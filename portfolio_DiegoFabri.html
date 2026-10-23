@@ -3,2240 +3,1644 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diego Fabri | Portfolio 2026</title>
+  <title>Diego Fabri — Product Designer</title>
+  <meta name="description" content="Diego Fabri — product designer from Antwerp working between physical products, digital tools and interactive media.">
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
 
     :root {
-      --blue: #2B7DE9;
-      --white: #ffffff;
-      --off-white: #f5f5f5;
-      --dark: #111111;
-      --text: #333;
-      --muted: #888;
-      --border: #e0e0e0;
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #7a7a7a;
+      --line: #e6e6e6;
+      --soft: #f3f3f1;
+      --accent: #2B7DE9;
+      --gutter: clamp(16px, 4vw, 56px);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      overflow-x: hidden;
+      font-family: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
     }
-
+    body.locked { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; }
+    img, video, iframe { display: block; max-width: 100%; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 200;
-      background: var(--blue);
-      height: 60px;
+    .wrap { padding-inline: var(--gutter); max-width: 1600px; margin: 0 auto; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
+      gap: 24px;
+      height: 64px;
     }
-
-    .nav-logo {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: white;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      font-size: 0.77rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: white; }
-
-    .nav-links .nav-cta {
-      padding: 8px 20px;
-      border: 1.5px solid rgba(255,255,255,0.45);
-      border-radius: 999px;
-      color: white;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .nav-links .nav-cta:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: white;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      padding-top: 60px;
-      background: var(--blue);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      position: relative;
-      overflow-x: clip;
-    }
-
-    /* Corner bracket decorations — from the PDF cover */
-    .hero-corner {
-      position: absolute;
-      width: 56px;
-      height: 56px;
-      border-color: rgba(255,255,255,0.28);
-      border-style: solid;
-    }
-    .hero-corner.tl { top: 80px; left: 44px; border-width: 1.5px 0 0 1.5px; }
-    .hero-corner.tr { top: 80px; right: 44px; border-width: 1.5px 1.5px 0 0; }
-    .hero-corner.bl { bottom: 44px; left: 44px; border-width: 0 0 1.5px 1.5px; }
-    .hero-corner.br { bottom: 44px; right: 44px; border-width: 0 1.5px 1.5px 0; }
-
-    .hero-rule {
-      position: absolute;
-      left: 44px;
-      right: 44px;
-      height: 1px;
-      background: rgba(255,255,255,0.13);
-    }
-    .hero-rule.top { top: 120px; }
-    .hero-rule.bottom { bottom: 80px; }
-
-    .hero-inner {
-      position: relative;
-      padding: 80px 40px;
-      max-width: 1200px;
-      width: 100%;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.78rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 28px;
-    }
-
-    /* Signature display title with horizontal bar cut — the PDF's main typographic effect */
-    .display-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 0.88;
-      background: linear-gradient(
-        to bottom,
-        white 0%,
-        white calc(50% - 4px),
-        var(--blue) calc(50% - 4px),
-        var(--blue) calc(50% + 4px),
-        white calc(50% + 4px),
-        white 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero .display-title {
-      font-size: 7vw;
-      line-height: 1;
-      padding: 0.12em 0;
-      margin-bottom: 20px;
-    }
-
-    .hero-desc {
-      font-size: 1.05rem;
-      max-width: 580px;
-      margin: 0 auto 48px;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.8;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border: 1.5px solid rgba(255,255,255,0.45);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: white;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .hero-cta:hover { background: rgba(255,255,255,0.14); border-color: white; }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
-
-    .hero-scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
+    .logo { font-weight: 600; letter-spacing: -0.01em; }
+    .logo span { color: var(--muted); font-weight: 400; }
+    .nav { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 32px); font-size: 0.95rem; }
+    .nav a { color: var(--muted); transition: color 0.2s; }
+    .nav a:hover, .nav a.active { color: var(--ink); }
+    .lang { display: flex; gap: 2px; font-size: 0.8rem; font-weight: 500; }
+    .lang button { padding: 4px 6px; color: var(--muted); border-radius: 4px; }
+    .lang button[aria-pressed="true"] { color: var(--ink); background: var(--soft); }
 
     /* ── INTRO ── */
-    .intro {
-      background: var(--blue);
-      padding: 0 48px 100px;
-    }
-
-    .intro-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .intro-photo-wrap img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 10px;
-    }
-
-    .intro-photo-name {
-      margin-top: 20px;
-      font-family: 'Syne', sans-serif;
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: white;
-      font-style: italic;
-      text-decoration: underline;
-      text-underline-offset: 7px;
-      text-decoration-thickness: 1.5px;
-    }
-
-    .intro-text { color: white; padding-top: 20px; }
-
-    .intro-breadcrumb {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .intro-text p {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 20px;
-    }
-
-    /* ── SHARED SECTION ── */
-    .section { padding: 96px 48px; }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 52px;
-    }
-
-    /* ── SKILLS ── */
-    .skills {
-      background: white;
-      border-top: 3px solid var(--blue);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border: 1.5px solid var(--border);
-    }
-
-    .skill-block {
-      padding: 40px;
-      border-right: 1.5px solid var(--border);
-    }
-
-    .skill-block:last-child { border-right: none; }
-
-    .skill-block-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: var(--blue);
-      text-decoration: underline;
-      text-underline-offset: 5px;
-      text-decoration-thickness: 1.5px;
-      margin-bottom: 36px;
-    }
-
-    .lang-item { margin-bottom: 22px; }
-
-    .lang-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .lang-name { font-size: 0.88rem; font-weight: 600; }
-
-    .lang-level {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .lang-bar {
-      height: 5px;
-      background: #eaeaea;
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .lang-bar-fill {
-      height: 100%;
-      background: var(--blue);
-      border-radius: 99px;
-    }
-
-    .study-item {
-      padding: 16px 0;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .study-item:first-child { padding-top: 0; }
-    .study-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .study-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
-
-    .study-meta { display: flex; gap: 10px; font-size: 0.76rem; color: var(--muted); }
-
-    .study-year { color: var(--blue); font-weight: 600; }
-
-    .software-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    .skill-tag {
-      padding: 6px 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.76rem;
+    .intro { padding-block: clamp(64px, 14vh, 160px) clamp(48px, 9vh, 104px); }
+    .intro h1 {
+      font-size: clamp(2rem, 4.6vw, 4.4rem);
       font-weight: 500;
-      transition: border-color 0.2s, color 0.2s;
-      cursor: default;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      max-width: 19ch;
     }
-
-    .skill-tag:hover { border-color: var(--blue); color: var(--blue); }
-
-    /* ── PROJECT CARDS (shared) ── */
-    .projects-header {
+    .intro h1 em { font-style: normal; color: var(--muted); }
+    .intro-meta {
+      margin-top: 40px;
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 52px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .projects-header-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 0.9;
-      color: var(--dark);
-    }
-
-    .projects-header-meta {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      flex-wrap: wrap;
+      gap: 8px 40px;
       color: var(--muted);
-      padding-bottom: 4px;
+      font-size: 0.95rem;
     }
+    .intro-meta strong { color: var(--ink); font-weight: 500; }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .project-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
+    /* ── WORK ── */
+    .work-bar {
       display: flex;
-      flex-direction: column;
-      transition: transform 0.35s cubic-bezier(.25,.46,.45,.94),
-                  box-shadow 0.35s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 64px rgba(0,0,0,0.11);
-    }
-
-    .project-thumb {
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      background: #f0f0f0;
-    }
-
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.55s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    .project-card:hover .project-thumb img { transform: scale(1.06); }
-
-    .project-info {
-      padding: 22px 24px 26px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-num {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: var(--blue);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-
-    .project-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-
-    .project-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .project-desc {
-      font-size: 0.83rem;
-      color: #666;
-      line-height: 1.68;
-      flex: 1;
-    }
-
-    /* ── BACHELOR SECTION ── */
-    .projects-bachelor {
-      background: var(--off-white);
-      padding: 96px 48px;
-    }
-    .projects-bachelor .section-inner {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── BACHELOR phase strip inside cards ── */
-    .project-phases {
-      display: grid;
-      gap: 2px;
-      background: #ccc;
-    }
-    .project-phases.p2 { grid-template-columns: repeat(2,1fr); }
-    .project-phases.p3 { grid-template-columns: repeat(3,1fr); }
-    .project-phases.p4 { grid-template-columns: repeat(4,1fr); }
-
-    .project-phases img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.55s cubic-bezier(.25,.46,.45,.94);
-    }
-    .project-phases:hover img { transform: scale(1.04); }
-
-    /* ── MASTER FULL-WIDTH SECTIONS ── */
-    .master-projects-wrap {
-      background: var(--blue);
-      padding-bottom: 0;
-    }
-
-    .master-projects-header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 96px 48px 52px;
-      display: flex;
-      align-items: flex-end;
+      flex-wrap: wrap;
+      align-items: baseline;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      margin-bottom: 0;
-    }
-
-    .master-projects-header .section-label { color: rgba(255,255,255,0.45); margin-bottom: 14px; }
-
-    .master-projects-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 0.9;
-      background: linear-gradient(
-        to bottom,
-        white 0%, white calc(50% - 4px),
-        var(--blue) calc(50% - 4px), var(--blue) calc(50% + 4px),
-        white calc(50% + 4px), white 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .master-projects-meta {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      padding-bottom: 4px;
-    }
-
-    .master-section {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      overflow: hidden;
-      padding: 80px 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    .master-section:last-of-type {
-      padding-bottom: 100px;
-    }
-
-    .master-section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .master-num {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 10px;
-    }
-
-    .master-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      color: white;
-      line-height: 0.92;
-    }
-
-    .master-tag {
-      margin-top: 12px;
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .master-desc {
-      font-size: 0.92rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.72);
-      padding-top: 8px;
-    }
-
-    /* Phase strip — full-bleed below the header */
-    .phase-strip {
-      margin-top: 48px;
-      display: grid;
-      gap: 3px;
-      background: rgba(0,0,0,0.25);
-    }
-
-    .phase-strip.ps-2 { grid-template-columns: repeat(2,1fr); }
-    .phase-strip.ps-3 { grid-template-columns: repeat(3,1fr); }
-    .phase-strip.ps-4 { grid-template-columns: repeat(4,1fr); }
-    .phase-strip.ps-5 { grid-template-columns: repeat(5,1fr); }
-
-    .phase-item {
-      position: relative;
-      overflow: hidden;
-      background: #1a5fb5;
-    }
-
-    .phase-item img {
-      width: 100%;
-      aspect-ratio: 3/2;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.55s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    .phase-item video {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-    }
-
-    .phase-item:hover img { transform: scale(1.05); }
-
-    .phase-label {
-      padding: 14px 18px 16px;
-      background: rgba(0,0,0,0.5);
-    }
-
-    .phase-step {
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
-      margin-bottom: 3px;
-    }
-
-    .phase-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .phase-item.span2 { grid-column: span 2; }
-    .phase-item.span2 img { aspect-ratio: 16/7; }
-
-    /* ── VIDEO PLAY OVERLAY ── */
-    .video-play-btn {
-      position: absolute;
-      inset: 0;
-      bottom: 48px; /* stop above the phase-label */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.38);
-      border: none;
-      cursor: pointer;
-      z-index: 4;
-      transition: opacity 0.35s ease, background 0.25s ease;
-      padding: 0;
-    }
-    .video-play-btn:hover { background: rgba(0,0,0,0.22); }
-    .video-play-btn.playing { opacity: 0; pointer-events: none; }
-    .play-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
-                  background 0.25s ease;
-    }
-    .video-play-btn:hover .play-icon {
-      transform: scale(1.12);
-      background: rgba(255,255,255,0.14);
-    }
-
-    /* Last master section gets extra bottom padding */
-
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--blue);
-      padding: 120px 48px 100px;
-      color: white;
-    }
-
-    .contact-inner { max-width: 1200px; margin: 0 auto; }
-
-    .contact-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
+      gap: 16px;
+      padding-block: 18px;
+      border-top: 1px solid var(--ink);
       margin-bottom: 32px;
     }
+    .work-bar h2 { font-size: 0.95rem; font-weight: 500; }
+    .filters { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 0.95rem; }
+    .filters button { color: var(--muted); padding: 2px 0; transition: color 0.2s; }
+    .filters button:hover { color: var(--ink); }
+    .filters button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+    .filters sup { font-size: 0.65em; margin-left: 2px; }
 
-    .contact-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3.5rem, 10vw, 9rem);
-      font-weight: 800;
-      line-height: 0.88;
-      margin-bottom: 80px;
-      background: linear-gradient(
-        to bottom,
-        white 0%,
-        white calc(50% - 5px),
-        var(--blue) calc(50% - 5px),
-        var(--blue) calc(50% + 5px),
-        white calc(50% + 5px),
-        white 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .contact-grid {
+    .grid {
       display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 64px;
-      padding-top: 48px;
-      border-top: 1px solid rgba(255,255,255,0.12);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(40px, 5vw, 72px) clamp(16px, 2.2vw, 32px);
     }
+    /* client logos — real logo files where available, otherwise a wordmark */
+    .client-logo { display: block; height: 16px; width: auto; max-width: 140px; object-fit: contain; object-position: left; }
+    .client-logo.square { height: 30px; }
+    .p-client .client-logo.square, .clients .client-logo.square { height: 44px; }
+    .client-word { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+    .card-client { grid-column: 1 / -1; margin-bottom: 6px; color: var(--ink); }
+    .p-client { margin-bottom: 18px; }
+    .p-client .client-logo { height: 28px; max-width: 220px; }
+    .p-client .client-word { font-size: 0.95rem; }
 
-    .contact-desc {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: rgba(255,255,255,0.78);
-    }
-
-    .contact-stack { display: flex; flex-direction: column; gap: 32px; }
-
-    .contact-block h3 {
-      font-size: 0.66rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 10px;
-    }
-
-    .contact-line {
-      display: block;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.75;
-      transition: color 0.2s;
-    }
-
-    a.contact-line:hover { color: white; text-decoration: underline; }
-
-    .download-btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 11px 22px;
-      border: 1.5px solid rgba(255,255,255,0.38);
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: white;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .download-btn:hover { background: rgba(255,255,255,0.14); border-color: white; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--blue);
-      padding: 28px 48px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    .clients {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
       align-items: center;
+      gap: 14px 36px;
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .clients-label { color: var(--muted); font-size: 0.85rem; margin-right: 4px; }
+    .clients a { opacity: 0.55; transition: opacity 0.2s; }
+    .clients a:hover { opacity: 1; }
+    .clients .client-logo { height: 20px; filter: grayscale(1); }
+
+    /* compact grids for the groups below the highlights */
+    .grid.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(16px, 2vw, 28px); }
+    .grid.compact .card-title { font-size: 1rem; }
+    .grid.compact .card-sub { font-size: 0.9rem; }
+    .grid.compact .card-cat { display: none; }
+
+    .group + .group { margin-top: clamp(72px, 10vw, 140px); }
+    .group-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .group-head h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -0.03em; }
+    .group-head span { color: var(--muted); font-size: 0.9rem; }
+
+    .card { display: block; }
+    .card.wide { grid-column: 1 / -1; }
+    .card-media {
+      position: relative;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      background: var(--soft);
+    }
+    .card.wide .card-media { aspect-ratio: 2 / 1; }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.9s var(--ease);
+    }
+    /* portrait covers are shown whole instead of cropped to the landscape frame */
+    .card-media img.portrait { object-fit: contain; }
+    .card:hover .card-media img { transform: scale(1.03); }
+    .card-media .badge {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .card-text {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 20px;
+      padding-top: 14px;
+    }
+    .card-title { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.01em; }
+    .card-cat { color: var(--muted); font-size: 0.9rem; text-align: right; white-space: nowrap; }
+    .card-sub { grid-column: 1 / -1; color: var(--muted); font-size: 0.95rem; }
+
+    /* ── ABOUT ── */
+    .about { padding-block: clamp(96px, 16vh, 180px) 40px; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(32px, 6vw, 96px);
+      align-items: start;
+    }
+    .about-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+    .about-photo figcaption { margin-top: 10px; color: var(--muted); font-size: 0.85rem; }
+    .about-text p {
+      font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      margin-bottom: 1em;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .facts h3 { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 14px; }
+    .facts li { list-style: none; font-size: 0.95rem; margin-bottom: 12px; line-height: 1.35; }
+    .facts li span { display: block; color: var(--muted); font-size: 0.85rem; }
+
+    /* ── CONTACT ── */
+    .contact { padding-block: clamp(96px, 16vh, 180px) 48px; }
+    .contact h2 {
+      font-size: clamp(2.2rem, 6.5vw, 6rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 40px;
+    }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px 48px; font-size: clamp(1rem, 1.5vw, 1.25rem); }
+    .contact-links a { border-bottom: 1px solid var(--line); transition: border-color 0.2s; overflow-wrap: anywhere; }
+    .contact-links a:hover { border-color: var(--ink); }
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding-block: 28px;
+      margin-top: 96px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
     }
 
-    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.32); }
-
-    .footer-links { display: flex; gap: 28px; }
-
-    .footer-links a {
-      font-size: 0.76rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.32);
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: white; }
-
-    /* ── SCROLL REVEAL — fade+lift (cards, blocks) ── */
-    .reveal {
+    /* ── PROJECT PAGE (overlay) ── */
+    .project {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg);
+      overflow-y: auto;
+      overscroll-behavior: contain;
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.72s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.72s cubic-bezier(0.16,1,0.3,1);
+      visibility: hidden;
+      transform: translateY(24px);
+      transition: opacity 0.35s var(--ease), transform 0.5s var(--ease), visibility 0s linear 0.35s;
     }
-    .reveal.visible { opacity: 1; transform: none; }
+    .project.open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: opacity 0.35s var(--ease), transform 0.5s var(--ease), visibility 0s;
+    }
+    .project-top {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+    .project-top .header-inner { font-size: 0.95rem; }
+    .project-top button { color: var(--muted); transition: color 0.2s; }
+    .project-top button:hover { color: var(--ink); }
+    .p-head { padding-block: clamp(40px, 8vh, 96px) 40px; }
+    .p-kicker { color: var(--muted); font-size: 0.95rem; margin-bottom: 14px; }
+    .p-title {
+      font-size: clamp(2.2rem, 6vw, 5.5rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .p-body {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: clamp(24px, 5vw, 80px);
+      padding-block: 32px 64px;
+      border-top: 1px solid var(--line);
+    }
+    .p-meta dt { color: var(--muted); font-size: 0.85rem; }
+    .p-meta dd { margin-bottom: 18px; font-size: 0.95rem; }
+    .p-meta a { border-bottom: 1px solid var(--line); }
+    .p-meta a:hover { border-color: var(--ink); }
+    .p-lead {
+      font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      max-width: 40ch;
+    }
+    .p-sections { margin-top: 40px; display: grid; gap: 28px; max-width: 62ch; }
+    .p-sections h3 { font-size: 1rem; font-weight: 500; margin-bottom: 6px; }
+    .p-sections p { color: #444; }
+    .p-note {
+      margin-top: 32px;
+      padding: 14px 18px;
+      background: var(--soft);
+      font-size: 0.95rem;
+      max-width: 62ch;
+    }
+    .p-media { display: grid; gap: clamp(12px, 1.6vw, 24px); padding-bottom: 64px; }
+    .p-media.cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* never taller than the screen, so portrait images and videos are seen in full */
+    .p-media img, .p-media video {
+      width: 100%;
+      height: auto;
+      max-height: calc(100vh - 96px);
+      object-fit: contain;
+      background: var(--soft);
+    }
+    .p-media .full { grid-column: 1 / -1; }
+    .embed { position: relative; aspect-ratio: 16 / 9; background: #000; }
+    .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    /* 3D model viewers */
+    .p-models { display: grid; gap: clamp(12px, 1.6vw, 24px); padding-bottom: clamp(12px, 1.6vw, 24px); }
+    .p-models.cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .p-models .full { grid-column: 1 / -1; }
+    .model figcaption { margin-top: 8px; color: var(--muted); font-size: 0.85rem; }
+    .model-stage {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--soft) 70%);
+      overflow: hidden;
+      cursor: pointer;
+      touch-action: pan-y;
+    }
+    .model.full .model-stage { aspect-ratio: 16 / 9; }
+    .model-stage canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; outline: none; }
+    .model-stage.active { cursor: grab; touch-action: none; }
+    .model-stage.active:active { cursor: grabbing; }
+    .model-hint, .model-status {
+      position: absolute;
+      z-index: 1;
+      font-size: 0.8rem;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .model-hint {
+      left: 14px;
+      bottom: 14px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .model-stage.active .model-hint { opacity: 0; }
+    .model-status { inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+    .model-stage.loaded .model-status { opacity: 0; }
+    .model-stage.failed .model-hint { display: none; }
 
-    /* ── HERO ENTRANCE — pure CSS keyframe, no overflow:hidden needed ── */
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: none; }
-    }
-    .hero-anim {
-      opacity: 0;
-      animation: heroIn 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
+    .p-note a { text-decoration: underline; text-underline-offset: 3px; }
 
-    /* ── CLIP REVEAL — text slides up from mask (section titles) ── */
-    .clip-wrap { overflow: hidden; display: block; }
-    .clip-inner {
-      display: block;
-      transform: translateY(105%);
-      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
-    }
-    .clip-inner.visible { transform: translateY(0); }
-    .clip-inner.d1 { transition-delay: 0.08s; }
-    .clip-inner.d2 { transition-delay: 0.16s; }
-    .clip-inner.d3 { transition-delay: 0.24s; }
-    .clip-inner.d4 { transition-delay: 0.32s; }
-
-    /* ── NAV SCROLL EFFECT ── */
-    nav {
-      transition: background 0.35s ease, box-shadow 0.35s ease,
-                  backdrop-filter 0.35s ease;
-    }
-    nav.nav-scrolled {
-      background: rgba(25, 95, 185, 0.9);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
-    }
-
-    /* ── PROJECT CARD HOVER OVERLAY ── */
-    .project-card { isolation: isolate; }
-    .card-hover-overlay {
+    /* embedded live tool — inert until clicked so the page keeps scrolling */
+    .tool { padding-bottom: clamp(24px, 3vw, 40px); }
+    .tool-stage { position: relative; aspect-ratio: 16 / 10; background: var(--soft); overflow: hidden; }
+    @media (max-width: 640px) { .tool-stage { aspect-ratio: 3 / 4; } }
+    .tool-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+    .tool-stage.active iframe { pointer-events: auto; }
+    .tool-activate {
       position: absolute;
       inset: 0;
-      border-radius: 12px;
-      background: var(--blue);
-      opacity: 0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      z-index: 3;
-      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1);
-      pointer-events: none;
+      align-items: flex-end;
+      padding: 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.06), transparent 30%);
+      transition: background 0.2s;
     }
-    .project-card:hover .card-hover-overlay { opacity: 0.88; }
-    .card-hover-num {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-    }
-    .card-hover-label {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: white;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .card-hover-arrow {
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid rgba(255,255,255,0.45);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      margin-top: 4px;
-      transform: translateY(6px);
-      transition: transform 0.32s cubic-bezier(0.16,1,0.3,1);
-    }
-    .project-card:hover .card-hover-arrow { transform: translateY(0); }
-
-    /* ── GEOMETRIC SYMBOL DIVIDER (forn.dk inspired) ── */
-    .symbol-divider {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 0 0 48px;
-      opacity: 0.22;
-    }
-    .sym { width: 18px; height: 18px; flex-shrink: 0; }
-
-    /* ── VERTICAL SECTION LABEL ── */
-    .section-v-label {
-      position: absolute;
-      right: -140px;
-      top: 50%;
-      transform: translateY(-50%) rotate(90deg);
-      transform-origin: center center;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .section-v-label.dark { color: rgba(0,0,0,0.14); }
-
-    /* ── HERO ARROW DOWN ── */
-    .hero-arrow-down {
-      position: absolute;
-      bottom: 48px;
-      right: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.35);
-      font-size: 0.62rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-    }
-    .hero-arrow-line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
-      animation: arrowPulse 1.8s ease-in-out infinite;
-    }
-    .hero-arrow-head {
-      width: 10px;
-      height: 10px;
-      border-right: 1.5px solid rgba(255,255,255,0.5);
-      border-bottom: 1.5px solid rgba(255,255,255,0.5);
-      transform: rotate(45deg);
-      margin-top: -14px;
-      animation: arrowPulse 1.8s ease-in-out infinite 0.15s;
-    }
-    @keyframes arrowPulse {
-      0%, 100% { opacity: 0.35; transform: rotate(45deg) translateY(0); }
-      50% { opacity: 0.9; transform: rotate(45deg) translateY(4px); }
-    }
-    .hero-arrow-line { animation: linePulse 1.8s ease-in-out infinite; }
-    @keyframes linePulse {
-      0%, 100% { opacity: 0.35; }
-      50% { opacity: 0.8; }
-    }
-
-    /* ── LANGUAGE TOGGLE ── */
-    .lang-toggle {
-      background: none;
-      border: 1.5px solid rgba(255,255,255,0.28);
+    .tool-activate::before {
+      content: attr(data-label);
+      padding: 6px 14px;
       border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 0.85rem;
+    }
+    .tool-activate:hover { background: linear-gradient(to top, rgba(0,0,0,0.12), transparent 40%); }
+    .tool-stage.active .tool-activate { display: none; }
+    .tool figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 8px; color: var(--muted); font-size: 0.85rem; }
+    .tool figcaption a { color: var(--ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .tool figcaption a:hover { border-color: var(--ink); }
+
+    .p-next {
       display: flex;
-      align-items: center;
-      padding: 2px;
-      cursor: pointer;
-      gap: 0;
-      flex-shrink: 0;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding-block: 28px 64px;
+      border-top: 1px solid var(--ink);
     }
-    .lang-opt {
-      padding: 4px 10px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      color: rgba(255,255,255,0.4);
-      border-radius: 999px;
-      transition: background 0.2s ease, color 0.2s ease;
-      font-family: 'Space Grotesk', sans-serif;
-      line-height: 1;
+    .p-next span { color: var(--muted); font-size: 0.95rem; }
+    .p-next a { font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.03em; text-align: right; }
+    .p-next a:hover { color: var(--accent); }
+
+    /* ── REVEAL ── */
+    .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+    .js .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal { opacity: 1; transform: none; transition: none; }
+      .project, .card-media img { transition: none; }
     }
-    .lang-opt.active {
-      background: rgba(255,255,255,0.18);
-      color: white;
-    }
-    .lang-toggle:hover { border-color: rgba(255,255,255,0.5); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .projects-grid { grid-template-columns: repeat(2, 1fr); }
-      .phase-strip.ps-4 { grid-template-columns: repeat(2, 1fr); }
-      .phase-strip.ps-5 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 860px) {
+      .grid.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about-grid, .p-body { grid-template-columns: 1fr; }
+      .about-photo { max-width: 420px; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .card.wide .card-media { aspect-ratio: 3 / 2; }
     }
-
-    @media (max-width: 900px) {
-      .projects-bachelor { min-height: auto; padding: 64px 24px; }
-      .master-section { min-height: auto; padding: 64px 24px 48px; }
-      .master-section:last-of-type { min-height: auto; }
-      nav { padding: 0 24px; }
-      .section { padding: 64px 24px; }
-      .skills { padding: 64px 24px; }
-      #contact { padding: 80px 24px; }
-      .intro { padding: 0 24px 64px; }
-      .intro-inner { grid-template-columns: 1fr; gap: 40px; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .skill-block { border-right: none; border-bottom: 1.5px solid var(--border); }
-      .skill-block:last-child { border-bottom: none; }
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
-      .master-section-inner { grid-template-columns: 1fr; gap: 20px; padding: 52px 24px 0; }
-      .master-projects-header { padding: 64px 24px 40px; }
-      .master-desc { padding-top: 0; }
-      .phase-strip.ps-3 { grid-template-columns: repeat(3, 1fr); }
-      .phase-strip.ps-4 { grid-template-columns: repeat(2, 1fr); }
-      .phase-item.span2 { grid-column: span 1; }
-      .phase-item.span2 img { aspect-ratio: 3/2; }
-    }
-
     @media (max-width: 640px) {
-      .projects-grid { grid-template-columns: 1fr; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      .lang-toggle { display: none; }
-      .hero-corner, .hero-rule { display: none; }
-      .project-phases.p4 { grid-template-columns: repeat(2, 1fr); }
-      .phase-strip.ps-3,
-      .phase-strip.ps-4 { grid-template-columns: repeat(2, 1fr); }
-      .phase-strip.ps-2 { grid-template-columns: 1fr; }
-      .master-title { font-size: clamp(1.8rem, 7vw, 3rem); }
-    }
-  
-    /* ── PROJECT DETAIL MODAL ── */
-    .project-card { cursor: pointer; }
-    .master-section[data-project] { cursor: pointer; }
-    .master-section[data-project]:hover { background: rgba(255,255,255,0.025); transition: background 0.2s; }
-    .proj-backdrop { position: fixed; inset: 0; z-index: 9000; background: rgba(6,6,6,0.96); display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-    .proj-backdrop.open { opacity: 1; pointer-events: all; }
-    .proj-dialog { position: relative; width: min(95vw, 1600px); height: min(94vh, 900px); display: grid; grid-template-rows: 1fr auto; border-radius: 16px; overflow: hidden; background: #111213; box-shadow: 0 40px 100px rgba(0,0,0,0.9); transform: translateY(30px) scale(0.95); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
-    .proj-backdrop.open .proj-dialog { transform: none; }
-    .proj-dialog-body { display: grid; grid-template-columns: 380px 1fr; overflow: hidden; min-height: 0; }
-    .proj-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.65); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.18s, color 0.18s; }
-    .proj-close:hover { background: rgba(255,255,255,0.18); color: white; }
-    .proj-info { padding: 52px 40px 40px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid rgba(255,255,255,0.07); overflow-y: auto; }
-    .proj-info-num { font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); }
-    .proj-info-name { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1.1; color: white; margin: 8px 0 10px; }
-    .proj-info-tag { font-size: 0.68rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.36); }
-    .proj-info-desc { font-size: 0.84rem; line-height: 1.78; color: rgba(255,255,255,0.62); margin-top: 10px; }
-    .proj-info-imgcount { margin-top: auto; padding-top: 20px; font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); }
-    .proj-viewer { display: flex; flex-direction: column; background: #0c0c0c; min-height: 0; overflow: hidden; }
-    .proj-main { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
-    .proj-main-img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: opacity 0.14s ease; }
-    .proj-main-img.fade { opacity: 0; }
-    .proj-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.08); color: white; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.18s; }
-    .proj-nav-btn:hover { background: rgba(255,255,255,0.2); }
-    #pmPrev { left: 10px; } #pmNext { right: 10px; }
-    .proj-counter { position: absolute; bottom: 8px; right: 12px; font-size: 0.62rem; font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.28); pointer-events: none; }
-    .proj-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: rgba(255,255,255,0.2); font-size: 0.76rem; font-family: 'Space Grotesk', sans-serif; text-align: center; padding: 24px; line-height: 1.6; }
-    .proj-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; padding: 16px 20px; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.06); overflow-y: auto; overflow-x: hidden; flex-shrink: 0; max-height: 300px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent; }
-    .proj-thumb { flex-shrink: 0; width: 80px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; opacity: 0.5; border: 2px solid transparent; transition: opacity 0.18s, border-color 0.18s; }
-    .proj-thumb.active, .proj-thumb:hover { opacity: 1; border-color: var(--blue); }
-    @media (max-width: 720px) { .proj-dialog { max-height: 95vh; } .proj-dialog-body { grid-template-columns: 1fr; } .proj-info { padding: 22px 20px 16px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); max-height: 38vh; overflow-y: auto; } .proj-info-name { font-size: 1.25rem; } .proj-viewer { min-height: 260px; } }
-      /* ── PRINT STYLESHEET ── */
-    @media print {
-      /* Hide nav and unnecessary elements */
-      nav { display: none; }
-      .section-v-label { display: none; }
-      .hero-arrow-down { display: none; }
-      .reveal { animation: none !important; opacity: 1 !important; }
-      
-      /* Page setup */
-      body { margin: 0; padding: 0; }
-      @page { margin: 0; size: A4; }
-      
-      /* Adjust sections for print */
-      .section { page-break-inside: avoid; padding: 40px; }
-      .hero { page-break-inside: avoid; padding: 60px 40px; }
-      .master-section { page-break-inside: avoid; padding: 50px 40px; }
-      
-      /* Better spacing */
-      .projects-grid { page-break-inside: avoid; }
-      .project-card { page-break-inside: avoid; }
-      .phase-strip { page-break-inside: avoid; }
-      
-      /* Optimize images */
-      img { max-width: 100%; height: auto; }
-      
-      /* Reduce modal */
-      .proj-backdrop { display: none; }
-      
-      /* Clean up footer */
-      footer { padding: 30px 40px; background: #195fbf; color: white; }
-      
-      /* Print-friendly links */
-      a { color: #195fbf; text-decoration: none; }
+      .grid, .grid.compact { grid-template-columns: 1fr; }
+      .nav a.hide-sm { display: none; }
+      .facts { grid-template-columns: 1fr; }
+      .p-media.cols, .p-models.cols { grid-template-columns: 1fr; }
+      .model.full .model-stage { aspect-ratio: 4 / 3; }
+      .card-text { grid-template-columns: 1fr; }
+      .card-cat { text-align: left; grid-row: 2; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">Diego Fabri</div>
-    <div class="nav-links">
-      <a href="#werk" data-i18n="nav.work">Work</a>
-      <a href="#over" data-i18n="nav.about">About</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span class="lang-opt active" data-lang="en">EN</span>
-        <span class="lang-opt" data-lang="nl">NL</span>
-      </button>
-      <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a>
+  <header>
+    <div class="wrap header-inner">
+      <a href="#top" class="logo">Diego Fabri <span data-i18n="role">— Product Designer</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="#work" data-i18n="nav.work">Work</a>
+        <a href="#about" class="hide-sm" data-i18n="nav.about">About</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="nl" aria-pressed="false">NL</button>
+        </div>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-corner tl"></div>
-    <div class="hero-corner tr"></div>
-    <div class="hero-corner bl"></div>
-    <div class="hero-corner br"></div>
-    <div class="hero-rule top"></div>
-    <div class="hero-rule bottom"></div>
-
-    <div class="hero-inner">
-      <div class="hero-eyebrow hero-anim" style="animation-delay:0.1s" data-i18n="hero.eyebrow">Portfolio &mdash; Diego Fabri &mdash; 2026</div>
-      <h1 class="display-title hero-anim" style="animation-delay:0.22s">PORTFOLIO</h1>
-      <p class="hero-desc hero-anim" style="animation-delay:0.38s" data-i18n="hero.desc">
-        Designer and product developer from Antwerp. Specialising in graphic work, product development and XR&nbsp;/&nbsp;AR experiences. Fascinated by biomimicry and organic forms.
-      </p>
-      <a href="#werk" class="hero-cta hero-anim" style="animation-delay:0.54s">
-        <span data-i18n="hero.cta">View work</span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 7h10M7 2l5 5-5 5"/>
-        </svg>
-      </a>
-    </div>
-
-    <!-- Vertical side label (forn.dk inspired) -->
-    <div class="section-v-label" data-i18n="hero.vlabel">Product Development &mdash; Graphic Design &mdash; XR&thinsp;/&thinsp;AR</div>
-
-    <!-- Arrow-down cue replacing old scroll line -->
-    <div class="hero-arrow-down">
-      <div class="hero-arrow-line"></div>
-      <div class="hero-arrow-head"></div>
-    </div>
-  </section>
-
-  <!-- INTRO / ABOUT -->
-  <section class="intro" id="over">
-    <div class="intro-inner">
-      <div class="intro-photo-wrap reveal">
-        <img
-          src="SUBBA-New Masters-Diego Fabri-stefaniedebakker027.webp"
-          alt="Diego Fabri"
-        >
-        <div class="intro-photo-name">Diego Fabri</div>
+  <main id="top">
+    <section class="wrap intro">
+      <h1 class="reveal" data-i18n="intro.title">Product designer working between <em>physical products</em>, <em>digital tools</em> and <em>interactive media</em>.</h1>
+      <div class="intro-meta reveal">
+        <span><strong data-i18n="intro.now.label">Now</strong> — <span data-i18n="intro.now">Master Product Development, UAntwerp</span></span>
+        <span><strong data-i18n="intro.based.label">Based in</strong> — <span data-i18n="intro.based">Antwerp, Belgium</span></span>
       </div>
-      <div class="intro-text reveal">
-        <div class="intro-breadcrumb">
-          <span>Intro</span>
-          <span data-i18n="intro.greeting">Hello, my name is</span>
-        </div>
-        <p data-i18n="intro.p1">
-          My studies and passion are graphic design &amp; product development. I love a well-crafted design and am fascinated by biomimicry and organic forms.
-        </p>
-        <p data-i18n="intro.p2">
-          Alongside my studies I run my own independent design studio, specialising in graphic work, marketing campaigns, XR &amp; AR experiences and game development.
-        </p>
-        <p data-i18n="intro.p3">
-          Currently finishing my Master's in Product Development at the University of Antwerp, looking for collaborations that connect design and technology.
-        </p>
+      <div class="clients reveal" id="clients"></div>
+    </section>
+
+    <section class="wrap" id="work">
+      <div class="work-bar">
+        <h2 data-i18n="work.title">Selected work</h2>
+        <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
       </div>
-    </div>
-  </section>
+      <div id="grid"></div>
+    </section>
 
-  <!-- SKILLS -->
-  <section class="section skills">
-    <div class="section-inner">
-      <div class="section-label" data-i18n="skills.label">Knowledge &amp; Skills</div>
-      <div class="skills-grid">
+    <section class="wrap about" id="about">
+      <div class="work-bar"><h2 data-i18n="nav.about">About</h2></div>
+      <div class="about-grid">
+        <figure class="about-photo reveal">
+          <img src="SUBBA-New%20Masters-Diego%20Fabri-stefaniedebakker027.webp" alt="Portrait of Diego Fabri" loading="lazy">
+          <figcaption data-i18n="about.credit">Photo: Stefanie De Bakker</figcaption>
+        </figure>
+        <div class="about-text reveal">
+          <p data-i18n="about.p1">I'm Diego, a designer from Antwerp. I studied cross-media design before moving into product development, and I like to work where those two worlds meet: objects, tools and the digital experiences around them.</p>
+          <p data-i18n="about.p2">I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run a small independent studio for graphic design, campaigns and AR/XR experiences.</p>
+          <p data-i18n="about.p3">I'm currently finishing my Master in Product Development at the University of Antwerp and I'm open to collaborations that connect design and technology.</p>
 
-        <div class="skill-block reveal">
-          <div class="skill-block-title" data-i18n="skills.lang.title">Languages</div>
-          <div class="lang-item">
-            <div class="lang-row">
-              <span class="lang-name">Dutch</span>
-              <span class="lang-level">Native</span>
-            </div>
-            <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
-          </div>
-          <div class="lang-item">
-            <div class="lang-row">
-              <span class="lang-name">French</span>
-              <span class="lang-level">Advanced</span>
-            </div>
-            <div class="lang-bar"><div class="lang-bar-fill" style="width:72%"></div></div>
-          </div>
-          <div class="lang-item">
-            <div class="lang-row">
-              <span class="lang-name">English</span>
-              <span class="lang-level">Advanced</span>
-            </div>
-            <div class="lang-bar"><div class="lang-bar-fill" style="width:78%"></div></div>
-          </div>
-        </div>
-
-        <div class="skill-block reveal">
-          <div class="skill-block-title" data-i18n="skills.edu.title">Education</div>
-          <div class="study-item">
-            <div class="study-name">Master Product Development</div>
-            <div class="study-meta">
-              <span>UAntwerp</span>
-              <span class="study-year">2024&ndash;2026</span>
-            </div>
-          </div>
-          <div class="study-item">
-            <div class="study-name">Bachelor Product Development</div>
-            <div class="study-meta">
-              <span>UAntwerp</span>
-              <span class="study-year">2021&ndash;2024</span>
-            </div>
-          </div>
-          <div class="study-item">
-            <div class="study-name" href="https://www.luca.be/en/programmes/postgraduate-traject3d">Postgraduate TRAJECT3D</div>
-            <div class="study-meta">
-              <span>LUCA School of Arts</span>
-              <span class="study-year">2020&ndash;2021</span>
-            </div>
-          </div>
-          <div class="study-item">
-            <div class="study-name">Bachelor Cross-media Design</div>
-            <div class="study-meta">
-              <span>AP Hogeschool</span>
-              <span class="study-year">2017&ndash;2021</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="skill-block reveal">
-          <div class="skill-block-title" data-i18n="skills.skills.title">Skills</div>
-          <div class="software-grid">
-            <span class="skill-tag">Photoshop</span>
-            <span class="skill-tag">Illustrator</span>
-            <span class="skill-tag">After Effects</span>
-            <span class="skill-tag">InDesign</span>
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">Rhino 3D</span>
-            <span class="skill-tag">Cinema 4D</span>
-            <span class="skill-tag">Keyshot</span>
-            <span class="skill-tag">XR / AR</span>
-            <span class="skill-tag">3D Printing</span>
-            <span class="skill-tag">Laser Cutting</span>
-            <span class="skill-tag">Unity</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Grasshopper</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- BACHELOR PROJECTS -->
-  <section class="section projects-bachelor" id="werk" style="position:relative;">
-    <div class="section-v-label dark" data-i18n="bach.vlabel">Bachelor &mdash; Product Development &mdash; UA</div>
-    <div class="section-inner">
-
-      <div class="section-label" data-i18n="bach.label">Bachelor</div>
-      <div class="projects-header">
-        <h2 class="projects-header-title">
-          <span class="clip-wrap"><span class="clip-inner" data-i18n="bach.title">PROJECTS</span></span>
-        </h2>
-        <span class="projects-header-meta" data-i18n="bach.meta">6 projects</span>
-      </div>
-      <div class="projects-grid">
-
-        <!-- 01 Eco Paper Lamp -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">01 &mdash; Bachelor</span>
-            <span class="card-hover-label">Eco Paper Lamp</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p3">
-            <img src="01-eco-paper-lamp/21.webp" alt="Paper Lamp design" loading="lazy">
-            <img src="01-eco-paper-lamp/22.webp" alt="Paper Lamp iterations" loading="lazy">
-            <img src="01-eco-paper-lamp/23.webp" alt="Paper Lamp result" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.01.num">01 &mdash; Material Design</div>
-            <div class="project-name" data-i18n="bach.01.name">Eco Paper Lamp</div>
-            <div class="project-tag" data-i18n="bach.01.tag">Product Design &mdash; Laser Cutting</div>
-            <p class="project-desc" data-i18n="bach.01.desc">Design of a lamp from a single material with integrated connections. Prototyping and laser cutting as core tools to explore form, composition and waste minimisation.</p>
-          </div>
-        </div>
-
-        <!-- 02 Historical Binoculars -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">02 &mdash; Bachelor</span>
-            <span class="card-hover-label">Historical Binoculars</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p3">
-              <img src="02-historical-binoculars/24.webp" alt="Tom Dixon style reference" loading="lazy">
-              <img src="02-historical-binoculars/25.webp" alt="10 binocular concepts" loading="lazy">
-              <img src="02-historical-binoculars/27.webp" alt="Tom Dixon binoculars final design" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.02.num">02 &mdash; Style Research</div>
-            <div class="project-name" data-i18n="bach.02.name">Historical Binoculars</div>
-            <div class="project-tag" data-i18n="bach.02.tag">Concept Design &mdash; Tom Dixon</div>
-            <p class="project-desc" data-i18n="bach.02.desc">Reinterpretation of classical design elements in the style of Tom Dixon. Form and aesthetics reimagined while preserving the archetype of the binocular object.</p>
-          </div>
-        </div>
-
-        <!-- 03 Ergonomic Pliers -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">03 &mdash; Bachelor</span>
-            <span class="card-hover-label">Ergonomic Pliers</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p3">
-            <img src="03-ergonomic-pliers/29.webp" alt="Pliers prototypes" loading="lazy">
-            <img src="03-ergonomic-pliers/31.webp" alt="Pliers product family" loading="lazy">
-            <img src="03-ergonomic-pliers/36.webp" alt="DUREVE branding" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.03.num">03 &mdash; Tool Design</div>
-            <div class="project-name" data-i18n="bach.03.name">Ergonomic Pliers</div>
-            <div class="project-tag" data-i18n="bach.03.tag">Product Family &mdash; DUREVE</div>
-            <p class="project-desc" data-i18n="bach.03.desc">Redesign of jewellery tools with a focus on grip, ergonomics and a coherent product family. From prototype to the DUREVE brand identity.</p>
-          </div>
-        </div>
-
-        <!-- 04 Temporary Bike Parking — Bachelor Thesis -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">04 &mdash; Bachelor Thesis</span>
-            <span class="card-hover-label">Temporary Bike Parking</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p4">
-            <img src="04-bike-parking/37.webp" alt="Bike parking research" loading="lazy">
-            <img src="04-bike-parking/38.webp" alt="Bike parking concept" loading="lazy">
-            <img src="04-bike-parking/46.webp" alt="Bike parking prototype" loading="lazy">
-            <img src="04-bike-parking/48.webp" alt="Bike parking urban render" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.04.num">04 &mdash; Bachelor Thesis</div>
-            <div class="project-name" data-i18n="bach.04.name">Temporary Bike Parking</div>
-            <div class="project-tag" data-i18n="bach.04.tag">Urban Design &mdash; Modular System</div>
-            <p class="project-desc" data-i18n="bach.04.desc">Transportable bike parking for urban events. Modular, safe and easy to install, with a focus on temporary deployment in public space.</p>
-          </div>
-        </div>
-
-        <!-- 05 Sculptures -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">05 &mdash; Bachelor</span>
-            <span class="card-hover-label">Sculptures</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p3">
-            <img src="05-sculptures/49.webp" alt="Green sculpture" loading="lazy">
-            <img src="05-sculptures/56.webp" alt="Blue sculpture" loading="lazy">
-            <img src="05-sculptures/61.webp" alt="Sculpture gallery" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.05.num">05 &mdash; Wearable Art</div>
-            <div class="project-name" data-i18n="bach.05.name">Sculptures</div>
-            <div class="project-tag" data-i18n="bach.05.tag">3D Printing &mdash; Stef Van Looveren</div>
-            <p class="project-desc" data-i18n="bach.05.desc">Collaboration with artist Stef Van Looveren. 9 wearable sculptures derived from 3D scans, optimised for printability and wearing comfort.</p>
-          </div>
-        </div>
-
-        <!-- 06 Radiant Nights -->
-        <div class="project-card reveal">
-          <div class="card-hover-overlay">
-            <span class="card-hover-num">06 &mdash; Bachelor</span>
-            <span class="card-hover-label">Radiant Nights</span>
-            <span class="card-hover-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M7 2l5 5-5 5"/></svg></span>
-          </div>
-          <div class="project-phases p4">
-            <img src="06-radiant-nights/62.webp" alt="Radiant Nights RN#1" loading="lazy">
-            <img src="06-radiant-nights/63.webp" alt="Radiant Nights RN#4" loading="lazy">
-            <img src="06-radiant-nights/68.webp" alt="Radiant Nights RN#10" loading="lazy">
-            <img src="06-radiant-nights/69.webp" alt="Radiant Nights mockup" loading="lazy">
-          </div>
-          <div class="project-info">
-            <div class="project-num" data-i18n="bach.06.num">06 &mdash; Event Branding</div>
-            <div class="project-name" data-i18n="bach.06.name">Radiant Nights</div>
-            <div class="project-tag" data-i18n="bach.06.tag">Visual Campaign &mdash; De Singel</div>
-            <p class="project-desc" data-i18n="bach.06.desc">Visual identity and campaign material for Radiant Nights in collaboration with cultural venue De Singel. Posters, billboards and visual assets across multiple editions.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MASTER PROJECTS -->
-  <div class="master-projects-wrap">
-
-    <div class="master-projects-header">
-      <div>
-        <div class="section-label" data-i18n="master.label">Master</div>
-        <h2 class="master-projects-title">
-          <span class="clip-wrap"><span class="clip-inner" data-i18n="master.title">ASSIGNMENTS</span></span>
-        </h2>
-      </div>
-      <span class="master-projects-meta" data-i18n="master.meta">6 projects</span>
-    </div>
-
-    <!-- M01 APD — Dossier Kipling -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">01 &mdash; Advanced Product Design</div>
-          <div class="master-title">Dossier Kipling</div>
-          <div class="master-tag">Graphic Design &mdash; Moodboarding &mdash; InDesign</div>
-        </div>
-        <p class="master-desc">Visual design dossier for Kipling: moodboards around colour, texture, pattern and volumes as the foundation for a coherent brand perspective. From sources of inspiration to conceptual proposal.</p>
-      </div>
-      <div class="phase-strip ps-4">
-        <div class="phase-item">
-          <img src="12- Advanced product design/KiplingColoursTexturePaterns_Moodboard.webp" alt="Kipling colour &amp; texture moodboard" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Phase 01</div>
-            <div class="phase-name">Colour &amp; Texture</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="12- Advanced product design/KiplingColoursTexturePaterns_Moodboard.webp" alt="Kipling detail moodboard" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Phase 02</div>
-            <div class="phase-name">Detail &amp; Material</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="12- Advanced product design/CONCEPT VR KIPLING.webp" alt="Kipling shapes &amp; volumes" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Phase 03</div>
-            <div class="phase-name">Shapes &amp; Volumes</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="12- Advanced product design/CONCEPT VR KIPLING.webp" alt="Kipling concept visualisation" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Phase 04</div>
-            <div class="phase-name">Concept &amp; Proposal</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M02 Reliq — Interaction Video -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">02 &mdash; Interaction Design</div>
-          <div class="master-title">Reliq</div>
-          <div class="master-tag">Video &mdash; Interaction &mdash; Group Project</div>
-        </div>
-        <p class="master-desc">Group project around interactive video work. Concept development, filmography and technical implementation of an immersive digital experience.</p>
-      </div>
-      <div class="phase-strip ps-2" style="margin-top:48px;">
-        <div class="phase-item span2">
-          <video controls muted playsinline preload="metadata">
-            <source src="1 master opdrachten/interaction/VideoGroup7_Reliq_Interaction.mp4" type="video/mp4">
-          </video>
-          <button class="video-play-btn" aria-label="Play video">
-            <span class="play-icon">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="white"><polygon points="7,3 20,11 7,19"/></svg>
-            </span>
-          </button>
-          <div class="phase-label">
-            <div class="phase-step">Final Result</div>
-            <div class="phase-name">Reliq &mdash; Interaction Video</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M03 PSS -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">03 &mdash; Problem Solving Studio</div>
-          <div class="master-title">PSS &mdash; Product Service System</div>
-          <div class="master-tag">Branding &mdash; Logo &mdash; Video</div>
-        </div>
-        <p class="master-desc">Logo design and end-term project video for Problem-Solving Studio. Brand identity and visual storytelling from concept phase to a presentation-ready campaign.</p>
-      </div>
-      <div class="phase-strip ps-2" style="margin-top:48px;">
-        <div class="phase-item span2">
-          <video controls muted playsinline preload="metadata">
-            <source src="1 master opdrachten/pss/Group 05_Endterm_video_short.mp4" type="video/mp4">
-          </video>
-          <button class="video-play-btn" aria-label="Play video">
-            <span class="play-icon">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="white"><polygon points="7,3 20,11 7,19"/></svg>
-            </span>
-          </button>
-          <div class="phase-label">
-            <div class="phase-step">Final Result</div>
-            <div class="phase-name">PSS Endterm Presentation</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M04 Internship — Komono -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">04 &mdash; Internship</div>
-          <div class="master-title">Komono</div>
-          <div class="master-tag">Product Design &mdash; Rhino&thinsp;/&thinsp;SolidWorks &mdash; Eyewear</div>
-        </div>
-        <p class="master-desc">Three-month internship at Komono (Zwijndrecht, Antwerp) — an internationally recognised eyewear and lifestyle brand. Contributed to the tyre &amp; tube sunglasses concept, Balance collection for Q1 2026, the Felipsis sunglasses and the Odyssey campaign rendering. Work spanned concept sketching, 3D modelling in Rhino and SolidWorks, technical specification sheets, 3D-printed wing prototypes for metal frames, and direct collaboration with the creative and production teams.</p>
-      </div>
-      <div class="phase-strip ps-3" style="margin-top:48px;">
-        <div class="phase-item">
-          <div class="phase-media-unavailable">Images unavailable</div>
-          <div class="phase-label">
-            <div class="phase-step">Phase 01</div>
-            <div class="phase-name">Komono stage documentation unavailable</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M05 Own Studio — XR / AR -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">05 &mdash; Own Design Studio</div>
-          <div class="master-title">XR&nbsp;/ AR Studio</div>
-          <div class="master-tag">AR Filters &mdash; Branding &mdash; Campaigns</div>
-        </div>
-        <p class="master-desc">Alongside my studies I run my own independent design studio, delivering AR filter experiences, brand identities and marketing campaigns. Clients include Have a Roll, Daily Paper and several independent brands. Filters published on Instagram and Snapchat, reaching thousands of users.</p>
-      </div>
-      <div class="phase-strip ps-4" style="margin-top:48px;">
-        <div class="phase-item">
-          <img src="SUBBA-New Masters-Diego Fabri-stefaniedebakker027.webp" alt="SUBBA portfolio image" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Overview</div>
-            <div class="phase-name">XR&thinsp;/&thinsp;AR Projects</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- M06 Master Thesis — DigiKnitting -->
-    <div class="master-section reveal">
-      <div class="master-section-inner">
-        <div>
-          <div class="master-num">06 &mdash; Master Thesis</div>
-          <div class="master-title">DigiKnitting</div>
-          <div class="master-tag">Additive Textile Manufacturing &mdash; Computational Design &mdash; Open Source</div>
-        </div>
-        <div>
-          <div style="margin-bottom: 52px;">
-            <div style="font-style: italic; font-size: 1.1rem; font-weight: 600; color: white; margin-bottom: 16px;">DigiKnitting: A Three-Dimensional Approach</div>
-            <p class="master-desc">
-              A master thesis exploring an emerging additive manufacturing technique that combines the layer-by-layer logic of 3D printing with the loop structure of knitting to build solid, three-dimensional objects from yarn. Currently at TRL&thinsp;3, no accessible design software, no reproducible fabrication method and limited material understanding exist for volumetric knitting.
-            </p>
-          </div>
-
-          <div style="margin-bottom: 52px;">
-            <div style="font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px;">Three Interconnected Domains</div>
-            
-            <div style="margin-bottom: 32px;">
-              <div style="font-weight: 600; color: white; margin-bottom: 8px;">01 — Material Research</div>
-              <p class="master-desc" style="font-size: 0.9rem;">
-                Material experiments establish how stitch topology affects structural compliance and stiffness. These design rules are embedded as a live stiffness simulation in the digital tool, enabling data-driven material selection and volumetric structure optimization.
-              </p>
-            </div>
-
-            <div style="margin-bottom: 32px;">
-              <div style="font-weight: 600; color: white; margin-bottom: 8px;">02 — Voxel Knitter (Digital Tool)</div>
-              <p class="master-desc" style="font-size: 0.9rem;">
-                Treats each knit stitch as a voxel in a 3D grid with five assignable types per cell: cast-on, knit, purl, tuck, and connector. This approach significantly lowers the cognitive barrier, allowing designers to develop volumetric knitted structures without deep specialist knitting knowledge.
-              </p>
-            </div>
-
+          <div class="facts">
             <div>
-              <div style="font-weight: 600; color: white; margin-bottom: 8px;">03 — Mechanical Fabrication System</div>
-              <p class="master-desc" style="font-size: 0.9rem;">
-                A modular mechanical pin system with a configurable needle bed makes solid knitting reproducible by hand production. This opens reproducible pathways toward both manual craftsmanship and future machine automation, democratizing access to volumetric knitting.
-              </p>
+              <h3 data-i18n="about.edu">Education</h3>
+              <ul>
+                <li data-i18n="edu.1">Master Product Development<span>UAntwerp · 2024–2026</span></li>
+                <li data-i18n="edu.2">Bachelor Product Development<span>UAntwerp · 2021–2024</span></li>
+                <li>Postgraduate TRAJECT3D<span>LUCA School of Arts · 2020–2021</span></li>
+                <li data-i18n="edu.4">Bachelor Cross-media Design<span>AP Hogeschool · 2017–2021</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3 data-i18n="about.tools">Tools</h3>
+              <ul>
+                <li>Rhino · Grasshopper · SolidWorks<span data-i18n="tools.3d">3D &amp; parametric</span></li>
+                <li>KeyShot · Cinema 4D<span data-i18n="tools.render">Rendering</span></li>
+                <li>Photoshop · Illustrator · InDesign · After Effects · Figma<span data-i18n="tools.graphic">Graphic &amp; motion</span></li>
+                <li>Unity · AR filters<span>XR / AR</span></li>
+                <li data-i18n="tools.fab">3D printing · Laser cutting<span>Prototyping</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3 data-i18n="about.lang">Languages</h3>
+              <ul>
+                <li data-i18n="lang.nl">Dutch<span>Native</span></li>
+                <li data-i18n="lang.en">English<span>Advanced</span></li>
+                <li data-i18n="lang.fr">French<span>Advanced</span></li>
+              </ul>
             </div>
           </div>
-
-          <div>
-            <div style="font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px;">Research Contribution</div>
-            <p class="master-desc" style="font-size: 0.9rem;">
-              Together the three domains form an integrated open-source framework contributing tools, methodologies and design guidelines toward the democratisation of volumetric knitting. Supervised by Jouke Verlinden &amp; Stijn Verwulgen &mdash; UAntwerp 2025&ndash;2026.<br><br>
-              <strong>Accepted for publication and presentation at AHFE 2026, Istanbul.</strong>
-            </p>
-          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Row 1: Three domains overview -->
-      <div class="phase-strip ps-3" style="margin-top:48px;">
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg" alt="3D volumetric knit stitch matrix — Course, Wale and Layer axes" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Domain 01</div>
-            <div class="phase-name">Material Research</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-22 050924.jpg" alt="Voxel Knitter — 3D digital design program with stiffness simulation" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Domain 02</div>
-            <div class="phase-name">Voxel Knitter &mdash; Digital Tool</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-22 050950.jpg" alt="Mechanical pin system — modular needle bed for volumetric knitting" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Domain 03</div>
-            <div class="phase-name">Mechanical Fabrication Tool</div>
-          </div>
-        </div>
+    <section class="wrap contact" id="contact">
+      <div class="work-bar"><h2>Contact</h2></div>
+      <h2 class="reveal" data-i18n="contact.title">Let's make something together.</h2>
+      <div class="contact-links reveal">
+        <a href="mailto:fabridiego@yahoo.be">fabridiego@yahoo.be</a>
+        <a href="mailto:diego.fabri@student.uantwerpen.be">diego.fabri@student.uantwerpen.be</a>
+        <span style="color:var(--muted)" data-i18n="contact.loc">Schoten, Antwerp — Belgium</span>
       </div>
+      <footer>
+        <span>© 2026 Diego Fabri</span>
+        <a href="#top" data-i18n="footer.top">Back to top ↑</a>
+      </footer>
+    </section>
+  </main>
 
-      <!-- Row 2: Process depth — software detail, prototype, results -->
-      <div class="phase-strip ps-3" style="margin-top:8px;">
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-22 051014.jpg" alt="Voxel Knitter — stitch-level 3D view and layer section" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Software</div>
-            <div class="phase-name">Stitch Visualisation &amp; Section View</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg" alt="Physical prototype — solid knitted volume produced with the tool" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Prototype</div>
-            <div class="phase-name">Solid Knitted Volume</div>
-          </div>
-        </div>
-        <div class="phase-item">
-          <img src="11- DigiKnitting/Schermafbeelding 2026-06-22 050924.jpg" alt="DigiKnitting — integrated framework and open-source outcomes" loading="lazy">
-          <div class="phase-label">
-            <div class="phase-step">Outcome</div>
-            <div class="phase-name">Integrated Framework</div>
-          </div>
-        </div>
+  <!-- PROJECT PAGE -->
+  <article class="project" id="project" aria-hidden="true" tabindex="-1">
+    <div class="project-top">
+      <div class="wrap header-inner">
+        <button type="button" id="pClose" data-i18n="p.back">← All work</button>
+        <button type="button" id="pClose2" aria-label="Close">✕</button>
       </div>
     </div>
-
-  </div>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-eyebrow" data-i18n="contact.eyebrow">Get in touch</div>
-      <h2 class="contact-title" data-i18n="contact.title">INTERESTED?</h2>
-      <div class="contact-grid">
-        <div>
-          <p class="contact-desc" data-i18n="contact.desc">
-            Available for collaborations, projects and conversations about design, product development and visual storytelling. Get in touch and let's make something remarkable.
-          </p>
-        </div>
-        <div class="contact-stack">
-          <div class="contact-block">
-            <h3>Email</h3>
-            <a href="mailto:diego.fabri@student.uantwerpen.be" class="contact-line">diego.fabri@student.uantwerpen.be</a>
-            <a href="mailto:fabridiego@yahoo.be" class="contact-line">fabridiego@yahoo.be</a>
-          </div>
-          <div class="contact-block">
-            <h3 data-i18n="contact.location.title">Location</h3>
-            <span class="contact-line" data-i18n="contact.location.city">Schoten, Antwerp</span>
-            <span class="contact-line" data-i18n="contact.location.country">Belgium</span>
-          </div>
-        </div>
-        <div class="contact-stack">
-          <div class="contact-block">
-            <h3>Downloads</h3>
-            <a class="download-btn" href="FabriDiego_Portfolio.pdf" target="_blank">PDF Portfolio &darr;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-copy" data-i18n="footer.copy">&copy; 2026 Diego Fabri &mdash; Designed and built for impact.</div>
-    <div class="footer-links">
-      <a href="#werk" data-i18n="footer.work">Work</a>
-      <a href="#over" data-i18n="footer.about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </footer>
+    <div class="wrap" id="pContent"></div>
+  </article>
 
   <script>
-    /* ── Fade+lift reveals (cards, blocks) ── */
-    const revealIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const siblings = Array.from(
-          entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')
-        );
-        const idx = siblings.indexOf(entry.target);
-        setTimeout(() => entry.target.classList.add('visible'), Math.max(0, idx) * 90);
-        revealIO.unobserve(entry.target);
-      });
-    }, { threshold: 0.07 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
-
-    /* ── Clip-inner reveals (section titles, outside hero) ── */
-    const clipIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        clipIO.unobserve(entry.target);
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.clip-inner:not(.hero .clip-inner)').forEach(el => clipIO.observe(el));
-
-    /* ── Master section titles — clip reveal ── */
-    const masterTitleIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll('.clip-inner').forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
-        });
-        masterTitleIO.unobserve(entry.target);
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.master-section').forEach(el => masterTitleIO.observe(el));
-
-    /* ── Video click-to-play ── */
-    document.querySelectorAll('.video-play-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const video = btn.closest('.phase-item').querySelector('video');
-        btn.classList.add('playing');
-        video.play();
-      });
-    });
-
-    /* ── Nav scroll effect ── */
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    /* ── Language Toggle (EN / NL) ── */
-    const translations = {
-      en: {
-        /* NAV */
-        'nav.work': 'Work',
-        'nav.about': 'About',
-        'nav.contact': 'Contact',
-        /* HERO */
-        'hero.eyebrow': 'Portfolio &mdash; Diego Fabri &mdash; 2026',
-        'hero.desc': 'Designer and product developer from Antwerp. Specialising in graphic work, product development and XR&nbsp;/&nbsp;AR experiences. Fascinated by biomimicry and organic forms.',
-        'hero.cta': 'View work',
-        'hero.vlabel': 'Product Development &mdash; Graphic Design &mdash; XR&thinsp;/&thinsp;AR',
-        /* INTRO */
-        'intro.greeting': 'Hello, my name is',
-        'intro.p1': 'My studies and passion are graphic design &amp; product development. I love a well-crafted design and am fascinated by biomimicry and organic forms.',
-        'intro.p2': 'Alongside my studies I run my own independent design studio, specialising in graphic work, marketing campaigns, XR &amp; AR experiences and game development.',
-        'intro.p3': "Currently finishing my Master's in Product Development at the University of Antwerp, looking for collaborations that connect design and technology.",
-        /* SKILLS */
-        'skills.label': 'Knowledge &amp; Skills',
-        'skills.lang.title': 'Languages',
-        'skills.edu.title': 'Education',
-        'skills.skills.title': 'Skills',
-        /* BACHELOR */
-        'bach.label': 'Bachelor',
-        'bach.vlabel': 'Bachelor &mdash; Product Development &mdash; UA',
-        'bach.title': 'PROJECTS',
-        'bach.meta': '6 projects',
-        'bach.01.num': '01 &mdash; Material Design',
-        'bach.01.name': 'Eco Paper Lamp',
-        'bach.01.tag': 'Product Design &mdash; Laser Cutting',
-        'bach.01.desc': 'Design of a lamp from a single material with integrated connections. Prototyping and laser cutting as core tools to explore form, composition and waste minimisation.',
-        'bach.02.num': '02 &mdash; Style Research',
-        'bach.02.name': 'Historical Binoculars',
-        'bach.02.tag': 'Concept Design &mdash; Tom Dixon',
-        'bach.02.desc': 'Reinterpretation of classical design elements in the style of Tom Dixon. Form and aesthetics reimagined while preserving the archetype of the binocular object.',
-        'bach.03.num': '03 &mdash; Tool Design',
-        'bach.03.name': 'Ergonomic Pliers',
-        'bach.03.tag': 'Product Family &mdash; DUREVE',
-        'bach.03.desc': 'Redesign of jewellery tools with a focus on grip, ergonomics and a coherent product family. From prototype to the DUREVE brand identity.',
-        'bach.04.num': '04 &mdash; Bachelor Thesis',
-        'bach.04.name': 'Temporary Bike Parking',
-        'bach.04.tag': 'Urban Design &mdash; Modular System',
-        'bach.04.desc': 'Transportable bike parking for urban events. Modular, safe and easy to install, with a focus on temporary deployment in public space.',
-        'bach.05.num': '05 &mdash; Wearable Art',
-        'bach.05.name': 'Sculptures',
-        'bach.05.tag': '3D Printing &mdash; Stef Van Looveren',
-        'bach.05.desc': 'Collaboration with artist Stef Van Looveren. 9 wearable sculptures derived from 3D scans, optimised for printability and wearing comfort.',
-        'bach.06.num': '06 &mdash; Event Branding',
-        'bach.06.name': 'Radiant Nights',
-        'bach.06.tag': 'Visual Campaign &mdash; De Singel',
-        'bach.06.desc': 'Visual identity and campaign material for Radiant Nights in collaboration with cultural venue De Singel. Posters, billboards and visual assets across multiple editions.',
-        /* MASTER */
-        'master.label': 'Master',
-        'master.title': 'ASSIGNMENTS',
-        'master.meta': '6 projects',
-        /* CONTACT */
-        'contact.eyebrow': 'Get in touch',
-        'contact.title': 'INTERESTED?',
-        'contact.desc': "Available for collaborations, projects and conversations about design, product development and visual storytelling. Get in touch and let's make something remarkable.",
-        'contact.location.title': 'Location',
-        'contact.location.city': 'Schoten, Antwerp',
-        'contact.location.country': 'Belgium',
-        /* FOOTER */
-        'footer.copy': '&copy; 2026 Diego Fabri &mdash; Designed and built for impact.',
-        'footer.work': 'Work',
-        'footer.about': 'About',
-      },
-      nl: {
-        /* NAV */
-        'nav.work': 'Werk',
-        'nav.about': 'Over',
-        'nav.contact': 'Contact',
-        /* HERO */
-        'hero.eyebrow': 'Portfolio &mdash; Diego Fabri &mdash; 2026',
-        'hero.desc': 'Designer en productontwikkelaar uit Antwerpen. Gespecialiseerd in grafisch werk, productontwikkeling en XR&nbsp;/&nbsp;AR-ervaringen. Gefascineerd door biomimicry en organische vormen.',
-        'hero.cta': 'Bekijk werk',
-        'hero.vlabel': 'Productontwikkeling &mdash; Grafisch Ontwerp &mdash; XR&thinsp;/&thinsp;AR',
-        /* INTRO */
-        'intro.greeting': 'Hallo, mijn naam is',
-        'intro.p1': 'Mijn studies en passie zijn grafisch ontwerp &amp; productontwikkeling. Ik hou van een goed uitgewerkt design en ben gefascineerd door biomimicry en organische vormen.',
-        'intro.p2': 'Naast mijn studies run ik mijn eigen onafhankelijk designstudio, gespecialiseerd in grafisch werk, marketingcampagnes, XR &amp; AR-ervaringen en game development.',
-        'intro.p3': 'Momenteel bezig met mijn Master Productontwikkeling aan de Universiteit Antwerpen, op zoek naar samenwerkingen die design en technologie verbinden.',
-        /* SKILLS */
-        'skills.label': 'Kennis &amp; Vaardigheden',
-        'skills.lang.title': 'Talen',
-        'skills.edu.title': 'Studies',
-        'skills.skills.title': 'Vaardigheden',
-        /* BACHELOR */
-        'bach.label': 'Bachelor',
-        'bach.vlabel': 'Bachelor &mdash; Productontwikkeling &mdash; UA',
-        'bach.title': 'PROJECTEN',
-        'bach.meta': '6 projecten',
-        'bach.01.num': '01 &mdash; Materiaalontwerp',
-        'bach.01.name': 'Eco Papieren Lamp',
-        'bach.01.tag': 'Productontwerp &mdash; Lasercutting',
-        'bach.01.desc': 'Ontwerp van een lamp uit één materiaal met geïntegreerde verbindingen. Prototyping en lasercutting als kernmiddelen om vorm, compositie en afvalminimalisatie te onderzoeken.',
-        'bach.02.num': '02 &mdash; Stijlonderzoek',
-        'bach.02.name': 'Historische Verrekijker',
-        'bach.02.tag': 'Conceptontwerp &mdash; Tom Dixon',
-        'bach.02.desc': 'Herinterpretatie van klassieke ontwerpelementen in de stijl van Tom Dixon. Vorm en esthetiek heruitgevonden terwijl het archetype van de verrekijker behouden blijft.',
-        'bach.03.num': '03 &mdash; Gereedschap',
-        'bach.03.name': 'Ergonomische Tang',
-        'bach.03.tag': 'Productfamilie &mdash; DUREVE',
-        'bach.03.desc': 'Redesign van juwelierswerktuigen met focus op grip, ergonomie en een coherente productfamilie. Van prototype naar de DUREVE-merkidentiteit.',
-        'bach.04.num': '04 &mdash; Bachelorproef',
-        'bach.04.name': 'Tijdelijke Fietsenstalling',
-        'bach.04.tag': 'Stadsontwerp &mdash; Modulair systeem',
-        'bach.04.desc': 'Transporteerbare fietsenstallingen voor stedelijke evenementen. Modulair, veilig en installatiegemakkelijk met focus op temporaire implementatie in de openbare ruimte.',
-        'bach.05.num': '05 &mdash; Wearable Art',
-        'bach.05.name': 'Sculpturen',
-        'bach.05.tag': '3D-printen &mdash; Stef Van Looveren',
-        'bach.05.desc': 'Samenwerking met kunstenaar Stef Van Looveren. 9 draagbare sculpturen van 3D-scans, geoptimaliseerd voor printbaarheid en draagcomfort.',
-        'bach.06.num': '06 &mdash; Event Branding',
-        'bach.06.name': 'Radiant Nights',
-        'bach.06.tag': 'Visuele campagne &mdash; De Singel',
-        'bach.06.desc': 'Visuele identiteit en campagnemateriaal voor Radiant Nights in samenwerking met cultuurhuis De Singel. Posters, billboards en visuele assets over meerdere edities.',
-        /* MASTER */
-        'master.label': 'Master',
-        'master.title': 'OPDRACHTEN',
-        'master.meta': '6 projecten',
-        /* CONTACT */
-        'contact.eyebrow': 'Neem contact op',
-        'contact.title': 'INTERESSE?',
-        'contact.desc': 'Beschikbaar voor samenwerkingen, projecten en gesprekken over design, productontwikkeling en visuele storytelling. Neem contact op en laten we iets opmerkelijks maken.',
-        'contact.location.title': 'Locatie',
-        'contact.location.city': 'Schoten, Antwerpen',
-        'contact.location.country': 'België',
-        /* FOOTER */
-        'footer.copy': '&copy; 2026 Diego Fabri &mdash; Ontworpen en gebouwd voor impact.',
-        'footer.work': 'Werk',
-        'footer.about': 'Over',
-      }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'en';
-
-    function applyLang(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-      /* Update toggle buttons */
-      document.querySelectorAll('.lang-opt').forEach(opt => {
-        opt.classList.toggle('active', opt.dataset.lang === lang);
-      });
-      /* Swap all data-i18n elements */
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key] !== undefined) {
-          el.innerHTML = translations[lang][key];
-        }
-      });
-      document.documentElement.lang = lang;
-    }
-
-    /* Wire up toggle */
-    document.getElementById('langToggle').addEventListener('click', () => {
-      applyLang(currentLang === 'en' ? 'nl' : 'en');
-    });
-
-    /* Apply stored language on load */
-    if (currentLang !== 'en') applyLang(currentLang);
-  
-    // ─────────────────────────────────────────────────────────────────────────
-    //  PROJECT DATA  —  add image paths per project below.
-    //  Drop image files into the matching project folders at the root and list them here.
-    // ─────────────────────────────────────────────────────────────────────────
-    const projectData = {
-      '01': {
+    /* ─────────────────────────────────────────────────────────────
+       PROJECTS — one entry per project, in display order.
+       Text fields are { en, nl }. `images` are shown on the project
+       page; `cover` is the grid thumbnail.
+       ───────────────────────────────────────────────────────────── */
+    const PROJECTS = [
+      {
+        id: 'digiknitting',
+        cat: 'master',
+        wide: true,
+        badge: { en: 'Master thesis', nl: 'Masterproef' },
+        title: 'DigiKnitting',
+        sub: { en: 'A three-dimensional approach to knitting solid objects', nl: 'Een driedimensionale aanpak om massieve objecten te breien' },
+        cover: '11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg',
+        meta: {
+          context: { en: 'Master thesis — UAntwerp, 2025–2026', nl: 'Masterproef — UAntwerpen, 2025–2026' },
+          role: { en: 'Research, computational design, mechanical design', nl: 'Onderzoek, computationeel ontwerp, mechanisch ontwerp' },
+          tools: 'Rhino · Grasshopper · KeyShot · 3D printing',
+          extra: { en: 'Supervisors: Jouke Verlinden & Stijn Verwulgen', nl: 'Promotoren: Jouke Verlinden & Stijn Verwulgen' },
+          links: [
+            { label: 'DOI 10.54941/ahfe1008073', href: 'https://doi.org/10.54941/ahfe1008073' },
+            { label: 'Voxel Knitter', href: 'https://fabridiego.github.io/Volumetric-Knitting-TriCAD/' },
+            { label: 'GitHub', href: 'https://github.com/FabriDiego/Volumetric-Knitting-TriCAD' }
+          ]
+        },
+        /* live tool is hosted from its own repo, so the portfolio always shows the latest version */
+        tool: 'https://fabridiego.github.io/Volumetric-Knitting-TriCAD/',
+        lead: {
+          en: 'An emerging additive technique that combines the layer-by-layer logic of 3D printing with the loop structure of knitting to build solid, three-dimensional objects from yarn. At TRL 3 there was no accessible design software, no reproducible fabrication method and little material knowledge — so the thesis builds all three.',
+          nl: 'Een opkomende additieve techniek die de laag-per-laag-logica van 3D-printen combineert met de lusstructuur van breien om massieve, driedimensionale objecten uit garen te bouwen. Op TRL 3 bestond er geen toegankelijke ontwerpsoftware, geen reproduceerbare productiemethode en weinig materiaalkennis — deze masterproef bouwt alle drie.'
+        },
+        sections: [
+          { h: { en: '01 — Material research', nl: '01 — Materiaalonderzoek' },
+            p: { en: 'Experiments show how stitch topology affects compliance and stiffness. Those rules are built into the digital tool as a live stiffness simulation.', nl: 'Experimenten tonen hoe de steektopologie flexibiliteit en stijfheid beïnvloedt. Die regels zitten als live stijfheidssimulatie in de digitale tool.' } },
+          { h: { en: '02 — Voxel Knitter, the digital tool', nl: '02 — Voxel Knitter, de digitale tool' },
+            p: { en: 'Every stitch is a voxel in a 3D grid with five types: cast-on, knit, purl, tuck and connector. Designers can build volumetric knits without deep specialist knowledge.', nl: 'Elke steek is een voxel in een 3D-grid met vijf types: opzet, recht, averecht, tuck en connector. Zo kunnen ontwerpers volumetrisch breiwerk maken zonder diepe specialistische kennis.' } },
+          { h: { en: '03 — Mechanical fabrication system', nl: '03 — Mechanisch productiesysteem' },
+            p: { en: 'A modular pin system with a configurable needle bed makes solid knitting reproducible by hand, and opens a path towards machine automation.', nl: 'Een modulair pinsysteem met een configureerbaar naaldbed maakt massief breien reproduceerbaar met de hand, en opent de weg naar automatisering.' } }
+        ],
+        note: {
+          en: 'Published and presented at AHFE 2026, Istanbul — “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.',
+          nl: 'Gepubliceerd en gepresenteerd op AHFE 2026, Istanbul — “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.'
+        },
+        noteHtml: true,
+        models: [
+          { src: '3d/digiknitting-cast-on.glb', label: { en: 'Cast-on stitch — animated', nl: 'Opzetsteek — geanimeerd' } },
+          { src: '3d/digiknitting-knit.glb', label: { en: 'Knit stitch', nl: 'Rechte steek' } },
+          { src: '3d/digiknitting-purl.glb', label: { en: 'Purl stitch', nl: 'Averechte steek' } }
+        ],
         images: [
-          '01-eco-paper-lamp/page_005.webp',
-          '01-eco-paper-lamp/18.webp',
-          '01-eco-paper-lamp/19.webp',
-          '01-eco-paper-lamp/20.webp',
-          '01-eco-paper-lamp/21.webp',
-          '01-eco-paper-lamp/22.webp',
-          '01-eco-paper-lamp/23.webp',
+          '11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg',
+          '11- DigiKnitting/Schermafbeelding 2026-06-22 050924.jpg',
+          '11- DigiKnitting/Schermafbeelding 2026-06-22 051014.jpg',
+          '11- DigiKnitting/Schermafbeelding 2026-06-22 050950.jpg'
         ]
       },
-      '02': {
-        images: [
-          '02-historical-binoculars/page_007.webp',
-          '02-historical-binoculars/page_008.webp',
-          '02-historical-binoculars/24.webp',
-          '02-historical-binoculars/25.webp',
-          '02-historical-binoculars/26.webp',
-          '02-historical-binoculars/27.webp',
-        ]
+      {
+        id: 'plum-road-tea-dream',
+        cat: 'pro',
+        client: { name: 'Samuel Baidoo' },
+        badge: { en: 'Video game', nl: 'Videogame' },
+        title: 'Plum Road Tea Dream',
+        sub: { en: 'Game, performance and exhibition by Samuel Baidoo', nl: 'Game, performance en tentoonstelling van Samuel Baidoo' },
+        cover: 'https://i.ytimg.com/vi/WQIr6QiUKLY/maxresdefault.jpg',
+        meta: {
+          context: { en: 'Samuel Baidoo / Hanafubuki vzw — 2026', nl: 'Samuel Baidoo / Hanafubuki vzw — 2026' },
+          role: { en: 'Technical support on the video game', nl: 'Technische ondersteuning bij de videogame' },
+          extra: { en: 'Premiered at De Singel, Antwerp (April 2026). Released on Steam, July 2026.', nl: 'Première in De Singel, Antwerpen (april 2026). Verschenen op Steam, juli 2026.' },
+          links: [
+            { label: 'Steam', href: 'https://store.steampowered.com/app/3206340/Plum_Road_Tea_Dream/' },
+            { label: 'workspacebrussels', href: 'https://www.workspacebrussels.be/en/projects/plum-road-tea-dream' }
+          ]
+        },
+        lead: {
+          en: 'A poetic, semi-autobiographical game about grief, joy and healing. Players follow the avatar S through seven sanctuaries — spaces built from memories — moving between in-game worlds and physical sculptures, images and texts. The project reclaims the video game as a medium for connection and introspection.',
+          nl: 'Een poëtische, semi-autobiografische game over rouw, vreugde en heling. Spelers volgen het avatar S door zeven sanctuaria — ruimtes opgebouwd uit herinneringen — en bewegen tussen gamewerelden en fysieke sculpturen, beelden en teksten. Het project claimt de videogame terug als medium voor verbinding en introspectie.'
+        },
+        sections: [
+          { h: { en: 'My contribution', nl: 'Mijn bijdrage' },
+            p: { en: 'I was part of the technical support team that helped build the video game, working alongside the artist and a group of developers to bring the sanctuaries to life.', nl: 'Ik maakte deel uit van het technische team dat de videogame mee heeft gebouwd, samen met de kunstenaar en een groep ontwikkelaars, om de sanctuaria tot leven te brengen.' } }
+        ],
+        embed: 'https://www.youtube-nocookie.com/embed/WQIr6QiUKLY',
+        images: []
       },
-      '03': {
-        images: [
-          '03-ergonomic-pliers/page_009.webp',
-          '03-ergonomic-pliers/15.webp',
-          '03-ergonomic-pliers/28.webp',
-          '03-ergonomic-pliers/29.webp',
-          '03-ergonomic-pliers/30.webp',
-          '03-ergonomic-pliers/31.webp',
-          '03-ergonomic-pliers/32.webp',
-          '03-ergonomic-pliers/33.webp',
-          '03-ergonomic-pliers/34.webp',
-          '03-ergonomic-pliers/35.webp',
-          '03-ergonomic-pliers/36.webp',
-        ]
-      },
-      '04': {
-        images: [
-          '04-bike-parking/page_012.webp',
-          '04-bike-parking/page_013.webp',
-          '04-bike-parking/page_014.webp',
-          '04-bike-parking/37.webp',
-          '04-bike-parking/38.webp',
-          '04-bike-parking/44.webp',
-          '04-bike-parking/45.webp',
-          '04-bike-parking/46.webp',
-          '04-bike-parking/47.webp',
-          '04-bike-parking/48.webp',
-        ]
-      },
-      '05': {
-        images: [
-          '05-sculptures/page_015.webp',
-          '05-sculptures/49.webp',
-          '05-sculptures/50.webp',
-          '05-sculptures/51.webp',
-          '05-sculptures/52.webp',
-          '05-sculptures/53.webp',
-          '05-sculptures/54.webp',
-          '05-sculptures/55.webp',
-          '05-sculptures/56.webp',
-          '05-sculptures/57.webp',
-          '05-sculptures/58.webp',
-          '05-sculptures/59.webp',
-          '05-sculptures/60.webp',
-          '05-sculptures/61.webp',
-        ]
-      },
-      '06': {
-        images: [
-          '06-radiant-nights/page_016.webp',
-          '06-radiant-nights/62.webp',
-          '06-radiant-nights/63.webp',
-          '06-radiant-nights/64.webp',
-          '06-radiant-nights/65.webp',
-          '06-radiant-nights/66.webp',
-          '06-radiant-nights/67.webp',
-          '06-radiant-nights/68.webp',
-          '06-radiant-nights/69.webp',
-        ]
-      },
-      // ── Master projects ──
-      '07': {
-        images: [
-          '07-grafisch werk/70.webp',
-          '07-grafisch werk/71.webp',
-          '07-grafisch werk/72.webp',
-          '07-grafisch werk/73.webp',
-          '07-grafisch werk/74.webp',
-          '07-grafisch werk/75.webp',
-          '07-grafisch werk/76.webp',
-          '07-grafisch werk/77.webp',
-          '07-grafisch werk/78.webp',
-          '07-grafisch werk/79.webp',
-          '07-grafisch werk/80.webp',
-          '07-grafisch werk/81.webp',
-        ]
-      },
-      '08': { images: [] },
-      '09': { images: [] },
-      '10': {
+      {
+        id: 'komono',
+        cat: 'pro',
+        client: { name: 'Komono', logo: 'logos/komono.png' },
+        badge: { en: 'Internship', nl: 'Stage' },
+        title: 'Komono',
+        sub: { en: 'Eyewear design internship', nl: 'Stage brillenontwerp' },
+        cover: '10-stage komono/85.webp',
+        meta: {
+          context: { en: 'Three-month internship — Komono, Antwerp', nl: 'Stage van drie maanden — Komono, Antwerpen' },
+          role: { en: 'Concept sketching, 3D modelling, technical sheets, prototyping', nl: 'Conceptschetsen, 3D-modellering, technische fiches, prototyping' },
+          tools: 'Rhino · SolidWorks · KeyShot · 3D printing'
+        },
+        lead: {
+          en: 'Three months inside the design team of Komono, an internationally recognised eyewear and lifestyle brand. I worked on the tyre & tube sunglasses concept, the Balance collection for Q1 2026, the Felipsis sunglasses and renders for the Odyssey campaign.',
+          nl: 'Drie maanden in het designteam van Komono, een internationaal erkend merk voor brillen en lifestyle. Ik werkte aan het tyre & tube-zonnebrilconcept, de Balance-collectie voor Q1 2026, de Felipsis-zonnebril en renders voor de Odyssey-campagne.'
+        },
+        sections: [
+          { h: { en: 'From sketch to production', nl: 'Van schets tot productie' },
+            p: { en: 'The work ran from concept sketches and texture studies to 3D models in Rhino and SolidWorks, technical specification sheets and 3D-printed wing prototypes for metal frames — in direct collaboration with the creative and production teams.', nl: 'Het werk ging van conceptschetsen en textuurstudies naar 3D-modellen in Rhino en SolidWorks, technische specificatiefiches en 3D-geprinte prototypes van brillenpoten voor metalen monturen — in rechtstreekse samenwerking met het creatieve en productieteam.' } }
+        ],
+        models: [
+          { src: '3d/komono-sm2-glasses.obj', label: { en: 'Tyre glasses — SM2 frame', nl: 'Tyre glasses — SM2-montuur' } },
+          { src: '3d/komono-wing-overflow.stl', label: { en: '3D-printed wing for metal frames', nl: '3D-geprinte wing voor metalen monturen' } }
+        ],
         images: [
           '10-stage komono/85.webp',
+          '10-stage komono/tire-parametric.webp',
+          '10-stage komono/tire-texture.webp',
           '10-stage komono/Schermafbeelding 2026-06-22 012249.webp',
           '10-stage komono/Schermafbeelding 2026-06-22 012506.webp',
           '10-stage komono/Schermafbeelding 2026-06-22 012612.webp',
           '10-stage komono/Schermafbeelding 2026-06-22 012630.webp',
           '10-stage komono/Schermafbeelding 2026-06-22 012700.webp',
-          '10-stage komono/Schermafbeelding 2026-06-22 012715.webp',
+          '10-stage komono/Schermafbeelding 2026-06-22 012715.webp'
         ]
       },
-      '11': {
+      {
+        id: 'vr-hospital',
+        cat: 'master',
+        client: { name: 'University of Groningen' },
+        badge: { en: 'Research', nl: 'Onderzoek' },
+        title: 'XR Hospital Room',
+        sub: { en: 'VR as a scalable research tool for patient-friendly hospital rooms', nl: 'VR als schaalbare onderzoekstool voor patiëntvriendelijke ziekenhuiskamers' },
+        cover: '17-vr-hospital/room-1.webp',
+        video: '17-vr-hospital/demo.mp4',
+        meta: {
+          context: { en: 'Master — Applied Research Methodology, group project', nl: 'Master — Applied Research Methodology, groepsproject' },
+          role: { en: 'VR environment, user testing, research', nl: 'VR-omgeving, gebruikerstesten, onderzoek' },
+          tools: 'Unity · VR headset · SPSS',
+          extra: { en: 'In collaboration with the University of Groningen', nl: 'In samenwerking met de Rijksuniversiteit Groningen' }
+        },
+        lead: {
+          en: 'To what extent is VR an effective and scalable tool for presenting and evaluating hospital rooms? Building on earlier research from the University of Groningen, which used 2D videos, we built an immersive VR hospital room and a research kit that can be delivered to participants at home.',
+          nl: 'In hoeverre is VR een effectieve en schaalbare tool om ziekenhuiskamers te presenteren en te evalueren? Voortbouwend op eerder onderzoek van de Rijksuniversiteit Groningen, dat met 2D-video’s werkte, bouwden we een immersieve VR-ziekenhuiskamer en een onderzoekskit die bij deelnemers thuis geleverd kan worden.'
+        },
+        sections: [
+          { h: { en: 'Method', nl: 'Methode' },
+            p: { en: 'Participants watched an instruction video, explored the VR room and filled in two surveys on usability and experience. We observed them fly-on-the-wall during the session, analysed the Likert data in SPSS and coded the open answers thematically.', nl: 'Deelnemers bekeken een instructievideo, verkenden de VR-kamer en vulden twee vragenlijsten in over gebruiksgemak en ervaring. We observeerden hen fly-on-the-wall tijdens de sessie, analyseerden de Likert-data in SPSS en codeerden de open antwoorden thematisch.' } },
+          { h: { en: 'Service model', nl: 'Servicemodel' },
+            p: { en: 'Headsets are delivered to participants’ homes, collected after use and prepared for the next participant — so the study can reach a large sample, including people with little technological experience.', nl: 'Headsets worden bij deelnemers thuis geleverd, na gebruik opgehaald en klaargemaakt voor de volgende — zo bereikt de studie een grote steekproef, ook mensen met weinig technologische ervaring.' } }
+        ],
+        cols: true,
         images: [
-          '11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg',
-          '11- DigiKnitting/Schermafbeelding 2026-06-22 050924.jpg',
-          '11- DigiKnitting/Schermafbeelding 2026-06-22 050950.jpg',
-          '11- DigiKnitting/Schermafbeelding 2026-06-22 051014.jpg',
+          '17-vr-hospital/room-1.webp',
+          '17-vr-hospital/room-2.webp'
         ]
       },
-      '12': {
+      {
+        id: 'reliq',
+        cat: 'master',
+        badge: { en: 'Video', nl: 'Video' },
+        title: 'Reliq',
+        sub: { en: 'Interaction design — group project', nl: 'Interactieontwerp — groepsproject' },
+        cover: '18-reliq/hologram.webp',
+        video: 'VideoGroup7_Reliq_Interaction_1_2.mp4',
+        meta: {
+          context: { en: 'Master — Interaction Design', nl: 'Master — Interaction Design' },
+          role: { en: 'Concept, filming, technical implementation', nl: 'Concept, film, technische uitwerking' }
+        },
+        lead: {
+          en: 'A group project around interactive video. Concept development, filming and the technical implementation of an immersive digital experience.',
+          nl: 'Een groepsproject rond interactieve video. Conceptontwikkeling, film en technische uitwerking van een immersieve digitale ervaring.'
+        },
+        models: [
+          { src: '3d/reliq-shard.stl', label: { en: 'Hero shard — 3D-printed interaction object', nl: 'Hero-scherf — 3D-geprint interactieobject' } }
+        ],
+        cols: true,
         images: [
+          '18-reliq/hologram.webp',
+          '18-reliq/installation.webp',
+          '18-reliq/scenario-1.webp',
+          '18-reliq/scenario-2.webp'
+        ]
+      },
+      {
+        id: 'pss',
+        cat: 'master',
+        badge: { en: 'Video', nl: 'Video' },
+        title: 'Product Service System',
+        sub: { en: 'Problem Solving Studio — branding & end-term film', nl: 'Problem Solving Studio — branding & eindfilm' },
+        cover: null,
+        video: 'Group 05_Endterm_video_short_1.mp4',
+        meta: {
+          context: { en: 'Master — Problem Solving Studio', nl: 'Master — Problem Solving Studio' },
+          role: { en: 'Logo design, visual identity, video', nl: 'Logo-ontwerp, visuele identiteit, video' }
+        },
+        lead: {
+          en: 'Logo design and the end-term presentation film for a product-service system. Brand identity and visual storytelling, from concept phase to a presentation-ready campaign.',
+          nl: 'Logo-ontwerp en de eindpresentatiefilm voor een product-dienstsysteem. Merkidentiteit en visuele storytelling, van conceptfase tot een presentatieklare campagne.'
+        },
+        images: []
+      },
+      {
+        id: 'kipling',
+        cat: 'master',
+        client: { name: 'Kipling' },
+        badge: { en: 'Concept', nl: 'Concept' },
+        title: 'Kipling VR',
+        sub: { en: 'Advanced Product Design — brand-driven VR headset', nl: 'Advanced Product Design — VR-headset vanuit een merk' },
+        cover: '12- Advanced product design/render-hero.webp',
+        meta: {
+          context: { en: 'Master — Advanced Product Design', nl: 'Master — Advanced Product Design' },
+          role: { en: 'Brand research, moodboarding, concept design', nl: 'Merkonderzoek, moodboards, conceptontwerp' }
+        },
+        lead: {
+          en: 'What would a VR headset look like if Kipling made it? Moodboards on colour, texture, pattern and volume translate the brand into a design language, which then drives a series of headset concepts.',
+          nl: 'Hoe zou een VR-headset eruitzien als Kipling hem maakte? Moodboards rond kleur, textuur, patroon en volume vertalen het merk naar een vormentaal, die vervolgens een reeks headsetconcepten stuurt.'
+        },
+        cols: true,
+        images: [
+          '12- Advanced product design/render-hero.webp',
+          '12- Advanced product design/render-front.webp',
+          '12- Advanced product design/render-pattern.webp',
+          '12- Advanced product design/render-side.webp',
           '12- Advanced product design/KiplingColoursTexturePaterns_Moodboard.webp',
-          '12- Advanced product design/CONCEPT VR KIPLING.webp',
+          '12- Advanced product design/moodboard-detail.webp',
+          '12- Advanced product design/concept-chart.webp',
+          '12- Advanced product design/sketch-ideation.webp',
           '12- Advanced product design/Schermafbeelding 2026-06-22 011649.webp',
+          '12- Advanced product design/CONCEPT VR KIPLING.webp'
         ]
+      },
+      {
+        id: 'komono-ar',
+        cat: 'pro',
+        client: { name: 'Komono', logo: 'logos/komono.png' },
+        badge: { en: 'AR filter', nl: 'AR-filter' },
+        title: 'Komono Bubblegum',
+        sub: { en: 'An Instagram AR filter for The Dylan sunglasses', nl: 'Een Instagram-AR-filter voor de Dylan-zonnebril' },
+        cover: '19-komono-ar/cover.webp',
+        meta: {
+          context: { en: 'Komono — social campaign', nl: 'Komono — sociale campagne' },
+          role: { en: '3D modelling, animation, AR filter', nl: '3D-modellering, animatie, AR-filter' },
+          tools: 'Cinema 4D · AR'
+        },
+        lead: {
+          en: 'The Dylan in pink, rebuilt as bubblegum: a try-on filter where the frame swells into bubbles and pops a bubble in front of your face. Modelled and animated in 3D, then brought to Instagram as an AR effect for the campaign.',
+          nl: 'De Dylan in het roze, herbouwd als kauwgom: een try-on-filter waarbij het montuur opzwelt tot bellen en een kauwgombel voor je gezicht blaast. Gemodelleerd en geanimeerd in 3D, en als AR-effect naar Instagram gebracht voor de campagne.'
+        },
+        videos: [
+          { src: '19-komono-ar/glasses-animated.mp4', loop: true },
+          { src: '19-komono-ar/campaign.mp4' },
+          { src: '19-komono-ar/bubble-up.mp4', loop: true },
+          { src: '19-komono-ar/swollen-bubbles.mp4', loop: true }
+        ],
+        cols: true,
+        images: ['19-komono-ar/in-use.webp']
+      },
+      {
+        id: 'amelie-lens',
+        cat: 'pro',
+        client: { name: 'Amelie Lens' },
+        badge: { en: '3D visuals', nl: '3D-visuals' },
+        title: 'Enfants Terribles',
+        sub: { en: 'Campaign visuals for Amelie Lens', nl: 'Campagnebeelden voor Amelie Lens' },
+        cover: '21-amelie-lens/3d-wings.webp',
+        meta: {
+          context: { en: 'Amelie Lens — Enfants Terribles', nl: 'Amelie Lens — Enfants Terribles' },
+          role: { en: '3D elements & animation for the campaign imagery', nl: '3D-elementen & animatie voor de campagnebeelden' }
+        },
+        lead: {
+          en: 'Chrome, liquid 3D forms woven into the campaign photography for Amelie Lens’ Enfants Terribles — turning studio portraits into something stranger.',
+          nl: 'Chromen, vloeibare 3D-vormen verweven in de campagnefotografie voor Enfants Terribles van Amelie Lens — studioportretten die net iets vreemder worden.'
+        },
+        cols: true,
+        images: [
+          '21-amelie-lens/3d-wings.webp',
+          '21-amelie-lens/cover.webp',
+          '21-amelie-lens/studio.webp'
+        ]
+      },
+      {
+        id: 'essentiel',
+        cat: 'pro',
+        client: { name: 'Essentiel Antwerp' },
+        badge: { en: '3D logo', nl: '3D-logo' },
+        title: 'Essentiel Orbit',
+        sub: { en: 'A 3D logo visual for Essentiel Antwerp', nl: 'Een 3D-logovisual voor Essentiel Antwerp' },
+        cover: '20-essentiel/logo-3d.webp',
+        meta: {
+          context: { en: 'Essentiel Antwerp', nl: 'Essentiel Antwerp' },
+          role: { en: '3D modelling, materials, rendering', nl: '3D-modellering, materialen, rendering' }
+        },
+        lead: {
+          en: 'The Essentiel Antwerp wordmark as a planet: chrome lettering circled by a glossy pink orbit, made for the brand’s social channels.',
+          nl: 'Het woordmerk van Essentiel Antwerp als planeet: chromen letters omcirkeld door een glanzende roze baan, gemaakt voor de sociale kanalen van het merk.'
+        },
+        images: [
+          '20-essentiel/logo-3d.webp',
+          '20-essentiel/orbit.webp'
+        ]
+      },
+      {
+        id: 'ar-studio',
+        cat: 'pro',
+        badge: { en: 'Own studio', nl: 'Eigen studio' },
+        title: 'AR / XR Studio',
+        sub: { en: 'AR filters, branding and campaigns', nl: 'AR-filters, branding en campagnes' },
+        cover: '07-grafisch werk/70.webp',
+        meta: {
+          context: { en: 'Independent design studio', nl: 'Onafhankelijke designstudio' },
+          role: { en: 'AR filter design, 3D, graphic design', nl: 'AR-filterontwerp, 3D, grafisch ontwerp' },
+          extra: { en: 'Clients include Have a Roll, Daily Paper and independent brands.', nl: 'Klanten o.a. Have a Roll, Daily Paper en onafhankelijke merken.' }
+        },
+        lead: {
+          en: 'Next to my studies I run a small studio making AR filter experiences, brand identities and campaigns. Filters are published on Instagram and Snapchat and have reached thousands of users.',
+          nl: 'Naast mijn studies run ik een kleine studio die AR-filters, merkidentiteiten en campagnes maakt. De filters staan op Instagram en Snapchat en bereikten duizenden gebruikers.'
+        },
+        cols: true,
+        images: [
+          '07-grafisch werk/70.webp', '07-grafisch werk/71.webp', '07-grafisch werk/72.webp',
+          '07-grafisch werk/73.webp', '07-grafisch werk/74.webp', '07-grafisch werk/75.webp',
+          '07-grafisch werk/76.webp', '07-grafisch werk/77.webp', '07-grafisch werk/78.webp',
+          '07-grafisch werk/79.webp', '07-grafisch werk/80.webp', '07-grafisch werk/81.webp'
+        ]
+      },
+      {
+        id: 'modulor',
+        cat: 'pro',
+        client: { name: 'MODULOR', logo: 'logos/modulor.png', square: true },
+        badge: { en: 'Graphic design', nl: 'Grafisch ontwerp' },
+        title: 'MODULOR',
+        sub: { en: 'Rebranding, posters and event campaigns for a student association', nl: 'Rebranding, affiches en eventcampagnes voor een studentenvereniging' },
+        cover: '16-modulor/gala-poster.webp',
+        video: '16-modulor/10-years.mp4',
+        meta: {
+          context: { en: 'MODULOR student association — UAntwerp', nl: 'Studentenvereniging MODULOR — UAntwerpen' },
+          role: { en: 'Graphic designer — rebranding, brand guidelines, posters, social media, video', nl: 'Grafisch ontwerper — rebranding, brand guidelines, affiches, sociale media, video' },
+          tools: 'Illustrator · Photoshop'
+        },
+        lead: {
+          en: 'A new visual identity for MODULOR — logo, DINPro typography, a colour system and brand guidelines — rolled out across a full year of events: the black-and-white lustrum gala, the job fair, Design Week, game nights and more. The 10-year anniversary film launched the new look and website.',
+          nl: 'Een nieuwe visuele identiteit voor MODULOR — logo, DINPro-typografie, een kleursysteem en brand guidelines — uitgerold over een volledig jaar aan events: het zwart-witte lustrumgala, de jobbeurs, Design Week, spelavonden en meer. De film voor het 10-jarig bestaan lanceerde de nieuwe look en website.'
+        },
+        cols: true,
+        images: [
+          '16-modulor/gala-poster.webp', '16-modulor/gala-square.webp', '16-modulor/gala-ticket.webp',
+          '16-modulor/gala-screen.webp', '16-modulor/logo-10-years.webp', '16-modulor/jobfair-poster.webp',
+          '16-modulor/idw-poster.webp', '16-modulor/game-night.webp', '16-modulor/pub-crawl.webp',
+          '16-modulor/comedy-club.webp', '16-modulor/vectorworks.webp', '16-modulor/brand-purple.webp',
+          '16-modulor/brand-orange.webp', '16-modulor/brand-green.webp'
+        ]
+      },
+      {
+        id: 'bike-parking',
+        cat: 'bachelor',
+        badge: { en: 'Bachelor thesis', nl: 'Bachelorproef' },
+        title: { en: 'Temporary Bike Parking', nl: 'Tijdelijke Fietsenstalling' },
+        sub: { en: 'Modular bike parking for urban events', nl: 'Modulaire fietsenstalling voor stadsevenementen' },
+        cover: '04-bike-parking/render-presentation.webp',
+        meta: {
+          context: { en: 'Bachelor thesis — UAntwerp', nl: 'Bachelorproef — UAntwerpen' },
+          role: { en: 'Research, concept, prototyping', nl: 'Onderzoek, concept, prototyping' }
+        },
+        lead: {
+          en: 'Transportable bike parking for urban events: modular, safe and quick to install, designed for temporary use in public space.',
+          nl: 'Transporteerbare fietsenstalling voor stadsevenementen: modulair, veilig en snel te plaatsen, ontworpen voor tijdelijk gebruik in de openbare ruimte.'
+        },
+        models: [
+          { src: '3d/bike-rack.stl', label: { en: 'Rack frame', nl: 'Frame van het rek' } }
+        ],
+        cols: true,
+        images: [
+          '04-bike-parking/render-presentation.webp', '04-bike-parking/render-square.webp',
+          '04-bike-parking/render-rack.webp', '04-bike-parking/exploded-view.webp',
+          '04-bike-parking/dimensions.webp', '04-bike-parking/welding.webp',
+          '04-bike-parking/prototype-frame.webp', '04-bike-parking/ergonomics.webp',
+          '04-bike-parking/page_012.webp', '04-bike-parking/page_013.webp', '04-bike-parking/page_014.webp',
+          '04-bike-parking/37.webp', '04-bike-parking/38.webp', '04-bike-parking/44.webp',
+          '04-bike-parking/45.webp', '04-bike-parking/46.webp', '04-bike-parking/47.webp', '04-bike-parking/48.webp'
+        ]
+      },
+      {
+        id: 'sculptures',
+        cat: 'bachelor',
+        client: { name: 'Stef Van Looveren' },
+        badge: { en: 'Collaboration', nl: 'Samenwerking' },
+        title: { en: 'Wearable Sculptures', nl: 'Draagbare Sculpturen' },
+        sub: { en: 'With artist Stef Van Looveren', nl: 'Met kunstenaar Stef Van Looveren' },
+        cover: '05-sculptures/49.webp',
+        meta: {
+          context: { en: 'Bachelor — collaboration with Stef Van Looveren', nl: 'Bachelor — samenwerking met Stef Van Looveren' },
+          role: { en: '3D scanning, modelling, print optimisation', nl: '3D-scannen, modelleren, printoptimalisatie' },
+          tools: '3D scanning · ZBrush · Cinema 4D · 3D printing'
+        },
+        lead: {
+          en: 'Nine wearable sculptures derived from 3D scans, optimised for printability and wearing comfort.',
+          nl: 'Negen draagbare sculpturen op basis van 3D-scans, geoptimaliseerd voor printbaarheid en draagcomfort.'
+        },
+        models: [
+          { src: '3d/sculpture-hands-together.obj', label: { en: 'Hands Together — with ring handle', nl: 'Hands Together — met ringhengsel' } },
+          { src: '3d/sculpture-trio.obj', label: { en: 'Trio', nl: 'Trio' } },
+          { src: '3d/sculpture-quatro.obj', label: { en: 'Quatro', nl: 'Quatro' } }
+        ],
+        cols: true,
+        images: [
+          '05-sculptures/page_015.webp', '05-sculptures/49.webp', '05-sculptures/50.webp', '05-sculptures/51.webp',
+          '05-sculptures/52.webp', '05-sculptures/53.webp', '05-sculptures/54.webp', '05-sculptures/55.webp',
+          '05-sculptures/56.webp', '05-sculptures/57.webp', '05-sculptures/58.webp', '05-sculptures/59.webp',
+          '05-sculptures/60.webp', '05-sculptures/61.webp'
+        ]
+      },
+      {
+        id: 'hydrofoil-boat',
+        cat: 'bachelor',
+        client: { name: 'Voxdale' },
+        badge: { en: 'Xplore Design Week', nl: 'Xplore Design Week' },
+        title: 'Electric H2O',
+        sub: { en: 'An electric hydrofoil speedboat', nl: 'Een elektrische hydrofoil-speedboot' },
+        cover: '14-hydrofoil-boat/render.webp',
+        meta: {
+          context: { en: 'Bachelor — Xplore Design Week 2023, with Voxdale', nl: 'Bachelor — Xplore Design Week 2023, met Voxdale' },
+          role: { en: 'Sketching, surface modelling, flow simulation, rendering', nl: 'Schetsen, surface modelling, stromingssimulatie, rendering' },
+          tools: 'SolidWorks · Rhino · Cinema 4D'
+        },
+        lead: {
+          en: 'A design week sprint: an electric speedboat that rises above the water on a hydrofoil. From style moodboards and sketches to a subdivision-surface hull, tested with a flow simulation and presented in renders and posters.',
+          nl: 'Een designweek-sprint: een elektrische speedboot die op een hydrofoil boven het water uitkomt. Van stijlmoodboards en schetsen naar een romp in subdivision surfaces, getest met een stromingssimulatie en gepresenteerd in renders en posters.'
+        },
+        models: [
+          { src: '3d/hydrofoil-boat.stl', label: { en: 'Hull — subdivision surface model', nl: 'Romp — subdivision surface-model' } }
+        ],
+        cols: true,
+        images: [
+          '14-hydrofoil-boat/render.webp', '14-hydrofoil-boat/render-poster.webp',
+          '14-hydrofoil-boat/design-process.webp', '14-hydrofoil-boat/aerodynamics.webp',
+          '14-hydrofoil-boat/model-process.webp', '14-hydrofoil-boat/sketches-1.webp',
+          '14-hydrofoil-boat/sketches-2.webp', '14-hydrofoil-boat/moodboard.webp'
+        ]
+      },
+      {
+        id: 'pliers',
+        cat: 'bachelor',
+        badge: { en: 'Product family', nl: 'Productfamilie' },
+        title: { en: 'Ergonomic Pliers', nl: 'Ergonomische Tangen' },
+        sub: { en: 'Jewellery tools for DUREVE', nl: 'Juweliersgereedschap voor DUREVE' },
+        cover: '03-ergonomic-pliers/31.webp',
+        meta: {
+          context: { en: 'Bachelor — tool design', nl: 'Bachelor — gereedschapsontwerp' },
+          role: { en: 'Ergonomics, prototyping, branding', nl: 'Ergonomie, prototyping, branding' }
+        },
+        lead: {
+          en: 'A redesign of jewellery tools focused on grip, ergonomics and a coherent product family — from hand-shaped prototypes to the DUREVE brand identity.',
+          nl: 'Een herontwerp van juweliersgereedschap met focus op grip, ergonomie en een coherente productfamilie — van handgevormde prototypes tot de DUREVE-merkidentiteit.'
+        },
+        images: [
+          '03-ergonomic-pliers/page_009.webp', '03-ergonomic-pliers/15.webp', '03-ergonomic-pliers/28.webp',
+          '03-ergonomic-pliers/29.webp', '03-ergonomic-pliers/30.webp', '03-ergonomic-pliers/31.webp',
+          '03-ergonomic-pliers/32.webp', '03-ergonomic-pliers/33.webp', '03-ergonomic-pliers/34.webp',
+          '03-ergonomic-pliers/35.webp', '03-ergonomic-pliers/36.webp'
+        ]
+      },
+      {
+        id: 'snow-scooter',
+        cat: 'bachelor',
+        badge: { en: 'Sketching', nl: 'Schetsen' },
+        title: 'Snow Scooter',
+        sub: { en: 'Digital concept sketching', nl: 'Digitaal conceptschetsen' },
+        cover: '15-snow-scooter/render-studio.webp',
+        meta: {
+          context: { en: 'Bachelor — Digital Concept Sketching, 2023–2024', nl: 'Bachelor — Digitaal Conceptschetsen, 2023–2024' },
+          role: { en: 'Concept sketching, AI-assisted rendering', nl: 'Conceptschetsen, AI-ondersteunde rendering' },
+          tools: 'Digital sketching · Vizcom'
+        },
+        lead: {
+          en: 'A snow scooter developed through digital sketching: from line work and shading to fast rendered variations. The final renders were generated from my own sketches with Vizcom to explore material, light and context.',
+          nl: 'Een sneeuwscooter uitgewerkt via digitaal schetsen: van lijnwerk en shading naar snelle gerenderde varianten. De finale renders zijn met Vizcom gegenereerd vanuit mijn eigen schetsen om materiaal, licht en context te verkennen.'
+        },
+        cols: true,
+        images: [
+          '15-snow-scooter/render-studio.webp', '15-snow-scooter/sketch-1.webp', '15-snow-scooter/sketch-2.webp',
+          '15-snow-scooter/render-cellshading.webp', '15-snow-scooter/render-snow.webp'
+        ]
+      },
+      {
+        id: 'radiant-nights',
+        cat: 'bachelor',
+        client: { name: 'deSingel' },
+        badge: { en: 'Branding', nl: 'Branding' },
+        title: 'Radiant Nights',
+        sub: { en: 'Event identity for De Singel', nl: 'Eventidentiteit voor De Singel' },
+        cover: '06-radiant-nights/69.webp',
+        meta: {
+          context: { en: 'Collaboration with De Singel, Antwerp', nl: 'Samenwerking met De Singel, Antwerpen' },
+          role: { en: 'Visual identity, posters, campaign', nl: 'Visuele identiteit, affiches, campagne' }
+        },
+        lead: {
+          en: 'Visual identity and campaign material for Radiant Nights at De Singel: posters, billboards and visual assets across multiple editions.',
+          nl: 'Visuele identiteit en campagnemateriaal voor Radiant Nights in De Singel: affiches, billboards en visuele assets over meerdere edities.'
+        },
+        cols: true,
+        images: [
+          '06-radiant-nights/page_016.webp', '06-radiant-nights/62.webp', '06-radiant-nights/63.webp',
+          '06-radiant-nights/64.webp', '06-radiant-nights/65.webp', '06-radiant-nights/66.webp',
+          '06-radiant-nights/67.webp', '06-radiant-nights/68.webp', '06-radiant-nights/69.webp'
+        ]
+      },
+      {
+        id: 'binoculars',
+        cat: 'bachelor',
+        badge: { en: 'Style study', nl: 'Stijlstudie' },
+        title: { en: 'Binoculars × Tom Dixon', nl: 'Verrekijker × Tom Dixon' },
+        sub: { en: 'An archetype redesigned in a designer\'s language', nl: 'Een archetype herontworpen in de taal van een ontwerper' },
+        cover: '02-historical-binoculars/27.webp',
+        meta: {
+          context: { en: 'Bachelor — style research', nl: 'Bachelor — stijlonderzoek' },
+          role: { en: 'Style analysis, concept design', nl: 'Stijlanalyse, conceptontwerp' }
+        },
+        lead: {
+          en: 'Classic binoculars reinterpreted in the style of Tom Dixon: form and aesthetics reimagined while keeping the archetype of the object recognisable.',
+          nl: 'Een klassieke verrekijker geherinterpreteerd in de stijl van Tom Dixon: vorm en esthetiek opnieuw bedacht, terwijl het archetype herkenbaar blijft.'
+        },
+        models: [
+          { src: '3d/binoculars.stl', label: { en: 'Final binoculars model', nl: 'Finaal model verrekijker' } }
+        ],
+        images: [
+          '02-historical-binoculars/page_007.webp', '02-historical-binoculars/page_008.webp',
+          '02-historical-binoculars/24.webp', '02-historical-binoculars/25.webp',
+          '02-historical-binoculars/26.webp', '02-historical-binoculars/27.webp'
+        ]
+      },
+      {
+        id: 'paper-lamp',
+        cat: 'bachelor',
+        badge: { en: 'Material study', nl: 'Materiaalstudie' },
+        title: { en: 'Eco Paper Lamp', nl: 'Eco Papieren Lamp' },
+        sub: { en: 'One material, no fasteners', nl: 'Eén materiaal, geen bevestigingsmiddelen' },
+        cover: '01-eco-paper-lamp/23.webp',
+        meta: {
+          context: { en: 'Bachelor — material design', nl: 'Bachelor — materiaalontwerp' },
+          role: { en: 'Prototyping, laser cutting', nl: 'Prototyping, lasersnijden' }
+        },
+        lead: {
+          en: 'A lamp made from a single material with integrated joints. Prototyping and laser cutting were used to explore form, composition and minimal waste.',
+          nl: 'Een lamp uit één materiaal met geïntegreerde verbindingen. Prototyping en lasersnijden om vorm, compositie en minimaal afval te onderzoeken.'
+        },
+        images: [
+          '01-eco-paper-lamp/page_005.webp', '01-eco-paper-lamp/18.webp', '01-eco-paper-lamp/19.webp',
+          '01-eco-paper-lamp/20.webp', '01-eco-paper-lamp/21.webp', '01-eco-paper-lamp/22.webp',
+          '01-eco-paper-lamp/23.webp'
+        ]
+      }
+    ];
+
+    /* Display order, most important first. FEATURED projects open the page as large cards;
+       the rest is grouped per category below them. */
+    const ORDER = [
+      'digiknitting', 'komono', 'plum-road-tea-dream', 'kipling', 'bike-parking',
+      'vr-hospital', 'reliq', 'pss',
+      'komono-ar', 'amelie-lens', 'modulor', 'essentiel', 'ar-studio',
+      'sculptures', 'hydrofoil-boat', 'pliers', 'radiant-nights', 'binoculars', 'snow-scooter', 'paper-lamp'
+    ];
+    const FEATURED = ['digiknitting', 'komono', 'plum-road-tea-dream', 'kipling', 'bike-parking'];
+    PROJECTS.forEach(p => { p.featured = FEATURED.includes(p.id); });
+
+    function displayOrder() {
+      const listed = ORDER.map(id => PROJECTS.find(p => p.id === id)).filter(Boolean);
+      return listed.concat(PROJECTS.filter(p => !ORDER.includes(p.id)));
+    }
+
+    const GROUP_TITLES = {
+      featured: { en: 'Highlights', nl: 'Uitgelicht' },
+      master:   { en: 'Master projects', nl: 'Masterprojecten' },
+      pro:      { en: 'Professional & freelance', nl: 'Professioneel & freelance' },
+      bachelor: { en: 'Bachelor projects', nl: 'Bachelorprojecten' }
+    };
+
+    const FILTERS = [
+      { id: 'all',      en: 'All',          nl: 'Alles' },
+      { id: 'master',   en: 'Master',       nl: 'Master' },
+      { id: 'pro',      en: 'Professional', nl: 'Professioneel' },
+      { id: 'bachelor', en: 'Bachelor',     nl: 'Bachelor' }
+    ];
+
+    /* Static UI strings. Keys match data-i18n attributes. */
+    const UI = {
+      en: {
+        'role': '— Product Designer',
+        'nav.work': 'Work', 'nav.about': 'About', 'nav.contact': 'Contact',
+        'intro.title': 'Product designer working between <em>physical products</em>, <em>digital tools</em> and <em>interactive media</em>.',
+        'intro.now.label': 'Now', 'intro.now': 'Master Product Development, UAntwerp',
+        'intro.based.label': 'Based in', 'intro.based': 'Antwerp, Belgium',
+        'work.title': 'Selected work',
+        'about.credit': 'Photo: Stefanie De Bakker',
+        'about.p1': "I'm Diego, a designer from Antwerp. I studied cross-media design before moving into product development, and I like to work where those two worlds meet: objects, tools and the digital experiences around them.",
+        'about.p2': "I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run a small independent studio for graphic design, campaigns and AR/XR experiences.",
+        'about.p3': "I'm currently finishing my Master in Product Development at the University of Antwerp and I'm open to collaborations that connect design and technology.",
+        'about.edu': 'Education', 'about.tools': 'Tools', 'about.lang': 'Languages',
+        'edu.1': 'Master Product Development<span>UAntwerp · 2024–2026</span>',
+        'edu.2': 'Bachelor Product Development<span>UAntwerp · 2021–2024</span>',
+        'edu.4': 'Bachelor Cross-media Design<span>AP Hogeschool · 2017–2021</span>',
+        'tools.3d': '3D &amp; parametric', 'tools.render': 'Rendering', 'tools.graphic': 'Graphic &amp; motion',
+        'tools.fab': '3D printing · Laser cutting<span>Prototyping</span>',
+        'lang.nl': 'Dutch<span>Native</span>', 'lang.en': 'English<span>Advanced</span>', 'lang.fr': 'French<span>Advanced</span>',
+        'contact.title': "Let's make something together.",
+        'contact.loc': 'Schoten, Antwerp — Belgium',
+        'footer.top': 'Back to top ↑',
+        'clients.label': 'Worked with',
+        'p.back': '← All work',
+        'p.context': 'Context', 'p.role': 'Role', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
+        'p.next': 'Next project', 'p.trailer': 'Official trailer',
+        'p.3d.hint': 'Click to explore in 3D', 'p.3d.loading': 'Loading 3D model…', 'p.3d.error': '3D model could not be loaded',
+        'p.tool.title': 'Voxel Knitter — live version of the design tool', 'p.tool.cta': 'Click to try the Voxel Knitter', 'p.tool.open': 'Open full screen'
+      },
+      nl: {
+        'role': '— Productontwerper',
+        'nav.work': 'Werk', 'nav.about': 'Over', 'nav.contact': 'Contact',
+        'intro.title': 'Productontwerper tussen <em>fysieke producten</em>, <em>digitale tools</em> en <em>interactieve media</em>.',
+        'intro.now.label': 'Nu', 'intro.now': 'Master Productontwikkeling, UAntwerpen',
+        'intro.based.label': 'Woont in', 'intro.based': 'Antwerpen, België',
+        'work.title': 'Geselecteerd werk',
+        'about.credit': 'Foto: Stefanie De Bakker',
+        'about.p1': 'Ik ben Diego, ontwerper uit Antwerpen. Ik studeerde cross-media design voor ik de stap naar productontwikkeling zette, en ik werk het liefst waar die twee werelden elkaar raken: objecten, tools en de digitale ervaringen errond.',
+        'about.p2': 'Ik ben gefascineerd door biomimicry, organische vormen en goed gemaakte dingen. Naast mijn studies run ik een kleine onafhankelijke studio voor grafisch ontwerp, campagnes en AR/XR-ervaringen.',
+        'about.p3': 'Momenteel rond ik mijn Master Productontwikkeling aan de Universiteit Antwerpen af en sta ik open voor samenwerkingen die design en technologie verbinden.',
+        'about.edu': 'Opleiding', 'about.tools': 'Tools', 'about.lang': 'Talen',
+        'edu.1': 'Master Productontwikkeling<span>UAntwerpen · 2024–2026</span>',
+        'edu.2': 'Bachelor Productontwikkeling<span>UAntwerpen · 2021–2024</span>',
+        'edu.4': 'Bachelor Cross-media Design<span>AP Hogeschool · 2017–2021</span>',
+        'tools.3d': '3D &amp; parametrisch', 'tools.render': 'Rendering', 'tools.graphic': 'Grafisch &amp; motion',
+        'tools.fab': '3D-printen · Lasersnijden<span>Prototyping</span>',
+        'lang.nl': 'Nederlands<span>Moedertaal</span>', 'lang.en': 'Engels<span>Gevorderd</span>', 'lang.fr': 'Frans<span>Gevorderd</span>',
+        'contact.title': 'Laten we samen iets maken.',
+        'contact.loc': 'Schoten, Antwerpen — België',
+        'footer.top': 'Naar boven ↑',
+        'clients.label': 'Werkte met',
+        'p.back': '← Alle werk',
+        'p.context': 'Context', 'p.role': 'Rol', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
+        'p.next': 'Volgend project', 'p.trailer': 'Officiële trailer',
+        'p.3d.hint': 'Klik om in 3D te bekijken', 'p.3d.loading': '3D-model laden…', 'p.3d.error': '3D-model kon niet geladen worden',
+        'p.tool.title': 'Voxel Knitter — live versie van de ontwerptool', 'p.tool.cta': 'Klik om de Voxel Knitter te proberen', 'p.tool.open': 'Open schermvullend'
       }
     };
 
-    // ─────────────────────────────────────────────────────────────────────────
-    //  MODAL LOGIC
-    // ─────────────────────────────────────────────────────────────────────────
-    (function () {
-      const backdrop   = document.getElementById('projBackdrop');
-      const closeBtn   = document.getElementById('projClose');
-      const pmNum      = document.getElementById('pmNum');
-      const pmName     = document.getElementById('pmName');
-      const pmTag      = document.getElementById('pmTag');
-      const pmDesc     = document.getElementById('pmDesc');
-      const pmImgCount = document.getElementById('pmImgCount');
-      const pmMain     = document.getElementById('pmMain');
-      const pmImg      = document.getElementById('pmImg');
-      const pmEmpty    = document.getElementById('pmEmpty');
-      const pmEmptyMsg = document.getElementById('pmEmptyMsg');
-      const pmPrev     = document.getElementById('pmPrev');
-      const pmNext     = document.getElementById('pmNext');
-      const pmCounter  = document.getElementById('pmCounter');
-      const pmThumbs   = document.getElementById('pmThumbs');
+    /* ── helpers ── */
+    let lang = 'en';
+    try { lang = localStorage.getItem('lang') === 'nl' ? 'nl' : 'en'; } catch (e) {}
+    let filter = 'all';
 
-      let images = [], idx = 0;
+    const t = v => (v && typeof v === 'object') ? (v[lang] || v.en) : (v || '');
+    const src = p => /^https?:/.test(p) ? p : encodeURI(p);
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const byId = id => PROJECTS.find(p => p.id === id);
 
-      function showImg(i) {
-        if (!images.length) return;
-        idx = ((i % images.length) + images.length) % images.length;
-        pmImg.classList.add('fade');
-        setTimeout(function () {
-          pmImg.src = images[idx];
-          pmImg.classList.remove('fade');
-        }, 120);
-        pmCounter.textContent = (idx + 1) + ' / ' + images.length;
-        pmThumbs.querySelectorAll('.proj-thumb').forEach(function (t, j) {
-          t.classList.toggle('active', j === idx);
-        });
-        var th = pmThumbs.children[idx];
-        if (th) th.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
+    /* ── grid ── */
+    const grid = document.getElementById('grid');
+    const filtersEl = document.getElementById('filters');
 
-      function openModal(projectId, info) {
-        var data = projectData[projectId] || {};
-        images = data.images || [];
+    function cardMedia(p) {
+      if (p.cover) return `<img src="${src(p.cover)}" alt="${esc(t(p.title))}" loading="lazy">`;
+      if (p.video) return `<video src="${src(p.video)}#t=1" muted playsinline preload="metadata"></video>`;
+      return '';
+    }
 
-        pmNum.textContent  = info.num;
-        pmName.textContent = info.name;
-        pmTag.textContent  = info.tag;
-        pmDesc.textContent = info.desc;
-        pmImgCount.textContent = images.length
-          ? images.length + ' image' + (images.length !== 1 ? 's' : '')
-          : '';
+    /* brand logo when we have the file, otherwise the name set as a wordmark */
+    function clientMark(c) {
+      return c.logo
+        ? `<img class="client-logo${c.square ? ' square' : ''}" src="${src(c.logo)}" alt="${esc(c.name)}">`
+        : `<span class="client-word">${esc(c.name)}</span>`;
+    }
 
-        if (images.length) {
-          pmImg.style.display   = '';
-          pmEmpty.style.display = 'none';
-          pmPrev.style.display  = '';
-          pmNext.style.display  = '';
-          pmThumbs.innerHTML = images.map(function (src, i) {
-            return '<img class="proj-thumb' + (i === 0 ? ' active' : '') + '" src="' + src + '" alt="Image ' + (i + 1) + '" loading="lazy">';
-          }).join('');
-          pmThumbs.querySelectorAll('.proj-thumb').forEach(function (t, i) {
-            t.addEventListener('click', function () { showImg(i); });
-          });
-          showImg(0);
-        } else {
-          pmImg.style.display   = 'none';
-          pmEmpty.style.display = 'flex';
-          pmPrev.style.display  = 'none';
-          pmNext.style.display  = 'none';
-          pmEmptyMsg.textContent = 'Drop images into  projects/' + String(projectId).padStart(2, '0') + '-…/  and add their paths to projectData in the HTML';
-          pmThumbs.innerHTML = '';
-          pmCounter.textContent = '';
-        }
+    function renderClients() {
+      const seen = new Map();
+      displayOrder().forEach(p => { if (p.client && !seen.has(p.client.name)) seen.set(p.client.name, p); });
+      document.getElementById('clients').innerHTML =
+        `<span class="clients-label">${UI[lang]['clients.label']}</span>` +
+        [...seen.values()].map(p => `<a href="#p/${p.id}" title="${esc(p.client.name)}">${clientMark(p.client)}</a>`).join('');
+    }
 
-        backdrop.classList.add('open');
-        backdrop.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        backdrop.classList.remove('open');
-        backdrop.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        pmImg.src = '';
-      }
-
-      pmPrev.addEventListener('click', function () { showImg(idx - 1); });
-      pmNext.addEventListener('click', function () { showImg(idx + 1); });
-      closeBtn.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
-      document.addEventListener('keydown', function (e) {
-        if (!backdrop.classList.contains('open')) return;
-        if (e.key === 'Escape')     closeModal();
-        if (e.key === 'ArrowLeft')  showImg(idx - 1);
-        if (e.key === 'ArrowRight') showImg(idx + 1);
-      });
-
-      // Touch swipe
-      var tx = 0;
-      pmMain.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-      pmMain.addEventListener('touchend',   function (e) {
-        var d = e.changedTouches[0].clientX - tx;
-        if (Math.abs(d) > 45) showImg(idx + (d < 0 ? 1 : -1));
-      }, { passive: true });
-
-      // Assign project IDs to cards by DOM order and wire up clicks
-      var projectIds = ['01','02','03','04','05','06'];
-      document.querySelectorAll('.project-card').forEach(function (card, i) {
-        var pid = projectIds[i];
-        if (!pid) return;
-        card.dataset.project = pid;
-        card.addEventListener('click', function () {
-          openModal(pid, {
-            num:  card.querySelector('.project-num').textContent,
-            name: card.querySelector('.project-name').textContent,
-            tag:  card.querySelector('.project-tag').textContent,
-            desc: card.querySelector('.project-desc').textContent,
-          });
-        });
-      });
-
-      // Wire master sections — each maps to a project folder ID
-      // DOM order: M01-APD→12, M02-Reliq→09, M03-PSS→08, M04-Komono→10, M05-XR/AR→07, M06-DigiKnitting→11
-      var masterIds = ['12','09','08','10','07','11'];
-      document.querySelectorAll('.master-section').forEach(function (section, i) {
-        var pid = masterIds[i];
-        if (!pid) return;
-        var data = projectData[pid] || {};
-        if (!data.images || !data.images.length) return;
-        section.dataset.project = pid;
-        section.addEventListener('click', function (e) {
-          if (e.target.closest('button, video, a, .video-play-btn')) return;
-          openModal(pid, {
-            num:  (section.querySelector('.master-num')   || {}).textContent || '',
-            name: (section.querySelector('.master-title') || {}).textContent || '',
-            tag:  (section.querySelector('.master-tag')   || {}).textContent || '',
-            desc: (section.querySelector('.master-desc')  || {}).textContent || '',
-          });
-        });
-      });
-    })();
-</script>
-
-
-  <!-- PROJECT DETAIL MODAL -->
-  <div class="proj-backdrop" id="projBackdrop" aria-hidden="true">
-    <div class="proj-dialog" role="dialog" aria-labelledby="pmName">
-      <button class="proj-close" id="projClose" aria-label="Close project">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l11 11M12 1L1 12"/></svg>
-      </button>
-      <div class="proj-dialog-body">
-        <div class="proj-info">
-          <div class="proj-info-num" id="pmNum"></div>
-          <div class="proj-info-name" id="pmName"></div>
-          <div class="proj-info-tag" id="pmTag"></div>
-          <p class="proj-info-desc" id="pmDesc"></p>
-          <div class="proj-info-imgcount" id="pmImgCount"></div>
-        </div>
-        <div class="proj-viewer">
-          <div class="proj-main" id="pmMain">
-            <button class="proj-nav-btn" id="pmPrev" aria-label="Previous image">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 2L4 7l5 5"/></svg>
-            </button>
-            <img class="proj-main-img" id="pmImg" src="" alt="" loading="eager">
-            <div class="proj-empty" id="pmEmpty">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              <span id="pmEmptyMsg"></span>
-            </div>
-            <button class="proj-nav-btn" id="pmNext" aria-label="Next image">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 2l5 5-5 5"/></svg>
-            </button>
-            <div class="proj-counter" id="pmCounter"></div>
+    function card(p, wide) {
+      return `
+        <a class="card reveal${wide ? ' wide' : ''}" href="#p/${p.id}">
+          <div class="card-media">${cardMedia(p)}<span class="badge">${esc(t(p.badge))}${p.models ? ' · 3D' : ''}</span></div>
+          <div class="card-text">
+            ${p.client ? `<span class="card-client">${clientMark(p.client)}</span>` : ''}
+            <span class="card-title">${esc(t(p.title))}</span>
+            <span class="card-cat">${esc(t(FILTERS.find(f => f.id === p.cat)))}</span>
+            <span class="card-sub">${esc(t(p.sub))}</span>
           </div>
-          <div class="proj-thumbs" id="pmThumbs"></div>
+        </a>`;
+    }
+
+    function group(title, items, compact) {
+      return `
+        <section class="group">
+          <div class="group-head"><h3>${esc(title)}</h3><span>${items.length}</span></div>
+          <div class="grid${compact ? ' compact' : ''}">${items.map((p, i) => card(p, !compact && i === 0 && p.wide)).join('')}</div>
+        </section>`;
+    }
+
+    function renderGrid() {
+      const ordered = displayOrder();
+      if (filter === 'all') {
+        /* highlights first, then the rest grouped by category */
+        grid.innerHTML = group(t(GROUP_TITLES.featured), ordered.filter(p => p.featured), false) +
+          ['master', 'pro', 'bachelor'].map(c =>
+            group(t(GROUP_TITLES[c]), ordered.filter(p => !p.featured && p.cat === c), true)).join('');
+      } else {
+        grid.innerHTML = group(t(GROUP_TITLES[filter]), ordered.filter(p => p.cat === filter), true);
+      }
+
+      /* videos used as covers play on hover */
+      grid.querySelectorAll('.card-media img').forEach(img => {
+        const check = () => { if (img.naturalHeight > img.naturalWidth * 1.05) img.classList.add('portrait'); };
+        if (img.complete) check(); else img.addEventListener('load', check, { once: true });
+      });
+
+      grid.querySelectorAll('.card video').forEach(v => {
+        v.style.cssText = 'width:100%;height:100%;object-fit:cover';
+        const card = v.closest('.card');
+        card.addEventListener('mouseenter', () => v.play().catch(() => {}));
+        card.addEventListener('mouseleave', () => v.pause());
+      });
+
+      observeReveals();
+    }
+
+    function renderFilters() {
+      filtersEl.innerHTML = FILTERS.map(f => {
+        const n = f.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === f.id).length;
+        return `<button type="button" data-filter="${f.id}" aria-pressed="${f.id === filter}">${esc(t(f))}<sup>${n}</sup></button>`;
+      }).join('');
+    }
+
+    filtersEl.addEventListener('click', e => {
+      const b = e.target.closest('button[data-filter]');
+      if (!b) return;
+      filter = b.dataset.filter;
+      filtersEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      renderGrid();
+    });
+
+    /* ── project page ── */
+    const page = document.getElementById('project');
+    const pContent = document.getElementById('pContent');
+    let lastScroll = 0;
+
+    function renderProject(p) {
+      const L = UI[lang];
+      const m = p.meta || {};
+      const metaRows = [
+        m.context && `<dt>${L['p.context']}</dt><dd>${esc(t(m.context))}</dd>`,
+        m.role && `<dt>${L['p.role']}</dt><dd>${esc(t(m.role))}</dd>`,
+        m.tools && `<dt>${L['p.tools']}</dt><dd>${esc(m.tools)}</dd>`,
+        m.extra && `<dt>${L['p.info']}</dt><dd>${esc(t(m.extra))}</dd>`,
+        m.links && `<dt>${L['p.links']}</dt><dd>${m.links.map(l => `<a href="${l.href}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('<br>')}</dd>`
+      ].filter(Boolean).join('');
+
+      const sections = (p.sections || []).map(s =>
+        `<div><h3>${esc(t(s.h))}</h3><p>${esc(t(s.p))}</p></div>`).join('');
+
+      const media = [];
+      if (p.embed) media.push(`<div class="embed full"><iframe src="${p.embed}" title="${esc(t(p.title))} — ${L['p.trailer']}" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`);
+      if (p.video) media.push(`<video class="full" src="${src(p.video)}" controls playsinline preload="metadata"></video>`);
+      /* extra clips: short loops autoplay muted like GIFs, the rest get controls */
+      (p.videos || []).forEach((v, i) => {
+        const full = !p.cols || i === 0 ? ' class="full"' : '';
+        media.push(v.loop
+          ? `<video${full} src="${src(v.src)}" autoplay muted loop playsinline></video>`
+          : `<video${full} src="${src(v.src)}" controls playsinline preload="metadata"></video>`);
+      });
+      /* first model is the large opener; a leftover last model also spans full width */
+      const nModels = (p.models || []).length;
+      const models = (p.models || []).map((m, i) => `
+        <figure class="model${i === 0 || (i === nModels - 1 && nModels % 2 === 0) ? ' full' : ''}">
+          <div class="model-stage" data-model="${src(m.src)}" data-error="${L['p.3d.error']}">
+            <span class="model-hint">${L['p.3d.hint']}</span>
+            <span class="model-status">${L['p.3d.loading']}</span>
+          </div>
+          <figcaption>${esc(t(m.label))}</figcaption>
+        </figure>`).join('');
+      p.images.forEach((img, i) => {
+        /* in two-column layouts the first image spans full width as an opener */
+        const full = !p.cols || (i === 0 && !p.videos) ? ' class="full"' : '';
+        media.push(`<img${full} src="${src(img)}" alt="${esc(t(p.title))} — ${i + 1}" loading="lazy">`);
+      });
+
+      const ordered = displayOrder();
+      const next = ordered[(ordered.indexOf(p) + 1) % ordered.length];
+
+      if (window.viewer3d) window.viewer3d.unmountAll();
+      pContent.innerHTML = `
+        <div class="p-head">
+          ${p.client ? `<div class="p-client">${clientMark(p.client)}</div>` : ''}
+          <div class="p-kicker">${esc(t(p.badge))} · ${esc(t(FILTERS.find(f => f.id === p.cat)))}</div>
+          <h1 class="p-title" id="pTitle">${esc(t(p.title))}</h1>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="p-body">
+          <dl class="p-meta">${metaRows}</dl>
+          <div>
+            <p class="p-lead">${esc(t(p.lead))}</p>
+            ${sections ? `<div class="p-sections">${sections}</div>` : ''}
+            ${p.note ? `<p class="p-note">${p.noteHtml ? t(p.note) : esc(t(p.note))}</p>` : ''}
+          </div>
+        </div>
+        ${p.tool ? `
+        <figure class="tool">
+          <div class="tool-stage">
+            <iframe src="${p.tool}" title="${L['p.tool.title']}" loading="lazy"></iframe>
+            <button type="button" class="tool-activate" data-label="${L['p.tool.cta']}" aria-label="${L['p.tool.cta']}"></button>
+          </div>
+          <figcaption><span>${L['p.tool.title']}</span><a href="${p.tool}" target="_blank" rel="noopener">${L['p.tool.open']} ↗</a></figcaption>
+        </figure>` : ''}
+        ${models ? `<div class="p-models${p.models.length > 1 ? ' cols' : ''}">${models}</div>` : ''}
+        <div class="p-media${p.cols ? ' cols' : ''}">${media.join('')}</div>
+        <div class="p-next">
+          <span>${L['p.next']}</span>
+          <a href="#p/${next.id}">${esc(t(next.title))} →</a>
+        </div>`;
+      page.setAttribute('aria-labelledby', 'pTitle');
+      /* 3D viewers live in the module script below; it may still be loading */
+      if (window.viewer3d) window.viewer3d.mount(pContent);
+    }
+
+    function openProject(id) {
+      const p = byId(id);
+      if (!p) return closeProject();
+      if (!page.classList.contains('open')) lastScroll = window.scrollY;
+      renderProject(p);
+      page.scrollTop = 0;
+      page.classList.add('open');
+      page.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      page.focus({ preventScroll: true });
+      document.title = t(p.title) + ' — Diego Fabri';
+    }
+
+    function closeProject() {
+      if (!page.classList.contains('open')) return;
+      page.classList.remove('open');
+      page.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      page.querySelectorAll('video').forEach(v => v.pause());
+      /* stop the trailer and free WebGL contexts: clear the page after the fade */
+      setTimeout(() => {
+        if (page.classList.contains('open')) return;
+        if (window.viewer3d) window.viewer3d.unmountAll();
+        pContent.innerHTML = '';
+      }, 400);
+      window.scrollTo(0, lastScroll);
+      document.title = 'Diego Fabri — Product Designer';
+    }
+
+    function goHome() {
+      if (location.hash.startsWith('#p/')) history.pushState(null, '', location.pathname + location.search);
+      closeProject();
+    }
+
+    function route() {
+      const h = location.hash;
+      if (h.startsWith('#p/')) openProject(decodeURIComponent(h.slice(3)));
+      else closeProject();
+    }
+
+    window.addEventListener('hashchange', route);
+    window.addEventListener('popstate', route);
+    document.getElementById('pClose').addEventListener('click', goHome);
+    document.getElementById('pClose2').addEventListener('click', goHome);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') goHome(); });
+
+    /* embedded tool: click to interact, leaving with the mouse hands scrolling back to the page */
+    pContent.addEventListener('click', e => {
+      const b = e.target.closest('.tool-activate');
+      if (b) b.parentElement.classList.add('active');
+    });
+    pContent.addEventListener('pointerleave', e => {
+      if (e.pointerType === 'mouse' && e.target.classList && e.target.classList.contains('tool-stage')) e.target.classList.remove('active');
+    }, true);
+
+    /* ── language ── */
+    function applyLang(l) {
+      lang = l;
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      document.documentElement.lang = l;
+      document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = UI[l][el.dataset.i18n];
+        if (v !== undefined) el.innerHTML = v;
+      });
+      renderFilters();
+      renderClients();
+      renderGrid();
+      if (page.classList.contains('open')) {
+        const id = location.hash.slice(3);
+        if (byId(id)) renderProject(byId(id));
+      }
+    }
+
+    document.querySelectorAll('.lang button').forEach(b =>
+      b.addEventListener('click', () => applyLang(b.dataset.lang)));
+
+    /* ── reveal on scroll ── */
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' }) : null;
+
+    function observeReveals() {
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+    }
+
+    /* ── init ── */
+    applyLang(lang);
+    route();
+  </script>
+
+  <!-- 3D VIEWERS (three.js) — supports .glb / .gltf / .stl / .obj -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+    import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const viewers = new Set();
+
+    /* neutral clay-like material for formats without their own materials */
+    const clay = () => new THREE.MeshStandardMaterial({ color: 0xd9d8d4, metalness: 0.1, roughness: 0.5 });
+
+    function loadModel(url) {
+      const ext = url.split(/[?#]/)[0].split('.').pop().toLowerCase();
+      if (ext === 'glb' || ext === 'gltf') {
+        return new GLTFLoader().loadAsync(url).then(g => ({ object: g.scene, clips: g.animations }));
+      }
+      if (ext === 'stl') {
+        return new STLLoader().loadAsync(url).then(geo => {
+          /* CAD exports are Z-up, three.js is Y-up */
+          geo.rotateX(-Math.PI / 2);
+          return { object: new THREE.Mesh(geo, clay()), clips: [] };
+        });
+      }
+      if (ext === 'obj') {
+        return new OBJLoader().loadAsync(url).then(obj => {
+          obj.traverse(o => { if (o.isMesh) o.material = clay(); });
+          return { object: obj, clips: [] };
+        });
+      }
+      return Promise.reject(new Error('Unsupported 3D format: ' + ext));
+    }
+
+    function createViewer(stage) {
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      stage.appendChild(renderer.domElement);
+      const canvas = renderer.domElement;
+
+      const scene = new THREE.Scene();
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      scene.environment = envTex;
+      const key = new THREE.DirectionalLight(0xffffff, 1.2);
+      key.position.set(3, 5, 4);
+      scene.add(key);
+
+      const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 1000);
+      const controls = new OrbitControls(camera, canvas);
+      controls.enableDamping = true;
+      controls.enablePan = false;
+      controls.autoRotate = !reducedMotion;
+      controls.autoRotateSpeed = 1.2;
+      /* inactive until clicked, so the page keeps scrolling over the viewer */
+      controls.enabled = false;
+      canvas.style.touchAction = 'pan-y';
+
+      const clock = new THREE.Clock();
+      let mixer = null, loaded = false, visible = false;
+
+      function resize() {
+        const w = stage.clientWidth, h = stage.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+
+      function tick() {
+        const dt = clock.getDelta();
+        if (mixer) mixer.update(dt);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      function setLoop() { renderer.setAnimationLoop(loaded && visible ? tick : null); }
+
+      function activate() {
+        if (controls.enabled || !loaded) return;
+        controls.enabled = true;
+        controls.autoRotate = false;
+        canvas.style.touchAction = 'none';
+        stage.classList.add('active');
+      }
+      function deactivate() {
+        if (!controls.enabled) return;
+        controls.enabled = false;
+        canvas.style.touchAction = 'pan-y';
+        stage.classList.remove('active');
+      }
+      const onOutside = e => { if (!stage.contains(e.target)) deactivate(); };
+      const onLeave = e => { if (e.pointerType === 'mouse') deactivate(); };
+      stage.addEventListener('click', activate);
+      stage.addEventListener('pointerleave', onLeave);
+      document.addEventListener('pointerdown', onOutside);
+
+      const ro = new ResizeObserver(resize);
+      ro.observe(stage);
+
+      let requested = false;
+      const io = new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible && !requested) { requested = true; load(); }
+        setLoop();
+      }, { rootMargin: '200px 0px' });
+      io.observe(stage);
+
+      function load() {
+        loadModel(stage.dataset.model).then(({ object, clips }) => {
+          if (disposed) return;
+          /* centre the model and frame it */
+          const box = new THREE.Box3().setFromObject(object);
+          const center = box.getCenter(new THREE.Vector3());
+          const radius = box.getSize(new THREE.Vector3()).length() / 2 || 1;
+          object.position.sub(center);
+          scene.add(object);
+
+          const dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2)) * 1.1;
+          camera.position.copy(new THREE.Vector3(1, 0.55, 1.15).normalize().multiplyScalar(dist));
+          camera.near = dist / 100;
+          camera.far = dist * 10;
+          camera.updateProjectionMatrix();
+          controls.minDistance = radius * 0.6;
+          controls.maxDistance = dist * 2.5;
+          controls.update();
+
+          if (clips.length) {
+            mixer = new THREE.AnimationMixer(object);
+            clips.forEach(c => mixer.clipAction(c).play());
+          }
+          loaded = true;
+          stage.classList.add('loaded');
+          resize();
+          setLoop();
+        }).catch(err => {
+          console.warn('3D model failed:', stage.dataset.model, err);
+          stage.classList.add('failed');
+          const status = stage.querySelector('.model-status');
+          if (status) status.textContent = stage.dataset.error || 'Error';
+        });
+      }
+
+      let disposed = false;
+      function dispose() {
+        disposed = true;
+        renderer.setAnimationLoop(null);
+        io.disconnect();
+        ro.disconnect();
+        document.removeEventListener('pointerdown', onOutside);
+        controls.dispose();
+        scene.traverse(o => {
+          if (o.geometry) o.geometry.dispose();
+          [].concat(o.material || []).forEach(m => {
+            Object.values(m).forEach(v => { if (v && v.isTexture) v.dispose(); });
+            m.dispose();
+          });
+        });
+        envTex.dispose();
+        pmrem.dispose();
+        renderer.dispose();
+        renderer.forceContextLoss();
+        canvas.remove();
+      }
+
+      return { stage, dispose };
+    }
+
+    window.viewer3d = {
+      mount(root) {
+        root.querySelectorAll('.model-stage[data-model]').forEach(stage => {
+          if ([...viewers].some(v => v.stage === stage)) return;
+          viewers.add(createViewer(stage));
+        });
+      },
+      unmountAll() {
+        viewers.forEach(v => v.dispose());
+        viewers.clear();
+      }
+    };
+
+    /* a project page may already be open (deep link) before this module loaded */
+    window.viewer3d.mount(document.getElementById('pContent'));
+  </script>
 </body>
 </html>
