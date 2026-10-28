@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diego Fabri — Product Designer</title>
-  <meta name="description" content="Diego Fabri — product designer from Antwerp working between physical products, digital tools and interactive media.">
+  <meta name="description" content="Diego Fabri, product designer from Antwerp. Objects, 3D, AR filters and volumetric knitting.">
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,7 +25,7 @@
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
       font-size: 16px;
       line-height: 1.55;
       background: var(--bg);
@@ -129,7 +129,7 @@
     .clients-label { color: var(--muted); font-size: 0.85rem; margin-right: 4px; }
     .clients a { opacity: 0.55; transition: opacity 0.2s; }
     .clients a:hover { opacity: 1; }
-    .clients .client-logo { height: 20px; filter: grayscale(1); }
+    .clients .client-logo { height: 20px; }
 
     /* compact grids for the groups below the highlights */
     .grid.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(16px, 2vw, 28px); }
@@ -149,6 +149,7 @@
     }
     .group-head h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 500; letter-spacing: -0.03em; }
     .group-head span { color: var(--muted); font-size: 0.9rem; }
+    .group-intro { max-width: 60ch; margin: -8px 0 28px; color: var(--muted); font-size: 1rem; }
 
     .card { display: block; }
     .card.wide { grid-column: 1 / -1; }
@@ -327,7 +328,7 @@
     .model-stage {
       position: relative;
       aspect-ratio: 4 / 3;
-      background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--soft) 70%);
+      background: var(--soft);
       overflow: hidden;
       cursor: pointer;
       touch-action: pan-y;
@@ -424,13 +425,144 @@
       .card-text { grid-template-columns: 1fr; }
       .card-cat { text-align: left; grid-row: 2; }
     }
+
+    /* ═════════ CREATIVE LAYER — editorial type, motion and rhythm ═════════ */
+    /* the blue of the cover of my 2024 PDF portfolio */
+    :root { --tint: #3479e0; --accent: #3479e0; }
+
+    /* hero: oversized name, rotating role, live 3D model */
+    .hero {
+      position: relative;
+      min-height: min(calc(100svh - 64px), 1000px);
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      padding-block: 32px clamp(28px, 6vh, 72px);
+    }
+    .hero-stage { position: absolute; top: 0; right: -6vw; width: min(64vw, 1040px); height: 100%; }
+    .hero-stage .model-stage { position: absolute; inset: 0; aspect-ratio: auto; background: none; }
+    .hero-stage .model-hint, .hero-stage .model-status { display: none; }
+    .hero-inner { position: relative; z-index: 1; width: 100%; pointer-events: none; }
+    /* Syne was the typeface of my first portfolio; it carries the headings */
+    .hero-name, .group-head h3, .card-title, .row-title, .p-title, .contact h2.reveal, .p-next a, .logo {
+      font-family: 'Syne', 'Archivo', system-ui, sans-serif;
+    }
+    .hero-name {
+      font-size: clamp(4.2rem, 16.5vw, 17rem);
+      font-weight: 800;
+      line-height: 0.82;
+      letter-spacing: -0.04em;
+    }
+    .hero-name .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+    .hero-name .line > span { display: inline-block; transform: translateY(105%); animation: lineUp 1.2s var(--ease) forwards; }
+    .hero-name .line + .line > span { animation-delay: 0.12s; margin-left: 0.55em; }
+    @keyframes lineUp { to { transform: none; } }
+    .hero-role { margin-top: 4vh; max-width: 30ch; font-size: clamp(1.2rem, 2.2vw, 2rem); line-height: 1.2; }
+    .hero .intro-meta { margin-top: 3vh; }
+
+    /* endless client band */
+    .marquee { overflow: hidden; border-block: 1px solid var(--ink); padding-block: clamp(18px, 2.4vw, 28px); margin-bottom: clamp(72px, 10vw, 140px); }
+    .marquee-track { display: flex; align-items: center; gap: clamp(40px, 6vw, 88px); width: max-content; animation: marquee 45s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track a { display: flex; align-items: center; opacity: 0.75; transition: opacity 0.2s; }
+    .marquee-track a:hover { opacity: 1; }
+    .marquee-label { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+    .marquee .client-logo { height: 30px; max-width: 220px; }
+    .marquee .client-logo.square { height: 54px; }
+    .marquee .client-word { font-size: clamp(0.95rem, 1.3vw, 1.2rem); letter-spacing: 0.14em; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* big section titles */
+    .group-head { border-bottom: 0; padding-bottom: 0; margin-bottom: clamp(24px, 3vw, 44px); align-items: flex-end; }
+    .group-head h3 { font-size: clamp(2.4rem, 7vw, 6.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 0.9; }
+    .group-intro { font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.35; margin: 0 0 clamp(32px, 4vw, 56px); }
+
+    /* highlights: asymmetric editorial grid */
+    .grid.featured { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(48px, 7vw, 110px) clamp(16px, 2.2vw, 32px); }
+    .grid.featured .card { grid-column: span 6; }
+    .grid.featured .card:nth-child(1) { grid-column: 1 / -1; }
+    .grid.featured .card:nth-child(2) { grid-column: 1 / span 7; }
+    .grid.featured .card:nth-child(3) { grid-column: 9 / span 4; margin-top: clamp(80px, 14vw, 220px); }
+    .grid.featured .card:nth-child(4) { grid-column: 2 / span 5; }
+    .grid.featured .card:nth-child(5) { grid-column: 8 / span 5; margin-top: clamp(60px, 10vw, 160px); }
+    .grid.featured .card:nth-child(n+3) .card-media { aspect-ratio: 4 / 5; }
+    .grid.featured .card-title { font-size: clamp(1.5rem, 2.8vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; }
+    .card-title { font-weight: 700; }
+
+    /* XR Studio: a full-bleed block in the PDF-portfolio blue */
+    .group.tinted {
+      color: #fff;
+      background: var(--tint);
+      box-shadow: 0 0 0 100vmax var(--tint);
+      clip-path: inset(0 -100vmax);
+      padding-block: clamp(72px, 10vw, 150px);
+    }
+    .group.tinted .group-intro, .group.tinted .card-sub, .group.tinted .card-cat { color: rgba(255, 255, 255, 0.75); }
+    .group.tinted .card-media { background: rgba(255, 255, 255, 0.12); }
+    .group.tinted .card-client { color: #fff; }
+    /* logos are dark on white; inverted and screened they turn white on the blue */
+    .group.tinted .client-logo { filter: invert(1); mix-blend-mode: screen; }
+    .group.tinted + .group { margin-top: clamp(110px, 14vw, 200px); }
+
+    /* bachelor: typographic index with a floating preview */
+    .rows { border-top: 1px solid var(--ink); }
+    .row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+      gap: 8px 24px;
+      align-items: baseline;
+      padding-block: clamp(18px, 2.4vw, 30px);
+      border-bottom: 1px solid var(--line);
+    }
+    .row-num { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+    .row-title { font-size: clamp(1.6rem, 3.8vw, 3.4rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; transition: transform 0.6s var(--ease), color 0.3s; }
+    .row-sub { color: var(--muted); }
+    .row-badge { font-size: 0.85rem; white-space: nowrap; }
+    .row:hover .row-title { transform: translateX(0.3em); color: var(--accent); }
+    .row-thumb { display: none; }
+    #preview { position: fixed; top: 0; left: 0; z-index: 40; pointer-events: none; will-change: transform; }
+    #preview .pv {
+      width: min(26vw, 400px);
+      aspect-ratio: 4 / 3;
+      margin: 28px 0 0 28px;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+      background: var(--soft);
+    }
+    #preview.show .pv { opacity: 1; }
+    #preview img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* contact: big statement */
+    .contact .work-bar h2 { font-family: inherit; font-size: 0.95rem; font-weight: 500; letter-spacing: 0; margin: 0; line-height: inherit; }
+    .contact h2.reveal { font-size: clamp(3rem, 10vw, 10rem); font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; }
+    .contact-links a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; border-bottom-color: var(--line); transition: background-size 0.5s var(--ease); }
+    .contact-links a:hover { background-size: 100% 1px; }
+
+    @media (max-width: 860px) {
+      .grid.featured .card, .grid.featured .card:nth-child(n) { grid-column: 1 / -1; margin-top: 0; }
+      .grid.featured .card:nth-child(n+3) .card-media { aspect-ratio: 3 / 2; }
+      .hero-stage { right: -20vw; width: 100vw; opacity: 0.55; }
+    }
+    @media (max-width: 640px), (hover: none) {
+      .row { grid-template-columns: 76px minmax(0, 1fr); }
+      .row-num { display: none; }
+      .row-thumb { display: block; grid-row: span 3; width: 76px; height: 76px; object-fit: cover; }
+      .row-sub, .row-badge { grid-column: 2; }
+      #preview { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name .line > span { animation: none; transform: none; }
+      .marquee-track { animation: none; flex-wrap: wrap; width: auto; }
+      #preview { display: none; }
+    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="wrap header-inner">
-      <a href="#top" class="logo">Diego Fabri <span data-i18n="role">— Product Designer</span></a>
+      <a href="#top" class="logo">Diego Fabri</a>
       <nav class="nav" aria-label="Main">
         <a href="#work" data-i18n="nav.work">Work</a>
         <a href="#about" class="hide-sm" data-i18n="nav.about">About</a>
@@ -444,14 +576,22 @@
   </header>
 
   <main id="top">
-    <section class="wrap intro">
-      <h1 class="reveal" data-i18n="intro.title">Product designer working between <em>physical products</em>, <em>digital tools</em> and <em>interactive media</em>.</h1>
-      <div class="intro-meta reveal">
-        <span><strong data-i18n="intro.now.label">Now</strong> — <span data-i18n="intro.now">Master Product Development, UAntwerp</span></span>
-        <span><strong data-i18n="intro.based.label">Based in</strong> — <span data-i18n="intro.based">Antwerp, Belgium</span></span>
+    <section class="hero">
+      <!-- live 3D: the animated cast-on stitch from the DigiKnitting thesis -->
+      <div class="hero-stage" id="heroStage" aria-hidden="true">
+        <div class="model-stage" data-model="3d/digiknitting-cast-on.glb" data-up="z"></div>
       </div>
-      <div class="clients reveal" id="clients"></div>
+      <div class="wrap hero-inner">
+        <h1 class="hero-name" aria-label="Diego Fabri"><span class="line"><span>Diego</span></span><span class="line"><span>Fabri</span></span></h1>
+        <p class="hero-role" data-i18n="hero.role">Product designer from Antwerp. I make objects, 3D, AR filters and, lately, a way to knit in three dimensions.</p>
+        <div class="intro-meta">
+          <span><strong data-i18n="intro.now.label">Now</strong> <span data-i18n="intro.now">Master Product Development, UAntwerp</span></span>
+          <span><strong>XR Studio</strong> <span data-i18n="hero.studio">my freelance studio</span></span>
+        </div>
+      </div>
     </section>
+
+    <div class="marquee" id="clients" aria-label="Clients"></div>
 
     <section class="wrap" id="work">
       <div class="work-bar">
@@ -470,7 +610,7 @@
         </figure>
         <div class="about-text reveal">
           <p data-i18n="about.p1">I'm Diego, a designer from Antwerp. I studied cross-media design before moving into product development, and I like to work where those two worlds meet: objects, tools and the digital experiences around them.</p>
-          <p data-i18n="about.p2">I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run a small independent studio for graphic design, campaigns and AR/XR experiences.</p>
+          <p data-i18n="about.p2">I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run XR Studio, my own freelance studio for AR filters, 3D visuals and branding.</p>
           <p data-i18n="about.p3">I'm currently finishing my Master in Product Development at the University of Antwerp and I'm open to collaborations that connect design and technology.</p>
 
           <div class="facts">
@@ -508,11 +648,11 @@
 
     <section class="wrap contact" id="contact">
       <div class="work-bar"><h2>Contact</h2></div>
-      <h2 class="reveal" data-i18n="contact.title">Let's make something together.</h2>
+      <h2 class="reveal" data-i18n="contact.title">Say hello.</h2>
       <div class="contact-links reveal">
         <a href="mailto:fabridiego@yahoo.be">fabridiego@yahoo.be</a>
         <a href="mailto:diego.fabri@student.uantwerpen.be">diego.fabri@student.uantwerpen.be</a>
-        <span style="color:var(--muted)" data-i18n="contact.loc">Schoten, Antwerp — Belgium</span>
+        <span style="color:var(--muted)" data-i18n="contact.loc">Schoten, Antwerp, Belgium</span>
       </div>
       <footer>
         <span>© 2026 Diego Fabri</span>
@@ -520,6 +660,8 @@
       </footer>
     </section>
   </main>
+
+  <div id="preview" aria-hidden="true"><div class="pv"><img alt=""></div></div>
 
   <!-- PROJECT PAGE -->
   <article class="project" id="project" aria-hidden="true" tabindex="-1">
@@ -548,7 +690,7 @@
         sub: { en: 'A three-dimensional approach to knitting solid objects', nl: 'Een driedimensionale aanpak om massieve objecten te breien' },
         cover: '11- DigiKnitting/Schermafbeelding 2026-06-01 153708.jpg',
         meta: {
-          context: { en: 'Master thesis — UAntwerp, 2025–2026', nl: 'Masterproef — UAntwerpen, 2025–2026' },
+          context: { en: 'Master thesis, UAntwerp, 2025–2026', nl: 'Masterproef, UAntwerpen, 2025–2026' },
           role: { en: 'Research, computational design, mechanical design', nl: 'Onderzoek, computationeel ontwerp, mechanisch ontwerp' },
           tools: 'Rhino · Grasshopper · KeyShot · 3D printing',
           extra: { en: 'Supervisors: Jouke Verlinden & Stijn Verwulgen', nl: 'Promotoren: Jouke Verlinden & Stijn Verwulgen' },
@@ -561,24 +703,24 @@
         /* live tool is hosted from its own repo, so the portfolio always shows the latest version */
         tool: 'https://fabridiego.github.io/Volumetric-Knitting-TriCAD/',
         lead: {
-          en: 'An emerging additive technique that combines the layer-by-layer logic of 3D printing with the loop structure of knitting to build solid, three-dimensional objects from yarn. At TRL 3 there was no accessible design software, no reproducible fabrication method and little material knowledge — so the thesis builds all three.',
-          nl: 'Een opkomende additieve techniek die de laag-per-laag-logica van 3D-printen combineert met de lusstructuur van breien om massieve, driedimensionale objecten uit garen te bouwen. Op TRL 3 bestond er geen toegankelijke ontwerpsoftware, geen reproduceerbare productiemethode en weinig materiaalkennis — deze masterproef bouwt alle drie.'
+          en: 'An emerging additive technique that combines the layer-by-layer logic of 3D printing with the loop structure of knitting to build solid, three-dimensional objects from yarn. At TRL 3 there was no accessible design software, no reproducible fabrication method and little material knowledge, so the thesis builds all three.',
+          nl: 'Een opkomende additieve techniek die de laag-per-laag-logica van 3D-printen combineert met de lusstructuur van breien om massieve, driedimensionale objecten uit garen te bouwen. Op TRL 3 bestond er geen toegankelijke ontwerpsoftware, geen reproduceerbare productiemethode en weinig materiaalkennis, deze masterproef bouwt alle drie.'
         },
         sections: [
-          { h: { en: '01 — Material research', nl: '01 — Materiaalonderzoek' },
+          { h: { en: '01 Material research', nl: '01 Materiaalonderzoek' },
             p: { en: 'Experiments show how stitch topology affects compliance and stiffness. Those rules are built into the digital tool as a live stiffness simulation.', nl: 'Experimenten tonen hoe de steektopologie flexibiliteit en stijfheid beïnvloedt. Die regels zitten als live stijfheidssimulatie in de digitale tool.' } },
-          { h: { en: '02 — Voxel Knitter, the digital tool', nl: '02 — Voxel Knitter, de digitale tool' },
+          { h: { en: '02 Voxel Knitter, the digital tool', nl: '02 Voxel Knitter, de digitale tool' },
             p: { en: 'Every stitch is a voxel in a 3D grid with five types: cast-on, knit, purl, tuck and connector. Designers can build volumetric knits without deep specialist knowledge.', nl: 'Elke steek is een voxel in een 3D-grid met vijf types: opzet, recht, averecht, tuck en connector. Zo kunnen ontwerpers volumetrisch breiwerk maken zonder diepe specialistische kennis.' } },
-          { h: { en: '03 — Mechanical fabrication system', nl: '03 — Mechanisch productiesysteem' },
+          { h: { en: '03 Mechanical fabrication system', nl: '03 Mechanisch productiesysteem' },
             p: { en: 'A modular pin system with a configurable needle bed makes solid knitting reproducible by hand, and opens a path towards machine automation.', nl: 'Een modulair pinsysteem met een configureerbaar naaldbed maakt massief breien reproduceerbaar met de hand, en opent de weg naar automatisering.' } }
         ],
         note: {
-          en: 'Published and presented at AHFE 2026, Istanbul — “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.',
-          nl: 'Gepubliceerd en gepresenteerd op AHFE 2026, Istanbul — “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.'
+          en: 'Published and presented at AHFE 2026, Istanbul, “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.',
+          nl: 'Gepubliceerd en gepresenteerd op AHFE 2026, Istanbul, “DigiKnitting: Enabling Knitting in 3D”, <a href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener">doi:10.54941/ahfe1008073</a>.'
         },
         noteHtml: true,
         models: [
-          { src: '3d/digiknitting-cast-on.glb', label: { en: 'Cast-on stitch — animated', nl: 'Opzetsteek — geanimeerd' } },
+          { src: '3d/digiknitting-cast-on.glb', label: { en: 'Cast-on stitch, animated', nl: 'Opzetsteek, geanimeerd' } },
           { src: '3d/digiknitting-knit.glb', label: { en: 'Knit stitch', nl: 'Rechte steek' } },
           { src: '3d/digiknitting-purl.glb', label: { en: 'Purl stitch', nl: 'Averechte steek' } }
         ],
@@ -591,14 +733,14 @@
       },
       {
         id: 'plum-road-tea-dream',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'Samuel Baidoo' },
         badge: { en: 'Video game', nl: 'Videogame' },
         title: 'Plum Road Tea Dream',
         sub: { en: 'Game, performance and exhibition by Samuel Baidoo', nl: 'Game, performance en tentoonstelling van Samuel Baidoo' },
         cover: 'https://i.ytimg.com/vi/WQIr6QiUKLY/maxresdefault.jpg',
         meta: {
-          context: { en: 'Samuel Baidoo / Hanafubuki vzw — 2026', nl: 'Samuel Baidoo / Hanafubuki vzw — 2026' },
+          context: { en: 'Samuel Baidoo / Hanafubuki vzw, 2026', nl: 'Samuel Baidoo / Hanafubuki vzw, 2026' },
           role: { en: 'Technical support on the video game', nl: 'Technische ondersteuning bij de videogame' },
           extra: { en: 'Premiered at De Singel, Antwerp (April 2026). Released on Steam, July 2026.', nl: 'Première in De Singel, Antwerpen (april 2026). Verschenen op Steam, juli 2026.' },
           links: [
@@ -607,8 +749,8 @@
           ]
         },
         lead: {
-          en: 'A poetic, semi-autobiographical game about grief, joy and healing. Players follow the avatar S through seven sanctuaries — spaces built from memories — moving between in-game worlds and physical sculptures, images and texts. The project reclaims the video game as a medium for connection and introspection.',
-          nl: 'Een poëtische, semi-autobiografische game over rouw, vreugde en heling. Spelers volgen het avatar S door zeven sanctuaria — ruimtes opgebouwd uit herinneringen — en bewegen tussen gamewerelden en fysieke sculpturen, beelden en teksten. Het project claimt de videogame terug als medium voor verbinding en introspectie.'
+          en: 'A poetic, semi-autobiographical game about grief, joy and healing. Players follow the avatar S through seven sanctuaries, spaces built from memories, moving between in-game worlds and physical sculptures, images and texts. The project reclaims the video game as a medium for connection and introspection.',
+          nl: 'Een poëtische, semi-autobiografische game over rouw, vreugde en heling. Spelers volgen het avatar S door zeven sanctuaria, ruimtes opgebouwd uit herinneringen, en bewegen tussen gamewerelden en fysieke sculpturen, beelden en teksten. Het project claimt de videogame terug als medium voor verbinding en introspectie.'
         },
         sections: [
           { h: { en: 'My contribution', nl: 'Mijn bijdrage' },
@@ -619,14 +761,14 @@
       },
       {
         id: 'komono',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'Komono', logo: 'logos/komono.png' },
         badge: { en: 'Internship', nl: 'Stage' },
         title: 'Komono',
         sub: { en: 'Eyewear design internship', nl: 'Stage brillenontwerp' },
         cover: '10-stage komono/85.webp',
         meta: {
-          context: { en: 'Three-month internship — Komono, Antwerp', nl: 'Stage van drie maanden — Komono, Antwerpen' },
+          context: { en: 'Three-month internship, Komono, Antwerp', nl: 'Stage van drie maanden, Komono, Antwerpen' },
           role: { en: 'Concept sketching, 3D modelling, technical sheets, prototyping', nl: 'Conceptschetsen, 3D-modellering, technische fiches, prototyping' },
           tools: 'Rhino · SolidWorks · KeyShot · 3D printing'
         },
@@ -636,10 +778,10 @@
         },
         sections: [
           { h: { en: 'From sketch to production', nl: 'Van schets tot productie' },
-            p: { en: 'The work ran from concept sketches and texture studies to 3D models in Rhino and SolidWorks, technical specification sheets and 3D-printed wing prototypes for metal frames — in direct collaboration with the creative and production teams.', nl: 'Het werk ging van conceptschetsen en textuurstudies naar 3D-modellen in Rhino en SolidWorks, technische specificatiefiches en 3D-geprinte prototypes van brillenpoten voor metalen monturen — in rechtstreekse samenwerking met het creatieve en productieteam.' } }
+            p: { en: 'The work ran from concept sketches and texture studies to 3D models in Rhino and SolidWorks, technical specification sheets and 3D-printed wing prototypes for metal frames, in direct collaboration with the creative and production teams.', nl: 'Het werk ging van conceptschetsen en textuurstudies naar 3D-modellen in Rhino en SolidWorks, technische specificatiefiches en 3D-geprinte prototypes van brillenpoten voor metalen monturen, in rechtstreekse samenwerking met het creatieve en productieteam.' } }
         ],
         models: [
-          { src: '3d/komono-sm2-glasses.obj', label: { en: 'Tyre glasses — SM2 frame', nl: 'Tyre glasses — SM2-montuur' } },
+          { src: '3d/komono-sm2-glasses.obj', label: { en: 'Tyre glasses, SM2 frame', nl: 'Tyre glasses, SM2-montuur' } },
           { src: '3d/komono-wing-overflow.stl', label: { en: '3D-printed wing for metal frames', nl: '3D-geprinte wing voor metalen monturen' } }
         ],
         images: [
@@ -664,7 +806,7 @@
         cover: '17-vr-hospital/room-1.webp',
         video: '17-vr-hospital/demo.mp4',
         meta: {
-          context: { en: 'Master — Applied Research Methodology, group project', nl: 'Master — Applied Research Methodology, groepsproject' },
+          context: { en: 'Master, Applied Research Methodology, group project', nl: 'Master, Applied Research Methodology, groepsproject' },
           role: { en: 'VR environment, user testing, research', nl: 'VR-omgeving, gebruikerstesten, onderzoek' },
           tools: 'Unity · VR headset · SPSS',
           extra: { en: 'In collaboration with the University of Groningen', nl: 'In samenwerking met de Rijksuniversiteit Groningen' }
@@ -677,7 +819,7 @@
           { h: { en: 'Method', nl: 'Methode' },
             p: { en: 'Participants watched an instruction video, explored the VR room and filled in two surveys on usability and experience. We observed them fly-on-the-wall during the session, analysed the Likert data in SPSS and coded the open answers thematically.', nl: 'Deelnemers bekeken een instructievideo, verkenden de VR-kamer en vulden twee vragenlijsten in over gebruiksgemak en ervaring. We observeerden hen fly-on-the-wall tijdens de sessie, analyseerden de Likert-data in SPSS en codeerden de open antwoorden thematisch.' } },
           { h: { en: 'Service model', nl: 'Servicemodel' },
-            p: { en: 'Headsets are delivered to participants’ homes, collected after use and prepared for the next participant — so the study can reach a large sample, including people with little technological experience.', nl: 'Headsets worden bij deelnemers thuis geleverd, na gebruik opgehaald en klaargemaakt voor de volgende — zo bereikt de studie een grote steekproef, ook mensen met weinig technologische ervaring.' } }
+            p: { en: 'Headsets are delivered to participants’ homes, collected after use and prepared for the next participant, so the study can reach a large sample, including people with little technological experience.', nl: 'Headsets worden bij deelnemers thuis geleverd, na gebruik opgehaald en klaargemaakt voor de volgende, zo bereikt de studie een grote steekproef, ook mensen met weinig technologische ervaring.' } }
         ],
         cols: true,
         images: [
@@ -690,11 +832,11 @@
         cat: 'master',
         badge: { en: 'Video', nl: 'Video' },
         title: 'Reliq',
-        sub: { en: 'Interaction design — group project', nl: 'Interactieontwerp — groepsproject' },
+        sub: { en: 'Interaction design, group project', nl: 'Interactieontwerp, groepsproject' },
         cover: '18-reliq/hologram.webp',
         video: 'VideoGroup7_Reliq_Interaction_1_2.mp4',
         meta: {
-          context: { en: 'Master — Interaction Design', nl: 'Master — Interaction Design' },
+          context: { en: 'Master, Interaction Design', nl: 'Master, Interaction Design' },
           role: { en: 'Concept, filming, technical implementation', nl: 'Concept, film, technische uitwerking' }
         },
         lead: {
@@ -702,7 +844,7 @@
           nl: 'Een groepsproject rond interactieve video. Conceptontwikkeling, film en technische uitwerking van een immersieve digitale ervaring.'
         },
         models: [
-          { src: '3d/reliq-shard.stl', label: { en: 'Hero shard — 3D-printed interaction object', nl: 'Hero-scherf — 3D-geprint interactieobject' } }
+          { src: '3d/reliq-shard.stl', label: { en: 'Hero shard, 3D-printed interaction object', nl: 'Hero-scherf, 3D-geprint interactieobject' } }
         ],
         cols: true,
         images: [
@@ -717,11 +859,11 @@
         cat: 'master',
         badge: { en: 'Video', nl: 'Video' },
         title: 'Product Service System',
-        sub: { en: 'Problem Solving Studio — branding & end-term film', nl: 'Problem Solving Studio — branding & eindfilm' },
+        sub: { en: 'Problem Solving Studio, branding & end-term film', nl: 'Problem Solving Studio, branding & eindfilm' },
         cover: null,
         video: 'Group 05_Endterm_video_short_1.mp4',
         meta: {
-          context: { en: 'Master — Problem Solving Studio', nl: 'Master — Problem Solving Studio' },
+          context: { en: 'Master, Problem Solving Studio', nl: 'Master, Problem Solving Studio' },
           role: { en: 'Logo design, visual identity, video', nl: 'Logo-ontwerp, visuele identiteit, video' }
         },
         lead: {
@@ -736,10 +878,10 @@
         client: { name: 'Kipling' },
         badge: { en: 'Concept', nl: 'Concept' },
         title: 'Kipling VR',
-        sub: { en: 'Advanced Product Design — brand-driven VR headset', nl: 'Advanced Product Design — VR-headset vanuit een merk' },
+        sub: { en: 'Advanced Product Design, brand-driven VR headset', nl: 'Advanced Product Design, VR-headset vanuit een merk' },
         cover: '12- Advanced product design/render-hero.webp',
         meta: {
-          context: { en: 'Master — Advanced Product Design', nl: 'Master — Advanced Product Design' },
+          context: { en: 'Master, Advanced Product Design', nl: 'Master, Advanced Product Design' },
           role: { en: 'Brand research, moodboarding, concept design', nl: 'Merkonderzoek, moodboards, conceptontwerp' }
         },
         lead: {
@@ -762,14 +904,14 @@
       },
       {
         id: 'komono-ar',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'Komono', logo: 'logos/komono.png' },
         badge: { en: 'AR filter', nl: 'AR-filter' },
         title: 'Komono Bubblegum',
         sub: { en: 'An Instagram AR filter for The Dylan sunglasses', nl: 'Een Instagram-AR-filter voor de Dylan-zonnebril' },
         cover: '19-komono-ar/cover.webp',
         meta: {
-          context: { en: 'Komono — social campaign', nl: 'Komono — sociale campagne' },
+          context: { en: 'XR Studio, Komono social campaign', nl: 'XR Studio, sociale campagne voor Komono' },
           role: { en: '3D modelling, animation, AR filter', nl: '3D-modellering, animatie, AR-filter' },
           tools: 'Cinema 4D · AR'
         },
@@ -784,23 +926,23 @@
           { src: '19-komono-ar/swollen-bubbles.mp4', loop: true }
         ],
         cols: true,
-        images: ['19-komono-ar/in-use.webp']
+        images: ['19-komono-ar/in-use.webp', '07-grafisch werk/70.webp']
       },
       {
         id: 'amelie-lens',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'Amelie Lens' },
         badge: { en: '3D visuals', nl: '3D-visuals' },
         title: 'Enfants Terribles',
         sub: { en: 'Campaign visuals for Amelie Lens', nl: 'Campagnebeelden voor Amelie Lens' },
         cover: '21-amelie-lens/3d-wings.webp',
         meta: {
-          context: { en: 'Amelie Lens — Enfants Terribles', nl: 'Amelie Lens — Enfants Terribles' },
+          context: { en: 'XR Studio, for Amelie Lens, Enfants Terribles', nl: 'XR Studio, voor Amelie Lens, Enfants Terribles' },
           role: { en: '3D elements & animation for the campaign imagery', nl: '3D-elementen & animatie voor de campagnebeelden' }
         },
         lead: {
-          en: 'Chrome, liquid 3D forms woven into the campaign photography for Amelie Lens’ Enfants Terribles — turning studio portraits into something stranger.',
-          nl: 'Chromen, vloeibare 3D-vormen verweven in de campagnefotografie voor Enfants Terribles van Amelie Lens — studioportretten die net iets vreemder worden.'
+          en: 'Chrome, liquid 3D forms woven into the campaign photography for Amelie Lens’ Enfants Terribles, turning studio portraits into something stranger.',
+          nl: 'Chromen, vloeibare 3D-vormen verweven in de campagnefotografie voor Enfants Terribles van Amelie Lens, studioportretten die net iets vreemder worden.'
         },
         cols: true,
         images: [
@@ -811,52 +953,120 @@
       },
       {
         id: 'essentiel',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'Essentiel Antwerp' },
-        badge: { en: '3D logo', nl: '3D-logo' },
+        badge: { en: 'AR filters & 3D logo', nl: 'AR-filters & 3D-logo' },
         title: 'Essentiel Orbit',
-        sub: { en: 'A 3D logo visual for Essentiel Antwerp', nl: 'Een 3D-logovisual voor Essentiel Antwerp' },
+        sub: { en: 'AR filters and a 3D logo for Essentiel Antwerp', nl: 'AR-filters en een 3D-logo voor Essentiel Antwerp' },
         cover: '20-essentiel/logo-3d.webp',
         meta: {
-          context: { en: 'Essentiel Antwerp', nl: 'Essentiel Antwerp' },
-          role: { en: '3D modelling, materials, rendering', nl: '3D-modellering, materialen, rendering' }
+          context: { en: 'XR Studio, for Essentiel Antwerp', nl: 'XR Studio, voor Essentiel Antwerp' },
+          role: { en: 'AR filters, 3D modelling, materials, rendering', nl: 'AR-filters, 3D-modellering, materialen, rendering' }
         },
         lead: {
-          en: 'The Essentiel Antwerp wordmark as a planet: chrome lettering circled by a glossy pink orbit, made for the brand’s social channels.',
-          nl: 'Het woordmerk van Essentiel Antwerp als planeet: chromen letters omcirkeld door een glanzende roze baan, gemaakt voor de sociale kanalen van het merk.'
+          en: 'The Essentiel Antwerp wordmark as a planet, chrome lettering circled by a glossy pink orbit, brought to Instagram as AR filters: the orbiting logo with sparkles around your head, and pills that drop into the frame.',
+          nl: 'Het woordmerk van Essentiel Antwerp als planeet, chromen letters omcirkeld door een glanzende roze baan, naar Instagram gebracht als AR-filters: het draaiende logo met glinsters rond je hoofd, en pillen die in beeld vallen.'
         },
+        cols: true,
         images: [
           '20-essentiel/logo-3d.webp',
+          '07-grafisch werk/81.webp',
+          '07-grafisch werk/79.webp',
           '20-essentiel/orbit.webp'
         ]
       },
       {
-        id: 'ar-studio',
-        cat: 'pro',
-        badge: { en: 'Own studio', nl: 'Eigen studio' },
-        title: 'AR / XR Studio',
-        sub: { en: 'AR filters, branding and campaigns', nl: 'AR-filters, branding en campagnes' },
-        cover: '07-grafisch werk/70.webp',
+        id: 'portrait-busts',
+        cat: 'studio',
+        badge: { en: 'Digital sculpting', nl: 'Digitaal sculpten' },
+        title: { en: 'Portrait Heads', nl: 'Portretkoppen' },
+        sub: { en: 'Sculpted heads of public figures, commissioned by a non-profit', nl: 'Gesculpte koppen van publieke figuren, in opdracht van een vzw' },
+        cover: '22-portrait-busts/cover.webp',
         meta: {
-          context: { en: 'Independent design studio', nl: 'Onafhankelijke designstudio' },
-          role: { en: 'AR filter design, 3D, graphic design', nl: 'AR-filterontwerp, 3D, grafisch ontwerp' },
-          extra: { en: 'Clients include Have a Roll, Daily Paper and independent brands.', nl: 'Klanten o.a. Have a Roll, Daily Paper en onafhankelijke merken.' }
+          context: { en: 'XR Studio, commission for a non-profit (vzw)', nl: 'XR Studio, opdracht voor een vzw' },
+          role: { en: 'Digital sculpting, print preparation', nl: 'Digitaal sculpten, printvoorbereiding' },
+          tools: 'ZBrush · 3D printing'
         },
         lead: {
-          en: 'Next to my studies I run a small studio making AR filter experiences, brand identities and campaigns. Filters are published on Instagram and Snapchat and have reached thousands of users.',
-          nl: 'Naast mijn studies run ik een kleine studio die AR-filters, merkidentiteiten en campagnes maakt. De filters staan op Instagram en Snapchat en bereikten duizenden gebruikers.'
+          en: 'A series of recognisable, slightly caricatured heads of Belgian and international public figures, sculpted digitally in ZBrush and prepared as print-ready models.',
+          nl: 'Een reeks herkenbare, licht gekarikaturiseerde koppen van Belgische en internationale publieke figuren, digitaal gesculpt in ZBrush en klaargemaakt als printklare modellen.'
+        },
+        models: [
+          { src: '3d/figure-van-ranst.stl', up: 'y', label: { en: 'Marc Van Ranst, full figure', nl: 'Marc Van Ranst, volledige figuur' } },
+          { src: '3d/bust-de-croo.stl', up: 'y', label: { en: 'Alexander De Croo', nl: 'Alexander De Croo' } },
+          { src: '3d/bust-mathilde.stl', up: 'y', label: { en: 'Queen Mathilde', nl: 'Koningin Mathilde' } },
+          { src: '3d/bust-meghan-markle.stl', up: 'y', label: { en: 'Meghan Markle', nl: 'Meghan Markle' } }
+        ],
+        images: []
+      },
+      {
+        id: 'have-a-roll',
+        cat: 'studio',
+        client: { name: 'Have a Roll', logo: 'logos/have-a-roll.png' },
+        badge: { en: 'Branding', nl: 'Branding' },
+        title: 'Have a Roll',
+        sub: { en: 'Brand world for a vegan cinnamon roll bakery', nl: 'Merkwereld voor een vegan cinnamon roll-bakkerij' },
+        cover: '07-grafisch werk/77.webp',
+        meta: {
+          context: { en: 'XR Studio, for Have a Roll', nl: 'XR Studio, voor Have a Roll' },
+          role: { en: 'Logo, mascot, packaging', nl: 'Logo, mascotte, verpakking' }
+        },
+        lead: {
+          en: 'A playful identity for Have a Roll: a retro script logo in mint, a running cinnamon-roll mascot that lights up the shop in neon, and boxes that tell you “You’re on a Roll!”.',
+          nl: 'Een speelse identiteit voor Have a Roll: een retro scriptlogo in mintgroen, een lopende cinnamon-roll-mascotte die de winkel in neon verlicht, en dozen die je vertellen “You’re on a Roll!”.'
         },
         cols: true,
         images: [
-          '07-grafisch werk/70.webp', '07-grafisch werk/71.webp', '07-grafisch werk/72.webp',
-          '07-grafisch werk/73.webp', '07-grafisch werk/74.webp', '07-grafisch werk/75.webp',
-          '07-grafisch werk/76.webp', '07-grafisch werk/77.webp', '07-grafisch werk/78.webp',
-          '07-grafisch werk/79.webp', '07-grafisch werk/80.webp', '07-grafisch werk/81.webp'
+          '07-grafisch werk/76.webp',
+          '07-grafisch werk/77.webp',
+          '07-grafisch werk/78.webp'
+        ]
+      },
+      {
+        id: 'daily-paper',
+        cat: 'studio',
+        client: { name: 'Daily Paper', logo: 'logos/daily-paper.png' },
+        badge: { en: 'AR filter', nl: 'AR-filter' },
+        title: 'Daily Paper',
+        sub: { en: 'A virtual try-on filter for Daily Paper eyewear', nl: 'Een virtuele try-on-filter voor Daily Paper-brillen' },
+        cover: '07-grafisch werk/80.webp',
+        meta: {
+          context: { en: 'XR Studio, for Daily Paper', nl: 'XR Studio, voor Daily Paper' },
+          role: { en: '3D modelling, AR filter', nl: '3D-modellering, AR-filter' }
+        },
+        lead: {
+          en: 'An Instagram AR filter that lets you try on Daily Paper sunglasses: the frame modelled in 3D and tracked to the face in real time.',
+          nl: 'Een Instagram-AR-filter waarmee je een Daily Paper-zonnebril virtueel opzet: het montuur in 3D gemodelleerd en realtime op het gezicht getrackt.'
+        },
+        images: ['07-grafisch werk/80.webp']
+      },
+      {
+        id: 'dima',
+        cat: 'studio',
+        client: { name: 'Dima' },
+        badge: { en: 'Cover art', nl: 'Cover-artwork' },
+        title: 'Dima',
+        sub: { en: 'Cover artwork with 3D butterflies and hand-drawn lettering', nl: 'Cover-artwork met 3D-vlinders en getekende lettering' },
+        cover: '23-dima/cover-with-logo.webp',
+        meta: {
+          context: { en: 'XR Studio, for the artist Dima', nl: 'XR Studio, voor de artiest Dima' },
+          role: { en: '3D butterflies, compositing, logo', nl: '3D-vlinders, compositing, logo' },
+          tools: 'ZBrush · Cinema 4D · Photoshop · Illustrator'
+        },
+        lead: {
+          en: 'Iridescent 3D butterflies sculpted in ZBrush and rendered in Cinema 4D, composited into the photo shoot, with a flowery hand-drawn logo on top.',
+          nl: 'Iriserende 3D-vlinders, gesculpt in ZBrush en gerenderd in Cinema 4D, verwerkt in de fotoshoot, met een bloemig getekend logo erbovenop.'
+        },
+        cols: true,
+        images: [
+          '23-dima/cover-with-logo.webp',
+          '23-dima/cover.webp',
+          '23-dima/logo.webp'
         ]
       },
       {
         id: 'modulor',
-        cat: 'pro',
+        cat: 'studio',
         client: { name: 'MODULOR', logo: 'logos/modulor.png', square: true },
         badge: { en: 'Graphic design', nl: 'Grafisch ontwerp' },
         title: 'MODULOR',
@@ -864,13 +1074,13 @@
         cover: '16-modulor/gala-poster.webp',
         video: '16-modulor/10-years.mp4',
         meta: {
-          context: { en: 'MODULOR student association — UAntwerp', nl: 'Studentenvereniging MODULOR — UAntwerpen' },
-          role: { en: 'Graphic designer — rebranding, brand guidelines, posters, social media, video', nl: 'Grafisch ontwerper — rebranding, brand guidelines, affiches, sociale media, video' },
+          context: { en: 'MODULOR student association, UAntwerp', nl: 'Studentenvereniging MODULOR, UAntwerpen' },
+          role: { en: 'Graphic designer, rebranding, brand guidelines, posters, social media, video', nl: 'Grafisch ontwerper, rebranding, brand guidelines, affiches, sociale media, video' },
           tools: 'Illustrator · Photoshop'
         },
         lead: {
-          en: 'A new visual identity for MODULOR — logo, DINPro typography, a colour system and brand guidelines — rolled out across a full year of events: the black-and-white lustrum gala, the job fair, Design Week, game nights and more. The 10-year anniversary film launched the new look and website.',
-          nl: 'Een nieuwe visuele identiteit voor MODULOR — logo, DINPro-typografie, een kleursysteem en brand guidelines — uitgerold over een volledig jaar aan events: het zwart-witte lustrumgala, de jobbeurs, Design Week, spelavonden en meer. De film voor het 10-jarig bestaan lanceerde de nieuwe look en website.'
+          en: 'A new visual identity for MODULOR, logo, DINPro typography, a colour system and brand guidelines, rolled out across a full year of events: the black-and-white lustrum gala, the job fair, Design Week, game nights and more. The 10-year anniversary film launched the new look and website.',
+          nl: 'Een nieuwe visuele identiteit voor MODULOR, logo, DINPro-typografie, een kleursysteem en brand guidelines, uitgerold over een volledig jaar aan events: het zwart-witte lustrumgala, de jobbeurs, Design Week, spelavonden en meer. De film voor het 10-jarig bestaan lanceerde de nieuwe look en website.'
         },
         cols: true,
         images: [
@@ -889,7 +1099,7 @@
         sub: { en: 'Modular bike parking for urban events', nl: 'Modulaire fietsenstalling voor stadsevenementen' },
         cover: '04-bike-parking/render-presentation.webp',
         meta: {
-          context: { en: 'Bachelor thesis — UAntwerp', nl: 'Bachelorproef — UAntwerpen' },
+          context: { en: 'Bachelor thesis, UAntwerp', nl: 'Bachelorproef, UAntwerpen' },
           role: { en: 'Research, concept, prototyping', nl: 'Onderzoek, concept, prototyping' }
         },
         lead: {
@@ -912,14 +1122,14 @@
       },
       {
         id: 'sculptures',
-        cat: 'bachelor',
+        cat: 'studio',
         client: { name: 'Stef Van Looveren' },
-        badge: { en: 'Collaboration', nl: 'Samenwerking' },
+        badge: { en: 'Commission', nl: 'Opdracht' },
         title: { en: 'Wearable Sculptures', nl: 'Draagbare Sculpturen' },
-        sub: { en: 'With artist Stef Van Looveren', nl: 'Met kunstenaar Stef Van Looveren' },
+        sub: { en: 'For artist Stef Van Looveren', nl: 'Voor kunstenaar Stef Van Looveren' },
         cover: '05-sculptures/49.webp',
         meta: {
-          context: { en: 'Bachelor — collaboration with Stef Van Looveren', nl: 'Bachelor — samenwerking met Stef Van Looveren' },
+          context: { en: 'XR Studio, commission for Stef Van Looveren, 2021', nl: 'XR Studio, opdracht voor Stef Van Looveren, 2021' },
           role: { en: '3D scanning, modelling, print optimisation', nl: '3D-scannen, modelleren, printoptimalisatie' },
           tools: '3D scanning · ZBrush · Cinema 4D · 3D printing'
         },
@@ -928,7 +1138,7 @@
           nl: 'Negen draagbare sculpturen op basis van 3D-scans, geoptimaliseerd voor printbaarheid en draagcomfort.'
         },
         models: [
-          { src: '3d/sculpture-hands-together.obj', label: { en: 'Hands Together — with ring handle', nl: 'Hands Together — met ringhengsel' } },
+          { src: '3d/sculpture-hands-together.obj', label: { en: 'Hands Together, with ring handle', nl: 'Hands Together, met ringhengsel' } },
           { src: '3d/sculpture-trio.obj', label: { en: 'Trio', nl: 'Trio' } },
           { src: '3d/sculpture-quatro.obj', label: { en: 'Quatro', nl: 'Quatro' } }
         ],
@@ -949,7 +1159,7 @@
         sub: { en: 'An electric hydrofoil speedboat', nl: 'Een elektrische hydrofoil-speedboot' },
         cover: '14-hydrofoil-boat/render.webp',
         meta: {
-          context: { en: 'Bachelor — Xplore Design Week 2023, with Voxdale', nl: 'Bachelor — Xplore Design Week 2023, met Voxdale' },
+          context: { en: 'Bachelor, Xplore Design Week 2023, with Voxdale', nl: 'Bachelor, Xplore Design Week 2023, met Voxdale' },
           role: { en: 'Sketching, surface modelling, flow simulation, rendering', nl: 'Schetsen, surface modelling, stromingssimulatie, rendering' },
           tools: 'SolidWorks · Rhino · Cinema 4D'
         },
@@ -958,7 +1168,7 @@
           nl: 'Een designweek-sprint: een elektrische speedboot die op een hydrofoil boven het water uitkomt. Van stijlmoodboards en schetsen naar een romp in subdivision surfaces, getest met een stromingssimulatie en gepresenteerd in renders en posters.'
         },
         models: [
-          { src: '3d/hydrofoil-boat.stl', label: { en: 'Hull — subdivision surface model', nl: 'Romp — subdivision surface-model' } }
+          { src: '3d/hydrofoil-boat.stl', label: { en: 'Hull, subdivision surface model', nl: 'Romp, subdivision surface-model' } }
         ],
         cols: true,
         images: [
@@ -976,12 +1186,12 @@
         sub: { en: 'Jewellery tools for DUREVE', nl: 'Juweliersgereedschap voor DUREVE' },
         cover: '03-ergonomic-pliers/31.webp',
         meta: {
-          context: { en: 'Bachelor — tool design', nl: 'Bachelor — gereedschapsontwerp' },
+          context: { en: 'Bachelor, tool design', nl: 'Bachelor, gereedschapsontwerp' },
           role: { en: 'Ergonomics, prototyping, branding', nl: 'Ergonomie, prototyping, branding' }
         },
         lead: {
-          en: 'A redesign of jewellery tools focused on grip, ergonomics and a coherent product family — from hand-shaped prototypes to the DUREVE brand identity.',
-          nl: 'Een herontwerp van juweliersgereedschap met focus op grip, ergonomie en een coherente productfamilie — van handgevormde prototypes tot de DUREVE-merkidentiteit.'
+          en: 'A redesign of jewellery tools focused on grip, ergonomics and a coherent product family, from hand-shaped prototypes to the DUREVE brand identity.',
+          nl: 'Een herontwerp van juweliersgereedschap met focus op grip, ergonomie en een coherente productfamilie, van handgevormde prototypes tot de DUREVE-merkidentiteit.'
         },
         images: [
           '03-ergonomic-pliers/page_009.webp', '03-ergonomic-pliers/15.webp', '03-ergonomic-pliers/28.webp',
@@ -998,7 +1208,7 @@
         sub: { en: 'Digital concept sketching', nl: 'Digitaal conceptschetsen' },
         cover: '15-snow-scooter/render-studio.webp',
         meta: {
-          context: { en: 'Bachelor — Digital Concept Sketching, 2023–2024', nl: 'Bachelor — Digitaal Conceptschetsen, 2023–2024' },
+          context: { en: 'Bachelor, Digital Concept Sketching, 2023–2024', nl: 'Bachelor, Digitaal Conceptschetsen, 2023–2024' },
           role: { en: 'Concept sketching, AI-assisted rendering', nl: 'Conceptschetsen, AI-ondersteunde rendering' },
           tools: 'Digital sketching · Vizcom'
         },
@@ -1014,22 +1224,42 @@
       },
       {
         id: 'radiant-nights',
-        cat: 'bachelor',
-        client: { name: 'deSingel' },
-        badge: { en: 'Branding', nl: 'Branding' },
+        cat: 'studio',
+        client: { name: 'deSingel', logo: 'logos/desingel.png' },
+        badge: { en: '3D campaign', nl: '3D-campagne' },
         title: 'Radiant Nights',
-        sub: { en: 'Event identity for De Singel', nl: 'Eventidentiteit voor De Singel' },
-        cover: '06-radiant-nights/69.webp',
+        sub: { en: 'A new 3D visual for every edition of deSingel’s night programme', nl: 'Een nieuwe 3D-visual voor elke editie van het nachtprogramma van deSingel' },
+        cover: '06-radiant-nights/rn9-ig.webp',
         meta: {
-          context: { en: 'Collaboration with De Singel, Antwerp', nl: 'Samenwerking met De Singel, Antwerpen' },
-          role: { en: 'Visual identity, posters, campaign', nl: 'Visuele identiteit, affiches, campagne' }
+          context: { en: 'XR Studio, for deSingel, Antwerp', nl: 'XR Studio, voor deSingel, Antwerpen' },
+          role: { en: '3D visuals, animation, posters, social media, banners & projections', nl: '3D-visuals, animatie, affiches, sociale media, doeken & projecties' },
+          tools: 'Cinema 4D · After Effects · Illustrator · Photoshop'
         },
         lead: {
-          en: 'Visual identity and campaign material for Radiant Nights at De Singel: posters, billboards and visual assets across multiple editions.',
-          nl: 'Visuele identiteit en campagnemateriaal voor Radiant Nights in De Singel: affiches, billboards en visuele assets over meerdere edities.'
+          en: 'Radiant Nights is deSingel’s evening of performance, theatre, talks and gatherings. Each edition gets its own 3D world, rolled out from the A1 poster to Instagram, animated stories, printed banners and projections in the building.',
+          nl: 'Radiant Nights is de avond van deSingel vol performance, theater, talks en ontmoetingen. Elke editie krijgt een eigen 3D-wereld, uitgerold van de A1-affiche tot Instagram, geanimeerde stories, gedrukte doeken en projecties in het gebouw.'
         },
+        sections: [
+          { h: { en: 'Early editions, chrome swirls', nl: 'Eerste edities, chromen swirls' },
+            p: { en: 'Glowing, chrome-wrapped tubes that change colour per edition: blue, orange, green.', nl: 'Gloeiende, in chroom gewikkelde buizen die per editie van kleur wisselen: blauw, oranje, groen.' } },
+          { h: { en: '#9 Spells for the Skin (2023–24)', nl: '#9 Spells for the Skin (2023–24)' },
+            p: { en: 'Inflated, misshapen letters in front of floating fabrics, animated for Instagram, large hanging banners and a projection.', nl: 'Opgeblazen, vervormde letters voor zwevende doeken, geanimeerd voor Instagram, grote hangende doeken en een projectie.' } },
+          { h: { en: '#10 Collective Memories (December edition)', nl: '#10 Collective Memories (decembereditie)' },
+            p: { en: 'An animated poster for the edition curated by Audrey Merilus.', nl: 'Een geanimeerde affiche voor de editie gecureerd door Audrey Merilus.' } }
+        ],
+        videos: [
+          { src: '06-radiant-nights/rn9-insta.mp4', loop: true },
+          { src: '06-radiant-nights/rn10-poster.mp4', loop: true },
+          { src: '06-radiant-nights/rn9-banner.mp4', loop: true },
+          { src: '06-radiant-nights/rn9-beamer.mp4', loop: true },
+          { src: '06-radiant-nights/swirl-blue.mp4', loop: true },
+          { src: '06-radiant-nights/swirl-green.mp4', loop: true }
+        ],
         cols: true,
         images: [
+          '06-radiant-nights/rn9-poster.webp', '06-radiant-nights/rn9-ig.webp', '06-radiant-nights/rn9-proto.webp',
+          '06-radiant-nights/swirl-visual-1.webp', '06-radiant-nights/rn2-orange.webp', '06-radiant-nights/rn3-green.webp',
+          '06-radiant-nights/swirl-visual-3.webp',
           '06-radiant-nights/page_016.webp', '06-radiant-nights/62.webp', '06-radiant-nights/63.webp',
           '06-radiant-nights/64.webp', '06-radiant-nights/65.webp', '06-radiant-nights/66.webp',
           '06-radiant-nights/67.webp', '06-radiant-nights/68.webp', '06-radiant-nights/69.webp'
@@ -1043,7 +1273,7 @@
         sub: { en: 'An archetype redesigned in a designer\'s language', nl: 'Een archetype herontworpen in de taal van een ontwerper' },
         cover: '02-historical-binoculars/27.webp',
         meta: {
-          context: { en: 'Bachelor — style research', nl: 'Bachelor — stijlonderzoek' },
+          context: { en: 'Bachelor, style research', nl: 'Bachelor, stijlonderzoek' },
           role: { en: 'Style analysis, concept design', nl: 'Stijlanalyse, conceptontwerp' }
         },
         lead: {
@@ -1067,7 +1297,7 @@
         sub: { en: 'One material, no fasteners', nl: 'Eén materiaal, geen bevestigingsmiddelen' },
         cover: '01-eco-paper-lamp/23.webp',
         meta: {
-          context: { en: 'Bachelor — material design', nl: 'Bachelor — materiaalontwerp' },
+          context: { en: 'Bachelor, material design', nl: 'Bachelor, materiaalontwerp' },
           role: { en: 'Prototyping, laser cutting', nl: 'Prototyping, lasersnijden' }
         },
         lead: {
@@ -1085,12 +1315,13 @@
     /* Display order, most important first. FEATURED projects open the page as large cards;
        the rest is grouped per category below them. */
     const ORDER = [
-      'digiknitting', 'komono', 'plum-road-tea-dream', 'kipling', 'bike-parking',
+      'digiknitting', 'komono', 'radiant-nights', 'plum-road-tea-dream', 'kipling',
       'vr-hospital', 'reliq', 'pss',
-      'komono-ar', 'amelie-lens', 'modulor', 'essentiel', 'ar-studio',
-      'sculptures', 'hydrofoil-boat', 'pliers', 'radiant-nights', 'binoculars', 'snow-scooter', 'paper-lamp'
+      'komono-ar', 'sculptures', 'portrait-busts', 'amelie-lens', 'essentiel', 'daily-paper', 'have-a-roll', 'dima',
+      'modulor',
+      'bike-parking', 'hydrofoil-boat', 'pliers', 'binoculars', 'snow-scooter', 'paper-lamp'
     ];
-    const FEATURED = ['digiknitting', 'komono', 'plum-road-tea-dream', 'kipling', 'bike-parking'];
+    const FEATURED = ['digiknitting', 'komono', 'radiant-nights', 'plum-road-tea-dream', 'kipling'];
     PROJECTS.forEach(p => { p.featured = FEATURED.includes(p.id); });
 
     function displayOrder() {
@@ -1099,31 +1330,40 @@
     }
 
     const GROUP_TITLES = {
-      featured: { en: 'Highlights', nl: 'Uitgelicht' },
-      master:   { en: 'Master projects', nl: 'Masterprojecten' },
-      pro:      { en: 'Professional & freelance', nl: 'Professioneel & freelance' },
-      bachelor: { en: 'Bachelor projects', nl: 'Bachelorprojecten' }
+      featured: { en: 'Selected', nl: 'Uitgelicht' },
+      master:   { en: 'Master', nl: 'Master' },
+      studio:   { en: 'Freelance', nl: 'Zelfstandig' },
+      bachelor: { en: 'Bachelor', nl: 'Bachelor' }
+    };
+
+    const GROUP_VARIANT = { master: 'compact', studio: 'tinted', bachelor: 'list' };
+
+    const GROUP_INTROS = {
+      studio: {
+        en: 'As a freelancer I work under the name XR Studio. Mostly AR filters and 3D for brands, venues and artists. My internship at Komono and the Plum Road Tea Dream game are in here too.',
+        nl: 'Als zelfstandige werk ik onder de naam XR Studio. Vooral AR-filters en 3D voor merken, cultuurhuizen en artiesten. Ook mijn stage bij Komono en de game Plum Road Tea Dream staan hier.'
+      }
     };
 
     const FILTERS = [
       { id: 'all',      en: 'All',          nl: 'Alles' },
       { id: 'master',   en: 'Master',       nl: 'Master' },
-      { id: 'pro',      en: 'Professional', nl: 'Professioneel' },
+      { id: 'studio',   en: 'Freelance', nl: 'Zelfstandig' },
       { id: 'bachelor', en: 'Bachelor',     nl: 'Bachelor' }
     ];
 
     /* Static UI strings. Keys match data-i18n attributes. */
     const UI = {
       en: {
-        'role': '— Product Designer',
+        'role': '',
         'nav.work': 'Work', 'nav.about': 'About', 'nav.contact': 'Contact',
         'intro.title': 'Product designer working between <em>physical products</em>, <em>digital tools</em> and <em>interactive media</em>.',
         'intro.now.label': 'Now', 'intro.now': 'Master Product Development, UAntwerp',
         'intro.based.label': 'Based in', 'intro.based': 'Antwerp, Belgium',
-        'work.title': 'Selected work',
+        'work.title': 'Work',
         'about.credit': 'Photo: Stefanie De Bakker',
         'about.p1': "I'm Diego, a designer from Antwerp. I studied cross-media design before moving into product development, and I like to work where those two worlds meet: objects, tools and the digital experiences around them.",
-        'about.p2': "I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run a small independent studio for graphic design, campaigns and AR/XR experiences.",
+        'about.p2': "I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run XR Studio, my own freelance studio for AR filters, 3D visuals and branding.",
         'about.p3': "I'm currently finishing my Master in Product Development at the University of Antwerp and I'm open to collaborations that connect design and technology.",
         'about.edu': 'Education', 'about.tools': 'Tools', 'about.lang': 'Languages',
         'edu.1': 'Master Product Development<span>UAntwerp · 2024–2026</span>',
@@ -1132,26 +1372,28 @@
         'tools.3d': '3D &amp; parametric', 'tools.render': 'Rendering', 'tools.graphic': 'Graphic &amp; motion',
         'tools.fab': '3D printing · Laser cutting<span>Prototyping</span>',
         'lang.nl': 'Dutch<span>Native</span>', 'lang.en': 'English<span>Advanced</span>', 'lang.fr': 'French<span>Advanced</span>',
-        'contact.title': "Let's make something together.",
-        'contact.loc': 'Schoten, Antwerp — Belgium',
+        'contact.title': 'Say hello.',
+        'contact.loc': 'Schoten, Antwerp, Belgium',
         'footer.top': 'Back to top ↑',
-        'clients.label': 'Worked with',
+        'clients.label': 'Clients',
+        'hero.role': 'Product designer from Antwerp. I make objects, 3D, AR filters and, lately, a way to knit in three dimensions.',
+        'hero.studio': 'my freelance studio',
         'p.back': '← All work',
         'p.context': 'Context', 'p.role': 'Role', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
         'p.next': 'Next project', 'p.trailer': 'Official trailer',
         'p.3d.hint': 'Click to explore in 3D', 'p.3d.loading': 'Loading 3D model…', 'p.3d.error': '3D model could not be loaded',
-        'p.tool.title': 'Voxel Knitter — live version of the design tool', 'p.tool.cta': 'Click to try the Voxel Knitter', 'p.tool.open': 'Open full screen'
+        'p.tool.title': 'The Voxel Knitter, live', 'p.tool.cta': 'Click to try the Voxel Knitter', 'p.tool.open': 'Open full screen'
       },
       nl: {
-        'role': '— Productontwerper',
+        'role': '',
         'nav.work': 'Werk', 'nav.about': 'Over', 'nav.contact': 'Contact',
         'intro.title': 'Productontwerper tussen <em>fysieke producten</em>, <em>digitale tools</em> en <em>interactieve media</em>.',
         'intro.now.label': 'Nu', 'intro.now': 'Master Productontwikkeling, UAntwerpen',
         'intro.based.label': 'Woont in', 'intro.based': 'Antwerpen, België',
-        'work.title': 'Geselecteerd werk',
+        'work.title': 'Werk',
         'about.credit': 'Foto: Stefanie De Bakker',
         'about.p1': 'Ik ben Diego, ontwerper uit Antwerpen. Ik studeerde cross-media design voor ik de stap naar productontwikkeling zette, en ik werk het liefst waar die twee werelden elkaar raken: objecten, tools en de digitale ervaringen errond.',
-        'about.p2': 'Ik ben gefascineerd door biomimicry, organische vormen en goed gemaakte dingen. Naast mijn studies run ik een kleine onafhankelijke studio voor grafisch ontwerp, campagnes en AR/XR-ervaringen.',
+        'about.p2': 'Ik ben gefascineerd door biomimicry, organische vormen en goed gemaakte dingen. Naast mijn studies run ik XR Studio, mijn eigen zelfstandige studio voor AR-filters, 3D-visuals en branding.',
         'about.p3': 'Momenteel rond ik mijn Master Productontwikkeling aan de Universiteit Antwerpen af en sta ik open voor samenwerkingen die design en technologie verbinden.',
         'about.edu': 'Opleiding', 'about.tools': 'Tools', 'about.lang': 'Talen',
         'edu.1': 'Master Productontwikkeling<span>UAntwerpen · 2024–2026</span>',
@@ -1160,15 +1402,17 @@
         'tools.3d': '3D &amp; parametrisch', 'tools.render': 'Rendering', 'tools.graphic': 'Grafisch &amp; motion',
         'tools.fab': '3D-printen · Lasersnijden<span>Prototyping</span>',
         'lang.nl': 'Nederlands<span>Moedertaal</span>', 'lang.en': 'Engels<span>Gevorderd</span>', 'lang.fr': 'Frans<span>Gevorderd</span>',
-        'contact.title': 'Laten we samen iets maken.',
-        'contact.loc': 'Schoten, Antwerpen — België',
+        'contact.title': 'Zeg gerust hallo.',
+        'contact.loc': 'Schoten, Antwerpen, België',
         'footer.top': 'Naar boven ↑',
-        'clients.label': 'Werkte met',
+        'clients.label': 'Klanten',
+        'hero.role': 'Productontwerper uit Antwerpen. Ik maak objecten, 3D, AR-filters en sinds kort een manier om in drie dimensies te breien.',
+        'hero.studio': 'mijn zelfstandige studio',
         'p.back': '← Alle werk',
         'p.context': 'Context', 'p.role': 'Rol', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
         'p.next': 'Volgend project', 'p.trailer': 'Officiële trailer',
         'p.3d.hint': 'Klik om in 3D te bekijken', 'p.3d.loading': '3D-model laden…', 'p.3d.error': '3D-model kon niet geladen worden',
-        'p.tool.title': 'Voxel Knitter — live versie van de ontwerptool', 'p.tool.cta': 'Klik om de Voxel Knitter te proberen', 'p.tool.open': 'Open schermvullend'
+        'p.tool.title': 'De Voxel Knitter, live', 'p.tool.cta': 'Klik om de Voxel Knitter te proberen', 'p.tool.open': 'Open schermvullend'
       }
     };
 
@@ -1202,29 +1446,46 @@
     function renderClients() {
       const seen = new Map();
       displayOrder().forEach(p => { if (p.client && !seen.has(p.client.name)) seen.set(p.client.name, p); });
-      document.getElementById('clients').innerHTML =
-        `<span class="clients-label">${UI[lang]['clients.label']}</span>` +
+      /* the set is repeated so the band can loop seamlessly at -50% */
+      const set = `<span class="marquee-label">${UI[lang]['clients.label']} —</span>` +
         [...seen.values()].map(p => `<a href="#p/${p.id}" title="${esc(p.client.name)}">${clientMark(p.client)}</a>`).join('');
+      document.getElementById('clients').innerHTML = `<div class="marquee-track">${set}${set}</div>`;
     }
 
     function card(p, wide) {
       return `
         <a class="card reveal${wide ? ' wide' : ''}" href="#p/${p.id}">
-          <div class="card-media">${cardMedia(p)}<span class="badge">${esc(t(p.badge))}${p.models ? ' · 3D' : ''}</span></div>
+          <div class="card-media">${cardMedia(p)}</div>
           <div class="card-text">
             ${p.client ? `<span class="card-client">${clientMark(p.client)}</span>` : ''}
             <span class="card-title">${esc(t(p.title))}</span>
-            <span class="card-cat">${esc(t(FILTERS.find(f => f.id === p.cat)))}</span>
+            <span class="card-cat">${esc(t(p.badge))}${p.models ? ' · 3D' : ''}</span>
             <span class="card-sub">${esc(t(p.sub))}</span>
           </div>
         </a>`;
     }
 
-    function group(title, items, compact) {
+    function row(p) {
       return `
-        <section class="group">
-          <div class="group-head"><h3>${esc(title)}</h3><span>${items.length}</span></div>
-          <div class="grid${compact ? ' compact' : ''}">${items.map((p, i) => card(p, !compact && i === 0 && p.wide)).join('')}</div>
+        <a class="row reveal" href="#p/${p.id}" data-cover="${p.cover ? src(p.cover) : ''}">
+          ${p.cover ? `<img class="row-thumb" src="${src(p.cover)}" alt="" loading="lazy">` : ''}
+          <span class="row-title">${esc(t(p.title))}</span>
+          <span class="row-sub">${esc(t(p.sub))}</span>
+          <span class="row-badge">${esc(t(p.badge))}${p.models ? ' · 3D' : ''}</span>
+        </a>`;
+    }
+
+    /* variant: 'featured' (editorial grid), 'compact' (3 columns), 'tinted' (compact on a colour block), 'list' (type index) */
+    function group(title, items, variant, intro) {
+      if (!items.length) return '';
+      const body = variant === 'list'
+        ? `<div class="rows">${items.map(row).join('')}</div>`
+        : `<div class="grid ${variant === 'featured' ? 'featured' : 'compact'}">${items.map(p => card(p)).join('')}</div>`;
+      return `
+        <section class="group${variant === 'tinted' ? ' tinted' : ''}">
+          <div class="group-head"><h3>${esc(title)}</h3></div>
+          ${intro ? `<p class="group-intro">${esc(intro)}</p>` : ''}
+          ${body}
         </section>`;
     }
 
@@ -1232,11 +1493,11 @@
       const ordered = displayOrder();
       if (filter === 'all') {
         /* highlights first, then the rest grouped by category */
-        grid.innerHTML = group(t(GROUP_TITLES.featured), ordered.filter(p => p.featured), false) +
-          ['master', 'pro', 'bachelor'].map(c =>
-            group(t(GROUP_TITLES[c]), ordered.filter(p => !p.featured && p.cat === c), true)).join('');
+        grid.innerHTML = group(t(GROUP_TITLES.featured), ordered.filter(p => p.featured), 'featured') +
+          ['master', 'studio', 'bachelor'].map(c =>
+            group(t(GROUP_TITLES[c]), ordered.filter(p => !p.featured && p.cat === c), GROUP_VARIANT[c], t(GROUP_INTROS[c]))).join('');
       } else {
-        grid.innerHTML = group(t(GROUP_TITLES[filter]), ordered.filter(p => p.cat === filter), true);
+        grid.innerHTML = group(t(GROUP_TITLES[filter]), ordered.filter(p => p.cat === filter), GROUP_VARIANT[filter], t(GROUP_INTROS[filter]));
       }
 
       /* videos used as covers play on hover */
@@ -1256,10 +1517,29 @@
     }
 
     function renderFilters() {
-      filtersEl.innerHTML = FILTERS.map(f => {
-        const n = f.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === f.id).length;
-        return `<button type="button" data-filter="${f.id}" aria-pressed="${f.id === filter}">${esc(t(f))}<sup>${n}</sup></button>`;
-      }).join('');
+      filtersEl.innerHTML = FILTERS.map(f =>
+        `<button type="button" data-filter="${f.id}" aria-pressed="${f.id === filter}">${esc(t(f))}</button>`).join('');
+    }
+
+    /* ── list view: the cover of the hovered row sits next to the pointer (mouse only) ── */
+    const preview = document.getElementById('preview');
+    const previewImg = preview.querySelector('img');
+
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      grid.addEventListener('mousemove', e => {
+        preview.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      });
+      grid.addEventListener('mouseover', e => {
+        const r = e.target.closest('.row');
+        if (r && r.dataset.cover) {
+          if (previewImg.getAttribute('src') !== r.dataset.cover) previewImg.src = r.dataset.cover;
+          preview.classList.add('show');
+        } else {
+          preview.classList.remove('show');
+        }
+      });
+      grid.addEventListener('mouseleave', () => preview.classList.remove('show'));
+      grid.addEventListener('click', () => preview.classList.remove('show'));
     }
 
     filtersEl.addEventListener('click', e => {
@@ -1303,7 +1583,7 @@
       const nModels = (p.models || []).length;
       const models = (p.models || []).map((m, i) => `
         <figure class="model${i === 0 || (i === nModels - 1 && nModels % 2 === 0) ? ' full' : ''}">
-          <div class="model-stage" data-model="${src(m.src)}" data-error="${L['p.3d.error']}">
+          <div class="model-stage" data-model="${src(m.src)}" data-up="${m.up || 'z'}" data-error="${L['p.3d.error']}">
             <span class="model-hint">${L['p.3d.hint']}</span>
             <span class="model-status">${L['p.3d.loading']}</span>
           </div>
@@ -1318,7 +1598,7 @@
       const ordered = displayOrder();
       const next = ordered[(ordered.indexOf(p) + 1) % ordered.length];
 
-      if (window.viewer3d) window.viewer3d.unmountAll();
+      if (window.viewer3d) window.viewer3d.unmountAll(pContent);
       pContent.innerHTML = `
         <div class="p-head">
           ${p.client ? `<div class="p-client">${clientMark(p.client)}</div>` : ''}
@@ -1374,7 +1654,7 @@
       /* stop the trailer and free WebGL contexts: clear the page after the fade */
       setTimeout(() => {
         if (page.classList.contains('open')) return;
-        if (window.viewer3d) window.viewer3d.unmountAll();
+        if (window.viewer3d) window.viewer3d.unmountAll(pContent);
         pContent.innerHTML = '';
       }, 400);
       window.scrollTo(0, lastScroll);
@@ -1470,15 +1750,15 @@
     /* neutral clay-like material for formats without their own materials */
     const clay = () => new THREE.MeshStandardMaterial({ color: 0xd9d8d4, metalness: 0.1, roughness: 0.5 });
 
-    function loadModel(url) {
+    function loadModel(url, up) {
       const ext = url.split(/[?#]/)[0].split('.').pop().toLowerCase();
       if (ext === 'glb' || ext === 'gltf') {
         return new GLTFLoader().loadAsync(url).then(g => ({ object: g.scene, clips: g.animations }));
       }
       if (ext === 'stl') {
         return new STLLoader().loadAsync(url).then(geo => {
-          /* CAD exports are Z-up, three.js is Y-up */
-          geo.rotateX(-Math.PI / 2);
+          /* CAD exports are Z-up, three.js is Y-up; sculpting exports (ZBrush) already are Y-up */
+          if (up !== 'y') geo.rotateX(-Math.PI / 2);
           return { object: new THREE.Mesh(geo, clay()), clips: [] };
         });
       }
@@ -1567,7 +1847,7 @@
       io.observe(stage);
 
       function load() {
-        loadModel(stage.dataset.model).then(({ object, clips }) => {
+        loadModel(stage.dataset.model, stage.dataset.up).then(({ object, clips }) => {
           if (disposed) return;
           /* centre the model and frame it */
           const box = new THREE.Box3().setFromObject(object);
@@ -1633,14 +1913,19 @@
           viewers.add(createViewer(stage));
         });
       },
-      unmountAll() {
-        viewers.forEach(v => v.dispose());
-        viewers.clear();
+      /* with a root, only viewers inside it are disposed (the hero model keeps running) */
+      unmountAll(root) {
+        viewers.forEach(v => {
+          if (root && !root.contains(v.stage)) return;
+          v.dispose();
+          viewers.delete(v);
+        });
       }
     };
 
     /* a project page may already be open (deep link) before this module loaded */
     window.viewer3d.mount(document.getElementById('pContent'));
+    window.viewer3d.mount(document.getElementById('heroStage'));
   </script>
 </body>
 </html>
