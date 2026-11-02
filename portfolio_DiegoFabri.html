@@ -556,6 +556,11 @@
       .marquee-track { animation: none; flex-wrap: wrap; width: auto; }
       #preview { display: none; }
     }
+
+    /* floating objects: my own models drifting over the page, clicks pass through */
+    .floaters { position: fixed; inset: 0; z-index: 30; pointer-events: none; transition: opacity 0.4s; }
+    .floaters canvas { display: block; width: 100% !important; height: 100% !important; }
+    body.locked .floaters { opacity: 0; }
   </style>
 </head>
 <body>
@@ -574,6 +579,8 @@
       </nav>
     </div>
   </header>
+
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
 
   <main id="top">
     <section class="hero">
@@ -1743,6 +1750,7 @@
     import { STLLoader } from 'three/addons/loaders/STLLoader.js';
     import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
     import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+    import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const viewers = new Set();
@@ -1926,6 +1934,151 @@
     /* a project page may already be open (deep link) before this module loaded */
     window.viewer3d.mount(document.getElementById('pContent'));
     window.viewer3d.mount(document.getElementById('heroStage'));
+
+    /* FLOATING OBJECTS — models drift over the page at their own depth,
+       spin with the scroll speed and get pushed away by the cursor */
+    (function floaters() {
+      const layer = document.getElementById('floaters');
+      if (!layer || reducedMotion) return;
+      const small = innerWidth < 860;
+
+      /* x: fraction of the viewport width, y: fraction of the page height,
+         s: size in px, d: depth (scroll speed relative to the page; below 1
+         they lag behind the page, so each one stays on screen for vh / d of scrolling) */
+      const items = [
+        { src: '3d/digiknitting-knit.glb', x: 0.07, y: 0.03, s: 140, d: 0.55, mat: 'blue' },
+        { src: '3d/reliq-shard.stl', x: 0.48, y: 0.11, s: 110, d: 0.4, mat: 'chrome' },
+        { src: '3d/digiknitting-purl.glb', x: 0.93, y: 0.2, s: 170, d: 0.65, mat: 'clay' },
+        { src: '3d/bike-rack.stl', x: 0.04, y: 0.32, s: 160, d: 0.5, mat: 'blue' },
+        { src: '3d/komono-wing-overflow.stl', x: 0.95, y: 0.45, s: 150, d: 0.4, mat: 'chrome', desktop: true },
+        { src: '3d/digiknitting-knit.glb', x: 0.03, y: 0.58, s: 120, d: 0.6, mat: 'clay' },
+        { src: '3d/reliq-shard.stl', x: 0.96, y: 0.7, s: 130, d: 0.5, mat: 'blue' },
+        { src: '3d/digiknitting-purl.glb', x: 0.05, y: 0.84, s: 150, d: 0.35, mat: 'chrome' },
+        { src: '3d/digiknitting-cast-on.glb', x: 0.92, y: 0.95, s: 160, d: 0.45, mat: 'blue' }
+      ].filter(it => !(small && it.desktop));
+
+      /* fixed satin materials, double-sided (some exports have flipped faces) and
+         with a little self-light so they never fall to black in the shadows */
+      const satin = (color, extra = {}) => new THREE.MeshPhysicalMaterial({
+        color, emissive: color, emissiveIntensity: 0.12, roughness: 0.35, metalness: 0,
+        clearcoat: 0.6, clearcoatRoughness: 0.25, side: THREE.DoubleSide, ...extra
+      });
+      const materials = {
+        blue: satin(0x3479e0),
+        chrome: satin(0xd6d9de, { metalness: 0.35, roughness: 0.22 }),
+        clay: satin(0xf1efea, { clearcoat: 0, roughness: 0.6 })
+      };
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      layer.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+      const key = new THREE.DirectionalLight(0xffffff, 1.4);
+      key.position.set(3, 5, 6);
+      scene.add(key, new THREE.HemisphereLight(0xffffff, 0xc9d3e6, 1.1));
+
+      const camera = new THREE.PerspectiveCamera(30, 1, 1, 100);
+      camera.position.z = 20;
+      let vw = 0, vh = 0, unit = 1, pageH = 1;
+      function resize() {
+        vw = innerWidth; vh = innerHeight;
+        renderer.setSize(vw, vh, false);
+        camera.aspect = vw / vh;
+        camera.updateProjectionMatrix();
+        /* world units per css pixel on the z = 0 plane */
+        unit = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / vh;
+        pageH = document.documentElement.scrollHeight;
+      }
+      resize();
+      addEventListener('resize', resize);
+      new ResizeObserver(() => { pageH = document.documentElement.scrollHeight; }).observe(document.body);
+
+      const mouse = { x: -9999, y: -9999, nx: 0, ny: 0 };
+      addEventListener('pointermove', e => {
+        mouse.x = e.clientX; mouse.y = e.clientY;
+        mouse.nx = e.clientX / vw - 0.5; mouse.ny = e.clientY / vh - 0.5;
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
+
+      /* each file is fetched once, then cloned per item */
+      const cache = new Map();
+      const load = (src) => {
+        if (!cache.has(src)) cache.set(src, loadModel(src, 'z'));
+        return cache.get(src);
+      };
+
+      const live = [];
+      function spawn(it, i) {
+        load(it.src).then(({ object }) => {
+          const model = SkeletonUtils.clone(object);
+          model.traverse(o => {
+            if (!o.isMesh) return;
+            if (!o.geometry.attributes.normal) o.geometry.computeVertexNormals();
+            o.material = materials[it.mat];
+          });
+          /* centre and normalise to a unit-radius sphere */
+          const box = new THREE.Box3().setFromObject(model);
+          const radius = box.getSize(new THREE.Vector3()).length() / 2 || 1;
+          model.position.sub(box.getCenter(new THREE.Vector3()));
+          const norm = new THREE.Group();
+          norm.scale.setScalar(1 / radius);
+          norm.add(model);
+          const group = new THREE.Group();
+          group.add(norm);
+          group.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6);
+          scene.add(group);
+          live.push({
+            ...it, group, s: it.s * (small ? 0.6 : 1),
+            phase: i * 1.7, spin: new THREE.Vector3(0.15 + Math.random() * 0.2, 0.2 + Math.random() * 0.25, 0.05),
+            ox: 0, oy: 0, appear: 0
+          });
+        }).catch(err => console.warn('Floating model failed:', it.src, err));
+      }
+      /* after the hero, so the floaters never delay the first paint */
+      const start = () => items.forEach(spawn);
+      'requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 600);
+
+      const clock = new THREE.Clock();
+      let lastScroll = scrollY, vel = 0;
+      renderer.setAnimationLoop(() => {
+        const dt = Math.min(clock.getDelta(), 0.05);
+        if (document.body.classList.contains('locked') || !live.length) return;
+        const t = clock.elapsedTime;
+        vel += ((scrollY - lastScroll) - vel) * 0.1;
+        lastScroll = scrollY;
+
+        for (const it of live) {
+          /* the item sits in the middle of the screen when the page reaches its anchor */
+          const target = it.y * Math.max(pageH - vh, 1);
+          let sx = it.x * vw - mouse.nx * 60 * it.d;
+          let sy = vh / 2 + (target - scrollY) * it.d + Math.sin(t * 0.6 + it.phase) * 12 - mouse.ny * 60 * it.d;
+
+          /* cursor push with a soft spring back */
+          const dx = sx + it.ox - mouse.x, dy = sy + it.oy - mouse.y;
+          const dist = Math.hypot(dx, dy) || 1, reach = it.s * 0.9 + 80;
+          const push = Math.max(0, 1 - dist / reach) * 90;
+          it.ox += (dx / dist * push - it.ox * 0.4) * 0.12;
+          it.oy += (dy / dist * push - it.oy * 0.4) * 0.12;
+          sx += it.ox; sy += it.oy;
+
+          const g = it.group;
+          g.visible = sy > -it.s && sy < vh + it.s;
+          if (!g.visible) continue;
+          it.appear = Math.min(1, it.appear + dt * 1.2);
+          const pop = 1 - Math.pow(1 - it.appear, 3);
+          g.position.set((sx - vw / 2) * unit, -(sy - vh / 2) * unit, 0);
+          g.scale.setScalar(it.s / 2 * unit * pop);
+          const boost = 1 + Math.min(Math.abs(vel) * 0.08, 4);
+          g.rotation.x += dt * it.spin.x * boost + push * 0.0004;
+          g.rotation.y += dt * it.spin.y * boost + vel * 0.004 * it.d;
+          g.rotation.z += dt * it.spin.z;
+        }
+        renderer.render(scene, camera);
+      });
+    })();
   </script>
 </body>
 </html>
