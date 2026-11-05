@@ -205,6 +205,58 @@
       letter-spacing: -0.015em;
       margin-bottom: 1em;
     }
+    .publications { padding-block: clamp(72px, 12vh, 136px) 0; }
+    .publication-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(24px, 6vw, 88px);
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: clamp(32px, 5vw, 64px);
+    }
+    .publication-feature img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      background: var(--soft);
+    }
+    .publication-feature figcaption { margin-top: 10px; color: var(--muted); font-size: 0.85rem; }
+    .publication-copy { max-width: 62ch; }
+    .publication-kicker, .publication-meta { color: var(--muted); font-size: 0.9rem; }
+    .publication-title {
+      margin-top: 16px;
+      font-size: clamp(1.8rem, 3.8vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.08;
+    }
+    .publication-summary { margin-top: 20px; color: #444; font-size: 1.05rem; }
+    .publication-quote {
+      margin-top: 26px;
+      padding-left: 18px;
+      border-left: 2px solid var(--accent);
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      line-height: 1.4;
+    }
+    .publication-meta { margin-top: 22px; }
+    .publication-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--ink);
+      font-size: 0.95rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .publication-link:hover { color: var(--accent); border-color: var(--accent); }
+    @media (max-width: 860px) {
+      .publication-feature { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
+    }
+    @media (max-width: 640px) {
+      .publication-feature { grid-template-columns: 1fr; }
+      .publication-feature img { aspect-ratio: 4 / 3; }
+    }
     .facts {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -318,6 +370,48 @@
       background: var(--soft);
     }
     .p-media .full { grid-column: 1 / -1; }
+    .p-media figure { min-width: 0; }
+    .p-media figcaption { margin-top: 8px; color: var(--muted); font-size: 0.85rem; }
+    .p-carousel { margin-bottom: clamp(24px, 4vw, 48px); }
+    .p-gallery-title { margin-bottom: 16px; font-size: 1.15rem; font-weight: 500; }
+    .p-character-gallery, .p-model-section { margin-top: clamp(32px, 5vw, 64px); }
+    .p-carousel-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #111; }
+    .p-carousel-slide { position: absolute; inset: 0; display: none; margin: 0; }
+    .p-carousel-slide.is-active { display: block; }
+    .p-carousel-slide img { width: 100%; height: 100%; object-fit: contain; background: #111; }
+    .p-carousel-slide figcaption {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      width: fit-content;
+      max-width: calc(100% - 28px);
+      padding: 7px 10px;
+      background: rgba(0,0,0,0.72);
+      color: #fff;
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+    .p-carousel-slide figcaption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .p-carousel-arrow {
+      position: absolute;
+      top: 50%;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.72);
+      color: #fff;
+      font-size: 1.35rem;
+    }
+    .p-carousel-arrow:hover, .p-carousel-toggle:hover { background: var(--accent); color: #fff; }
+    .p-carousel-prev { left: 14px; }
+    .p-carousel-next { right: 14px; }
+    .p-carousel-controls { display: flex; align-items: center; gap: 12px; padding-top: 10px; color: var(--muted); font-size: 0.85rem; }
+    .p-carousel-count { min-width: 4ch; font-variant-numeric: tabular-nums; }
+    .p-carousel-toggle { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; }
     .embed { position: relative; aspect-ratio: 16 / 9; background: #000; }
     .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     /* 3D model viewers */
@@ -571,6 +665,7 @@
       <nav class="nav" aria-label="Main">
         <a href="#work" data-i18n="nav.work">Work</a>
         <a href="#about" class="hide-sm" data-i18n="nav.about">About</a>
+        <a href="#publications" data-i18n="nav.publications">Publications</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
         <div class="lang" role="group" aria-label="Language">
           <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -651,6 +746,39 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="wrap publications" id="publications">
+      <div class="work-bar"><h2 data-i18n="nav.publications">Publications</h2></div>
+      <article class="publication-feature reveal">
+        <figure>
+          <img src="https://cdn.prod.website-files.com/61eedf91d91f3ea9dbd74bd8/63d94c27961cba8d019b8a6a_sEf6DoRsYs9mjc4862LA0zX-VL9K5PPzHZxwJkJg-Fs.webp" alt="Diego Fabri working with a sculptural object at the Fitting In exhibition at Z33" loading="lazy">
+          <figcaption data-i18n="publications.editorial.credit">Z33, Fitting In · Photography: Stefanie De Bakker</figcaption>
+        </figure>
+        <div class="publication-copy">
+          <p class="publication-kicker" data-i18n="publications.editorial.kicker">Different Class · Editorial · 23 January 2023</p>
+          <h3 class="publication-title">It is nice, for a few moments, to step into someone else's identity</h3>
+          <p class="publication-summary" data-i18n="publications.editorial.summary">An interview at Z33's Fitting In exhibition about identity, working across physical and digital media, and finding inspiration in other people's perspectives.</p>
+          <blockquote class="publication-quote">“It is always about the duality of the physical and digital, a back and forth.”</blockquote>
+          <a class="publication-link" href="https://www.differentclass.be/editorials/it-is-nice-for-a-few-moments-to-step-into-someone-elses-identity-fpkjs" target="_blank" rel="noopener noreferrer">
+            <span data-i18n="publications.editorial.read">Read the editorial</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+      <article class="publication-feature reveal">
+        <figure>
+          <img src="11-%20DigiKnitting/Schermafbeelding%202026-06-22%20050924.jpg" alt="DigiKnitting digital tool for designing volumetric knitted structures" loading="lazy">
+          <figcaption data-i18n="publications.ahfe.credit">DigiKnitting · AHFE 2026</figcaption>
+        </figure>
+        <div class="publication-copy">
+          <p class="publication-kicker" data-i18n="publications.ahfe.kicker">AHFE 2026 · Conference paper · Istanbul</p>
+          <h3 class="publication-title">DigiKnitting: Enabling Knitting in 3D</h3>
+          <p class="publication-summary" data-i18n="publications.ahfe.summary">Research from my master's thesis, published and presented at AHFE 2026 in Istanbul.</p>
+          <a class="publication-link" href="https://doi.org/10.54941/ahfe1008073" target="_blank" rel="noopener noreferrer">
+            <span data-i18n="publications.ahfe.read">View the publication</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
     </section>
 
     <section class="wrap contact" id="contact">
@@ -748,7 +876,7 @@
         cover: 'https://i.ytimg.com/vi/WQIr6QiUKLY/maxresdefault.jpg',
         meta: {
           context: { en: 'Samuel Baidoo / Hanafubuki vzw, 2026', nl: 'Samuel Baidoo / Hanafubuki vzw, 2026' },
-          role: { en: 'Technical support on the video game', nl: 'Technische ondersteuning bij de videogame' },
+          role: { en: 'Character design, wearable attributes, environment architecture and technical support', nl: 'Characterontwerp, draagbare attributen, omgevingsarchitectuur en technische ondersteuning' },
           extra: { en: 'Premiered at De Singel, Antwerp (April 2026). Released on Steam, July 2026.', nl: 'Première in De Singel, Antwerpen (april 2026). Verschenen op Steam, juli 2026.' },
           links: [
             { label: 'Steam', href: 'https://store.steampowered.com/app/3206340/Plum_Road_Tea_Dream/' },
@@ -761,10 +889,127 @@
         },
         sections: [
           { h: { en: 'My contribution', nl: 'Mijn bijdrage' },
-            p: { en: 'I was part of the technical support team that helped build the video game, working alongside the artist and a group of developers to bring the sanctuaries to life.', nl: 'Ik maakte deel uit van het technische team dat de videogame mee heeft gebouwd, samen met de kunstenaar en een groep ontwikkelaars, om de sanctuaria tot leven te brengen.' } }
+            p: { en: 'Alongside technical support, I created character looks and wearable attributes for the game, and developed architectural elements such as the sanctuary gate.', nl: 'Naast technische ondersteuning ontwierp ik characterlooks en draagbare attributen voor de game, en werkte ik architecturale elementen uit, zoals de poort van het sanctuarium.' } }
         ],
         embed: 'https://www.youtube-nocookie.com/embed/WQIr6QiUKLY',
-        images: []
+        screenshotsTitle: { en: 'Game and project screenshots', nl: 'Screenshots van de game en het project' },
+        screenshots: [
+          {
+            src: 'https://www.workspacebrussels.be/files/Projects/Archive/2024/_1200x675_crop_center-center_82_line/Plum-Road-Tea-Dream-%C2%A9-Hussein-Shikha.jpeg',
+            alt: { en: 'Plum Road Tea Dream pixel-art title screen', nl: 'Pixelart-titelscherm van Plum Road Tea Dream' },
+            caption: { en: 'Game title screen · © Hussein Shikha', nl: 'Titelscherm van de game · © Hussein Shikha' },
+            creditHref: 'https://www.workspacebrussels.be/en/projects/plum-road-tea-dream'
+          },
+          {
+            src: 'https://www.workspacebrussels.be/files/Projects/2025/_1200x675_crop_center-center_82_line/7.-Dream-garden-3.jpeg',
+            alt: { en: 'Dream Garden sanctuary with a sleeping figure among plants', nl: 'Dream Garden-sanctuarium met een slapende figuur tussen de planten' },
+            caption: { en: 'Dream Garden · Workspace Brussels project image', nl: 'Dream Garden · Projectbeeld van workspacebrussels' },
+            creditHref: 'https://www.workspacebrussels.be/en/projects/plum-road-tea-dream'
+          },
+          {
+            src: 'https://www.workspacebrussels.be/files/Projects/2025/_1200x675_crop_center-center_82_line/7.-Dream-Garden-9.jpeg',
+            alt: { en: 'Dream Garden performance image with a performer inside a projected game environment', nl: 'Dream Garden-performancebeeld met een performer in een geprojecteerde gameomgeving' },
+            caption: { en: 'Dream Garden performance · Workspace Brussels project image', nl: 'Dream Garden-performance · Projectbeeld van workspacebrussels' },
+            creditHref: 'https://www.workspacebrussels.be/en/shows/beyond-the-black-box-plum-road-tea-dream-the-performance'
+          },
+          {
+            src: 'https://www.workspacebrussels.be/files/Projects/2025/_1200x675_crop_center-center_82_line/8.-Sunrise-Monument-3.jpeg',
+            alt: { en: 'Sunrise Monument environment with a monumental hand and bridge', nl: 'Sunrise Monument-omgeving met een monumentale hand en brug' },
+            caption: { en: 'Sunrise Monument · Workspace Brussels project image', nl: 'Sunrise Monument · Projectbeeld van workspacebrussels' },
+            creditHref: 'https://www.workspacebrussels.be/en/projects/plum-road-tea-dream'
+          },
+          {
+            src: 'https://www.workspacebrussels.be/files/Projects/2025/_1200x675_crop_center-center_82_line/9.-Unbuilding-2.jpeg',
+            alt: { en: 'Unbuilding gameplay scene with the avatar approaching a sculptural structure', nl: 'Unbuilding-gameplaybeeld met de avatar bij een sculpturale structuur' },
+            caption: { en: 'Unbuilding · Workspace Brussels project image', nl: 'Unbuilding · Projectbeeld van workspacebrussels' },
+            creditHref: 'https://www.workspacebrussels.be/en/projects/plum-road-tea-dream'
+          },
+          {
+            src: 'plum-road/sanctuary-in-game.png',
+            alt: { en: 'Sanctuary architecture shown in the game', nl: 'Sanctuariumarchitectuur in de game' },
+            caption: { en: 'Gameplay screenshot · Sanctuary environment', nl: 'Gameplay-screenshot · Sanctuariumomgeving' }
+          },
+        ],
+        characterTitle: { en: 'Character designs and attributes', nl: 'Characterontwerpen en attributen' },
+        characterImages: [
+          {
+            src: 'plum-road/character-costume.jpg',
+            alt: { en: 'Game character in a red costume with sculptural headpiece', nl: 'Gamepersonage in een rood kostuum met sculpturaal hoofdornament' },
+            caption: { en: 'Character design · Costume and headpiece', nl: 'Characterontwerp · Kostuum en hoofdornament' }
+          },
+          {
+            src: 'plum-road/character-with-plant-umbrella.jpg',
+            alt: { en: 'Character with a plant-inspired umbrella and foliage', nl: 'Personage met een plantgeïnspireerde paraplu en bladwerk' },
+            caption: { en: 'Character design · Wearable attribute and prop', nl: 'Characterontwerp · Draagbaar attribuut en prop' }
+          },
+          {
+            src: 'plum-road/character-with-sculptural-mask.jpg',
+            alt: { en: 'Character in a floral outfit with an elaborate sculptural mask', nl: 'Personage in een bloemenoutfit met een uitbundig sculpturaal masker' },
+            caption: { en: 'Character design · Sculptural mask and floral outfit', nl: 'Characterontwerp · Sculpturaal masker en bloemenoutfit' }
+          },
+          {
+            src: 'plum-road/character-look-purple.jpg',
+            alt: { en: 'Character in a purple outfit with chains and shoulder armor', nl: 'Personage in een paarse outfit met kettingen en schouderpantser' },
+            caption: { en: 'Character design · Purple outfit and armor', nl: 'Characterontwerp · Paarse outfit en pantser' }
+          },
+          {
+            src: 'plum-road/character-look-dark.jpg',
+            alt: { en: 'Character in a dark textured outfit', nl: 'Personage in een donkere outfit met textuur' },
+            caption: { en: 'Character design · Dark costume variation', nl: 'Characterontwerp · Donkere kostuumvariant' }
+          }
+        ],
+        guardianTitle: { en: 'Guardians · Final character renders', nl: 'Guardians · Finale characterlooks' },
+        guardianImages: [
+          {
+            src: 'plum-road/guardians/guardian-155301.png',
+            alt: { en: 'Guardian with sculptural gold headpiece and chest ornament', nl: 'Guardian met sculpturaal gouden hoofddeksel en borstsieraad' },
+            caption: { en: 'Guardian · Gold headpiece and ornament', nl: 'Guardian · Gouden hoofddeksel en ornament' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-162150.png',
+            alt: { en: 'Guardian in a sailor-inspired collar with a pink bow', nl: 'Guardian met een matrozenkraag en roze strik' },
+            caption: { en: 'Guardian · Sailor collar and bow', nl: 'Guardian · Matrozenkraag en strik' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-164256.png',
+            alt: { en: 'Guardian in a black outfit with chains and dark glasses', nl: 'Guardian in een zwarte outfit met kettingen en donkere bril' },
+            caption: { en: 'Guardian · Black outfit and chains', nl: 'Guardian · Zwarte outfit en kettingen' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-164659.png',
+            alt: { en: 'Guardian in a red dress and blue sandals', nl: 'Guardian in een rode jurk en blauwe sandalen' },
+            caption: { en: 'Guardian · Red dress', nl: 'Guardian · Rode jurk' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-170554.png',
+            alt: { en: 'Guardian with blue hair, floral clothing, and plants at the feet', nl: 'Guardian met blauw haar, bloemenkleding en planten aan de voeten' },
+            caption: { en: 'Guardian · Floral look and garden details', nl: 'Guardian · Bloemenlook en tuindetails' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-171227.png',
+            alt: { en: 'Guardian with butterfly wings and a purple outfit', nl: 'Guardian met vlindervleugels en een paarse outfit' },
+            caption: { en: 'Guardian · Butterfly wings', nl: 'Guardian · Vlindervleugels' }
+          },
+          {
+            src: 'plum-road/guardians/guardian-172200.png',
+            alt: { en: 'Guardian in a light shirt, dark trousers, and sandals', nl: 'Guardian met een licht hemd, donkere broek en sandalen' },
+            caption: { en: 'Guardian · Light shirt and dark trousers', nl: 'Guardian · Licht hemd en donkere broek' }
+          }
+        ],
+        environmentTitle: { en: 'Sanctuary architecture', nl: 'Architectuur van het sanctuarium' },
+        environmentImage: {
+          src: 'plum-road/gate-modeling-process.png',
+          alt: { en: 'Sculpted ornamental gate model in progress', nl: 'Ornamenteel poortmodel tijdens het beeldhouwen' },
+          caption: { en: 'Environment design · Gate sculpting study', nl: 'Omgevingsontwerp · Poortstudie' }
+        },
+        modelsTitle: { en: 'Interactive 3D models', nl: 'Interactieve 3D-modellen' },
+        models: [
+          { src: '3d/plum-road/sanctuary-gate.fbx', label: { en: 'Sanctuary gate · game export', nl: 'Sanctuariumpoort · game-export' } },
+          { src: '3d/plum-road/handcrown.obj', label: { en: 'Handcrown · wearable attribute', nl: 'Handkroon · draagbaar attribuut' } },
+          { src: '3d/plum-road/leaf-umbrella.fbx', label: { en: 'Leaf umbrella · wearable prop', nl: 'Bladparaplu · draagbaar attribuut' } },
+          { src: '3d/plum-road/butterfly-wings.fbx', label: { en: 'Butterfly wings · wearable attribute', nl: 'Vlindervleugels · draagbaar attribuut' } },
+          { src: '3d/plum-road/guardian-diego.fbx', label: { en: 'Guardian Diego · static character sculpt', nl: 'Guardian Diego · statisch charactersculptuur' } }
+        ]
       },
       {
         id: 'komono',
@@ -1363,12 +1608,20 @@
     const UI = {
       en: {
         'role': '',
-        'nav.work': 'Work', 'nav.about': 'About', 'nav.contact': 'Contact',
+        'nav.work': 'Work', 'nav.about': 'About', 'nav.publications': 'Publications', 'nav.contact': 'Contact',
         'intro.title': 'Product designer working between <em>physical products</em>, <em>digital tools</em> and <em>interactive media</em>.',
         'intro.now.label': 'Now', 'intro.now': 'Master Product Development, UAntwerp',
         'intro.based.label': 'Based in', 'intro.based': 'Antwerp, Belgium',
         'work.title': 'Work',
         'about.credit': 'Photo: Stefanie De Bakker',
+        'publications.editorial.credit': 'Z33, Fitting In · Photography: Stefanie De Bakker',
+        'publications.editorial.kicker': 'Different Class · Editorial · 23 January 2023',
+        'publications.editorial.summary': "An interview at Z33's Fitting In exhibition about identity, working across physical and digital media, and finding inspiration in other people's perspectives.",
+        'publications.editorial.read': 'Read the editorial',
+        'publications.ahfe.credit': 'DigiKnitting · AHFE 2026',
+        'publications.ahfe.kicker': 'AHFE 2026 · Conference paper · Istanbul',
+        'publications.ahfe.summary': "Research from my master's thesis, published and presented at AHFE 2026 in Istanbul.",
+        'publications.ahfe.read': 'View the publication',
         'about.p1': "I'm Diego, a designer from Antwerp. I studied cross-media design before moving into product development, and I like to work where those two worlds meet: objects, tools and the digital experiences around them.",
         'about.p2': "I'm fascinated by biomimicry, organic form and well-made things. Next to my studies I run XR Studio, my own freelance studio for AR filters, 3D visuals and branding.",
         'about.p3': "I'm currently finishing my Master in Product Development at the University of Antwerp and I'm open to collaborations that connect design and technology.",
@@ -1388,17 +1641,26 @@
         'p.back': '← All work',
         'p.context': 'Context', 'p.role': 'Role', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
         'p.next': 'Next project', 'p.trailer': 'Official trailer',
+        'p.carousel.label': 'Project image gallery', 'p.carousel.previous': 'Previous image', 'p.carousel.next': 'Next image', 'p.carousel.pause': 'Pause slideshow', 'p.carousel.play': 'Play slideshow',
         'p.3d.hint': 'Click to explore in 3D', 'p.3d.loading': 'Loading 3D model…', 'p.3d.error': '3D model could not be loaded',
         'p.tool.title': 'The Voxel Knitter, live', 'p.tool.cta': 'Click to try the Voxel Knitter', 'p.tool.open': 'Open full screen'
       },
       nl: {
         'role': '',
-        'nav.work': 'Werk', 'nav.about': 'Over', 'nav.contact': 'Contact',
+        'nav.work': 'Werk', 'nav.about': 'Over', 'nav.publications': 'Publicaties', 'nav.contact': 'Contact',
         'intro.title': 'Productontwerper tussen <em>fysieke producten</em>, <em>digitale tools</em> en <em>interactieve media</em>.',
         'intro.now.label': 'Nu', 'intro.now': 'Master Productontwikkeling, UAntwerpen',
         'intro.based.label': 'Woont in', 'intro.based': 'Antwerpen, België',
         'work.title': 'Werk',
         'about.credit': 'Foto: Stefanie De Bakker',
+        'publications.editorial.credit': 'Z33, Fitting In · Fotografie: Stefanie De Bakker',
+        'publications.editorial.kicker': 'Different Class · Editorial · 23 januari 2023',
+        'publications.editorial.summary': 'Een interview in de tentoonstelling Fitting In bij Z33 over identiteit, werken met fysieke en digitale media en inspiratie vinden in het perspectief van anderen.',
+        'publications.editorial.read': 'Lees de editorial',
+        'publications.ahfe.credit': 'DigiKnitting · AHFE 2026',
+        'publications.ahfe.kicker': 'AHFE 2026 · Conferentiebijdrage · Istanbul',
+        'publications.ahfe.summary': 'Onderzoek uit mijn masterproef, gepubliceerd en gepresenteerd op AHFE 2026 in Istanbul.',
+        'publications.ahfe.read': 'Bekijk de publicatie',
         'about.p1': 'Ik ben Diego, ontwerper uit Antwerpen. Ik studeerde cross-media design voor ik de stap naar productontwikkeling zette, en ik werk het liefst waar die twee werelden elkaar raken: objecten, tools en de digitale ervaringen errond.',
         'about.p2': 'Ik ben gefascineerd door biomimicry, organische vormen en goed gemaakte dingen. Naast mijn studies run ik XR Studio, mijn eigen zelfstandige studio voor AR-filters, 3D-visuals en branding.',
         'about.p3': 'Momenteel rond ik mijn Master Productontwikkeling aan de Universiteit Antwerpen af en sta ik open voor samenwerkingen die design en technologie verbinden.',
@@ -1418,6 +1680,7 @@
         'p.back': '← Alle werk',
         'p.context': 'Context', 'p.role': 'Rol', 'p.tools': 'Tools', 'p.info': 'Info', 'p.links': 'Links',
         'p.next': 'Volgend project', 'p.trailer': 'Officiële trailer',
+        'p.carousel.label': 'Projectfotogalerij', 'p.carousel.previous': 'Vorige afbeelding', 'p.carousel.next': 'Volgende afbeelding', 'p.carousel.pause': 'Diavoorstelling pauzeren', 'p.carousel.play': 'Diavoorstelling afspelen',
         'p.3d.hint': 'Klik om in 3D te bekijken', 'p.3d.loading': '3D-model laden…', 'p.3d.error': '3D-model kon niet geladen worden',
         'p.tool.title': 'De Voxel Knitter, live', 'p.tool.cta': 'Klik om de Voxel Knitter te proberen', 'p.tool.open': 'Open schermvullend'
       }
@@ -1561,8 +1824,11 @@
     const page = document.getElementById('project');
     const pContent = document.getElementById('pContent');
     let lastScroll = 0;
+    let carouselTimer = null;
 
     function renderProject(p) {
+      if (carouselTimer) window.clearInterval(carouselTimer);
+      carouselTimer = null;
       const L = UI[lang];
       const m = p.meta || {};
       const metaRows = [
@@ -1590,16 +1856,77 @@
       const nModels = (p.models || []).length;
       const models = (p.models || []).map((m, i) => `
         <figure class="model${i === 0 || (i === nModels - 1 && nModels % 2 === 0) ? ' full' : ''}">
-          <div class="model-stage" data-model="${src(m.src)}" data-up="${m.up || 'z'}" data-error="${L['p.3d.error']}">
+          <div class="model-stage" data-model="${src(m.src)}" data-up="${m.up || 'z'}" data-materials="${m.materials || 'clay'}" data-error="${L['p.3d.error']}">
             <span class="model-hint">${L['p.3d.hint']}</span>
             <span class="model-status">${L['p.3d.loading']}</span>
           </div>
           <figcaption>${esc(t(m.label))}</figcaption>
         </figure>`).join('');
-      p.images.forEach((img, i) => {
-        /* in two-column layouts the first image spans full width as an opener */
-        const full = !p.cols || (i === 0 && !p.videos) ? ' class="full"' : '';
-        media.push(`<img${full} src="${src(img)}" alt="${esc(t(p.title))} — ${i + 1}" loading="lazy">`);
+      const carousel = p.screenshots ? `
+        <section class="p-carousel" data-carousel aria-label="${esc(t(p.screenshotsTitle))}" aria-roledescription="carousel">
+          <h2 class="p-gallery-title">${esc(t(p.screenshotsTitle))}</h2>
+          <div class="p-carousel-stage">
+            ${p.screenshots.map((img, i) => {
+              const imageSrc = typeof img === 'string' ? img : img.src;
+              const imageAlt = typeof img === 'string' ? `${t(p.title)} — ${i + 1}` : t(img.alt || p.title);
+              const caption = img.caption
+                ? `<figcaption>${esc(t(img.caption))}${img.creditHref ? ` · <a href="${esc(img.creditHref)}" target="_blank" rel="noopener noreferrer">workspacebrussels ↗</a>` : ''}</figcaption>`
+                : '';
+              return `<figure class="p-carousel-slide${i === 0 ? ' is-active' : ''}" data-carousel-slide aria-hidden="${i !== 0}">
+                <img src="${src(imageSrc)}" alt="${esc(imageAlt)}" loading="eager" decoding="async">
+                ${caption}
+              </figure>`;
+            }).join('')}
+            <button type="button" class="p-carousel-arrow p-carousel-prev" data-carousel-prev aria-label="${esc(L['p.carousel.previous'])}" title="${esc(L['p.carousel.previous'])}">←</button>
+            <button type="button" class="p-carousel-arrow p-carousel-next" data-carousel-next aria-label="${esc(L['p.carousel.next'])}" title="${esc(L['p.carousel.next'])}">→</button>
+          </div>
+          <div class="p-carousel-controls">
+            <button type="button" class="p-carousel-toggle" data-carousel-toggle data-pause-label="${esc(L['p.carousel.pause'])}" data-play-label="${esc(L['p.carousel.play'])}" aria-label="${esc(L['p.carousel.pause'])}" title="${esc(L['p.carousel.pause'])}">Ⅱ</button>
+            <span class="p-carousel-count" data-carousel-count aria-live="polite"></span>
+          </div>
+        </section>` : '';
+      const characterImages = (p.characterImages || []).map(img => {
+        const imageSrc = typeof img === 'string' ? img : img.src;
+        const imageAlt = typeof img === 'string' ? t(p.title) : t(img.alt || p.title);
+        return `<figure>
+          <img src="${src(imageSrc)}" alt="${esc(imageAlt)}" loading="lazy">
+          ${img.caption ? `<figcaption>${esc(t(img.caption))}</figcaption>` : ''}
+        </figure>`;
+      }).join('');
+      const characterGallery = characterImages ? `
+        <section class="p-character-gallery" aria-labelledby="pCharacterTitle">
+          <h2 class="p-gallery-title" id="pCharacterTitle">${esc(t(p.characterTitle))}</h2>
+          <div class="p-media cols">${characterImages}</div>
+        </section>` : '';
+      const guardianImages = (p.guardianImages || []).map(img => `
+        <figure>
+          <img src="${src(img.src)}" alt="${esc(t(img.alt))}" loading="lazy">
+          <figcaption>${esc(t(img.caption))}</figcaption>
+        </figure>`).join('');
+      const guardianGallery = guardianImages ? `
+        <section class="p-guardian-gallery" aria-labelledby="pGuardianTitle">
+          <h2 class="p-gallery-title" id="pGuardianTitle">${esc(t(p.guardianTitle))}</h2>
+          <div class="p-media cols">${guardianImages}</div>
+        </section>` : '';
+      const environmentGallery = p.environmentImage ? `
+        <section class="p-environment-gallery" aria-labelledby="pEnvironmentTitle">
+          <h2 class="p-gallery-title" id="pEnvironmentTitle">${esc(t(p.environmentTitle))}</h2>
+          <div class="p-media">
+            <figure>
+              <img src="${src(p.environmentImage.src)}" alt="${esc(t(p.environmentImage.alt))}" loading="lazy">
+              <figcaption>${esc(t(p.environmentImage.caption))}</figcaption>
+            </figure>
+          </div>
+        </section>` : '';
+      if (!p.screenshots) (p.images || []).forEach((img, i) => {
+        const imageSrc = typeof img === 'string' ? img : img.src;
+        const imageAlt = typeof img === 'string' ? `${t(p.title)} — ${i + 1}` : t(img.alt || p.title);
+        const full = !p.cols || (i === 0 && !p.videos);
+        const fullClass = full ? ' class="full"' : '';
+        const image = `<img src="${src(imageSrc)}" alt="${esc(imageAlt)}" loading="lazy">`;
+        media.push(img.caption
+          ? `<figure${fullClass}>${image}<figcaption>${esc(t(img.caption))}</figcaption></figure>`
+          : `<img${fullClass} src="${src(imageSrc)}" alt="${esc(imageAlt)}" loading="lazy">`);
       });
 
       const ordered = displayOrder();
@@ -1620,6 +1947,10 @@
             ${p.note ? `<p class="p-note">${p.noteHtml ? t(p.note) : esc(t(p.note))}</p>` : ''}
           </div>
         </div>
+        ${carousel}
+        ${characterGallery}
+        ${guardianGallery}
+        ${environmentGallery}
         ${p.tool ? `
         <figure class="tool">
           <div class="tool-stage">
@@ -1628,7 +1959,7 @@
           </div>
           <figcaption><span>${L['p.tool.title']}</span><a href="${p.tool}" target="_blank" rel="noopener">${L['p.tool.open']} ↗</a></figcaption>
         </figure>` : ''}
-        ${models ? `<div class="p-models${p.models.length > 1 ? ' cols' : ''}">${models}</div>` : ''}
+        ${models ? `<section class="p-model-section" aria-labelledby="pModelsTitle">${p.modelsTitle ? `<h2 class="p-gallery-title" id="pModelsTitle">${esc(t(p.modelsTitle))}</h2>` : ''}<div class="p-models${p.models.length > 1 ? ' cols' : ''}">${models}</div></section>` : ''}
         <div class="p-media${p.cols ? ' cols' : ''}">${media.join('')}</div>
         <div class="p-next">
           <span>${L['p.next']}</span>
@@ -1637,6 +1968,66 @@
       page.setAttribute('aria-labelledby', 'pTitle');
       /* 3D viewers live in the module script below; it may still be loading */
       if (window.viewer3d) window.viewer3d.mount(pContent);
+      initProjectCarousel();
+    }
+
+    function initProjectCarousel() {
+      if (carouselTimer) window.clearInterval(carouselTimer);
+      carouselTimer = null;
+      const carousel = pContent.querySelector('[data-carousel]');
+      if (!carousel) return;
+
+      const slides = Array.from(carousel.querySelectorAll('[data-carousel-slide]'));
+      const counter = carousel.querySelector('[data-carousel-count]');
+      const previous = carousel.querySelector('[data-carousel-prev]');
+      const next = carousel.querySelector('[data-carousel-next]');
+      const toggle = carousel.querySelector('[data-carousel-toggle]');
+      let activeIndex = 0;
+      let paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let hovered = false;
+      let focused = false;
+
+      function updateTimer() {
+        if (carouselTimer) window.clearInterval(carouselTimer);
+        carouselTimer = null;
+        if (!paused && !hovered && !focused && slides.length > 1) {
+          carouselTimer = window.setInterval(() => showSlide(activeIndex + 1), 5600);
+        }
+      }
+
+      function updatePauseButton() {
+        const label = paused ? toggle.dataset.playLabel : toggle.dataset.pauseLabel;
+        toggle.textContent = paused ? '▶' : 'Ⅱ';
+        toggle.setAttribute('aria-label', label);
+        toggle.title = label;
+      }
+
+      function showSlide(index) {
+        activeIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const active = i === activeIndex;
+          slide.classList.toggle('is-active', active);
+          slide.setAttribute('aria-hidden', String(!active));
+        });
+        counter.textContent = `${activeIndex + 1} / ${slides.length}`;
+        updateTimer();
+      }
+
+      previous.addEventListener('click', () => showSlide(activeIndex - 1));
+      next.addEventListener('click', () => showSlide(activeIndex + 1));
+      toggle.addEventListener('click', () => {
+        paused = !paused;
+        updatePauseButton();
+        updateTimer();
+      });
+      carousel.addEventListener('mouseenter', () => { hovered = true; updateTimer(); });
+      carousel.addEventListener('mouseleave', () => { hovered = false; updateTimer(); });
+      carousel.addEventListener('focusin', () => { focused = true; updateTimer(); });
+      carousel.addEventListener('focusout', event => {
+        if (!carousel.contains(event.relatedTarget)) { focused = false; updateTimer(); }
+      });
+      updatePauseButton();
+      showSlide(0);
     }
 
     function openProject(id) {
@@ -1657,6 +2048,8 @@
       page.classList.remove('open');
       page.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('locked');
+      if (carouselTimer) window.clearInterval(carouselTimer);
+      carouselTimer = null;
       page.querySelectorAll('video').forEach(v => v.pause());
       /* stop the trailer and free WebGL contexts: clear the page after the fade */
       setTimeout(() => {
@@ -1749,6 +2142,7 @@
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
     import { STLLoader } from 'three/addons/loaders/STLLoader.js';
     import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+    import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
     import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 
@@ -1757,11 +2151,24 @@
 
     /* neutral clay-like material for formats without their own materials */
     const clay = () => new THREE.MeshStandardMaterial({ color: 0xd9d8d4, metalness: 0.1, roughness: 0.5 });
+    const placeholderTexture = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a0y8AAAAASUVORK5CYII=';
 
-    function loadModel(url, up) {
+    function loadModel(url, up, materialMode) {
       const ext = url.split(/[?#]/)[0].split('.').pop().toLowerCase();
       if (ext === 'glb' || ext === 'gltf') {
         return new GLTFLoader().loadAsync(url).then(g => ({ object: g.scene, clips: g.animations }));
+      }
+      if (ext === 'fbx') {
+        const manager = new THREE.LoadingManager();
+        if (materialMode !== 'preserve') {
+          manager.setURLModifier(resourceUrl => /\.fbx(?:[?#]|$)/i.test(resourceUrl) ? resourceUrl : placeholderTexture);
+        }
+        return new FBXLoader(manager).loadAsync(url).then(object => {
+          if (materialMode !== 'preserve') object.traverse(node => {
+            if (node.isMesh) node.material = clay();
+          });
+          return { object, clips: object.animations || [] };
+        });
       }
       if (ext === 'stl') {
         return new STLLoader().loadAsync(url).then(geo => {
@@ -1855,7 +2262,7 @@
       io.observe(stage);
 
       function load() {
-        loadModel(stage.dataset.model, stage.dataset.up).then(({ object, clips }) => {
+        loadModel(stage.dataset.model, stage.dataset.up, stage.dataset.materials).then(({ object, clips }) => {
           if (disposed) return;
           /* centre the model and frame it */
           const box = new THREE.Box3().setFromObject(object);
